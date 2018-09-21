@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Generating HTML</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+       <script src="../labs.js"></script>
+<style>ol li{margin-bottom: 5px;}</style>
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Class 101</a></li><li><a href="page04.html">Java API</a></li><li><a href="page05.html">Checkpoint 1</a></li><li><a href="page06.html">Writing a Class</a></li><li><a href="page06a.html">Constructing Instances</a></li><li><a href="page06b.html">Writing the Code</a></li><li><a href="page07.html">Javadoc</a></li><li><a href="page08.html">Generating HTML</a></li><li><a href="page10.html">Your Own Class</a></li><li><a href="page11.html">Testing your code</a></li><li><a href="page13.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Generating HTML</h2>
+The JDK includes a tool that will convert the specially formatted comments into html pages like the online Java API documentation.  We can run it easily from Eclipse.
+<ol>
+
+<li>Highlight the "project2" project, go to the Project menu, and run <code>Generate Javadoc...</code>. A dialog appears.
+Most of the default settings are fine, but check the next three items.
+
+<li>The project2 project should be checked.  
+<li>The "Javadoc command:" field should contain a path to a utility called javadoc.exe, similar to the following:
+<pre>
+C:\Program Files\Java\jdk1.8.0_144\bin\javadoc.exe
+</pre>
+
+
+<strong>If you don't see a path like the one above</strong> (the exact version numbers may vary), click the <code>Configure</code> button and navigate to the javadoc
+executable <code>javadoc.exe</code>.  To find the <code>Program Files</code> directory,
+you may need to click on "This PC" in the sidebar and then "Local Disk (C:)"
+If you are not sure, feel free to ask your TA to help you find the correct path. Then click Finish.
+
+<!--
+<div class="expandable">
+<span class="expandableTag">
+What if it doesn't?
+</span>
+<div class="expandableContent">
+<ul>
+<li>Click the <code>Configure</code> button and navigate to the javadoc
+executable, <code>javadoc.exe</code>.  Normally the path will be
+similar to the following:
+
+If you are not sure, feel free to ask your TA to help you find the correct path. Then click Finish.</li>
+</ul>
+
+</div>
+</div>
+-->
+
+<li>In the "Destination" field, make sure you see an <em>absolute path</em> into your
+your workspace, beginning with the drive letter you have mapped; it should be similar to:
+<pre class="block">
+U:\cs227\workspace\project2\lab2\doc
+</pre>
+depending on exactly how you named your workspace directory.
+<em>If you see a network path starting with "<code>\\cyfiles.iastate.edu...</code>" or something like that, change it to an absolute path starting with a drive letter.</em>
+<li>If necessary, confirm in the next dialog that a "doc" directory may be
+written to in your project.
+<li>After the javadoc tool runs (it will produce some console output) a webpage containing the documentation is created inside your project folder.  You can expand the directory <code>doc</code> in the Package Explorer and right-click on <code>index.html</code> to view the page in a web browser within Eclipse.  (If you'd prefer to use a traditional web browser, open the file through  File Explorer.)  Nice, huh?
+
+<!--
+<ul>
+<li>Note: if you only see an empty 'doc' directory in your project, it 
+is probably because your workspace is located under a symbolic directory
+such as "Documents" or "Desktop".  We recommend that you set up a workspace
+using an absolute path on a mapped drive, such as <code>U:\cs227\workspace</code>,
+as <a href="http://www.cs.iastate.edu/~cs227/labs/lab1/page08.html">
+described in lab 1</a>.
+</ul>
+-->
+
+</ol>
+
+<p>
+Compare the generated webpage to the documentation in the source code.  
+Try making some changes and see where the changes appear in the html.
+What effect do the <code>@return</code> and <code>@param</code> have? 
+
+<p>
+If you have trouble, your TA is there to help.
+</p>
+
+<div style="border: 2px solid #ff0000; right-margin:1.0in"> 
+In the homework assignments, a portion of the points will be designated for writing  Javadoc-style comments as in the previous example.  (We <em>don't</em> require you to generate html for homework submission.)
+</div>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page07.html">&lt; Javadoc</a></td><td align="right"><a href="page10.html">Your Own Class &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+</html>

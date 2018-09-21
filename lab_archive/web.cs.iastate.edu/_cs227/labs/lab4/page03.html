@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading numbers</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h3>Reading numbers</h3>
+
+The value returned by next() is always of type String. But if you are working with numbers, that's not very convenient, because you can't do math with Strings.  
+<p>
+In the last lab, you saw how to use a method such as <code>Integer.parseInt</code>
+to convert a string to an integer. 
+The <code>Scanner</code>
+class provides additional methods that are specialized for reading different types of values: <code>nextInt()</code> for reading integers and <code>nextDouble()</code> for reading floating-point values.  For example, here is a simple main class that reads two integers from the keyboard and prints their product:
+
+<pre class="block">
+package lab4;
+import java.util.Scanner;
+
+public class Multiplier
+{
+  public static void main(String[] args)
+  {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter a number: ");
+    int first = scanner.nextInt();
+    System.out.print("Enter a number: ");
+    int second = scanner.nextInt();
+    int result = first * second;
+    System.out.println(first + " times " + second + " is " + result);
+  }
+}
+</pre>
+
+<p>
+Create the <code>Multiplier</code> class in Eclipse and run it.
+<p>
+
+<!--
+<h3>Using a helper method</h3>
+Notice that the task of prompting the user and reading the next number happens more than once.  This is an opportunity to use a <em>helper method</em>.  We can take the 
+repeated statements and move them into a separate method whose job is simply to 
+prompt the user and return the next number that is typed.  Then that method can be called
+from <code>main</code>:
+
+<pre class="block">
+public class Multiplier
+{
+  public static void main(String[] args)
+  {
+    // Create one scanner to read from System.in
+    Scanner scanner = new Scanner(System.in);
+	
+    // Use the helper method to prompt and return the inputs
+    int first = getNextNumber(scanner);
+    int second = getNextNumber(scanner);
+	
+    int result = first * second;
+    System.out.println(first + " times " + second + " is " + result);
+  }
+  
+  // Helper method
+  private static int getNextNumber(Scanner scanner)
+  {
+    System.out.print("Enter a number: ");
+    int next = scanner.nextInt();
+    return next;
+  }
+}
+</pre>
+
+The helper method is made <code>private</code>, since we only 
+expect it to be used within this class.  It has to be declared <code>static</code>
+in order to be called from <code>main</code>.  (The <code>static</code> keyword
+can be confusing.  Basically it just means that the method doesn't need to refer
+to any instance variables, so it can be called directly from <code>main</code>
+without creating any objects.)
+
+<p> 
+Notice also that the helper method has a 
+<code>Scanner</code> as a parameter. When reading from <code>System.in</code>
+we should only create one scanner, so we create it in <code>main</code> and pass
+it as an argument to the helper method.
+<p>
+Replace the code for your <code>Multiplier</code> class with the version
+above and try it out.  (In this example, the helper method only saves us a few lines of code.  In more realistic examples, you'll find the helper method much more of a "help".)
+-->
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02.html">&lt; Scanner</a></td><td align="right"><a href="page06.html">Conditional statements &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

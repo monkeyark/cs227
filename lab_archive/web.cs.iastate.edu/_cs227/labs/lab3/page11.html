@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page11.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 2</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Experimenting</a></li><li><a href="page02a.html">Exceptions</a></li><li><a href="page02b.html">Checkpoint 1</a></li><li><a href="page08.html">Meeting a Specification</a></li><li><a href="page09.html">The Rabbit Problem</a></li><li><a href="page10.html">The Rabbit Simulator</a></li><li><a href="page11.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Checkpoint 2</h2>
+Now we want to try some more interesting models of rabbit populations.
+
+<h3>Do this first</h3>
+The model used by the simulator is required to be a class named <code>RabbitModel</code>, so in order to implement a model with different behavior, you'll have to make the modifications in your 
+<code>RabbitModel</code>.
+
+
+Before you begin doing so, <strong>save</strong> your work as follows:
+<ol>
+<li>Run your application and <strong>take a screenshot</strong> of the population plot. 
+<ul>
+  <li>On Windows, use Alt-Printscreen to save a screenshot to the clipboard.  Then open the Paint program and select to Edit->Paste.  Then save the image to your network drive so you can show the TA later.
+  <li>On a Mac, make the plotter window active and hit Command-Shift-4.  Press the spacebar to select the window, and then click to take a screenshot.  You can normally find the image file on your desktop.
+</ul> 
+<li>Save a <strong>copy of your code</strong>.  This is easy to do in Eclipse.
+<ol>
+<li>Select your <code>RabbitModel</code> class in the Package Explorer
+<li>Hit Control-C (to copy) and then Control-V (to paste the copy into the same package)
+<li>When prompted, enter a new name for the copy, such as <code>RabbitModel2</code>,
+<code>RabbitModel3</code>, and so on.
+</ol>
+</ol>
+ 
+(Later in the semester we will learn how to use <em>java interfaces</em> to avoid having to specify the exact class name like this.)
+
+
+
+<h3>Models to implement</h3>
+
+<p>
+Complete the following models.  As you complete each one, follow the steps above for saving a screenshot of the plot and a copy of your code.  When you are done, 
+show your TA the screenshots and code for the four models.          
+
+</p>
+
+
+
+<ol class="addSpace">
+
+<li>The population starts at zero and increases each year by 1 rabbit, but after every 5 years, oversaturation brings the population back down to 0.  (Hint: consider an expression using the mod operator "%". If you divide the population by 5, what is the remainder?)</li>
+<li>The population starts at 500 and decreases by half each year.</li>
+<!--
+<li>The population is modeled by <code>40 * |sin(year)|</code>.  See the 
+<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Math.html" target="New_Win">documentation for the <code>Math</code> class</a> to find out how to compute the sine and absolute value functions.
+</li>
+-->
+<li>The increase in population each year is a random value in the range 0 through 10. 
+Refer back to <a href="page02b.html">this previous page</a>, item 5, for an example of how to use the class <code>java.util.Random</code> to generate random numbers in a specified range.
+<p>
+In an application like this, it is important to create just <em>one</em> instance of 
+<code>Random</code> and use it as the sole source of randomness.
+You should define an instance variable of type <code>Random</code> and initialize it in the constructor (and/or in the reset() method). Use a "seed" value so that the results of the simulation can be reproduced.
+
+
+</li>
+<li>The population follows the <a href="http://en.wikipedia.org/wiki/Fibonacci_number" target="New_Win" >Fibonacci sequence</a>, in which the current population is the sum of the previous two years' populations. Assume it starts out with value 1 for the last year's population and 0 for the year before that, so that the initial population is also 1 + 0 = 1.  For example, the values would look like this for the first few years:
+
+<table>
+<tr><td><em>Initial values:</em></td><td></td><td></td></tr>
+<tr><td></td><td>last year</td><td>1</td></tr>
+<tr><td></td><td>year before</td><td>0</td></tr>
+<tr><td></td><td>population</td><td>1 = 1 + 0</td></tr>
+</table>
+
+<table>
+<tr><td><em>After one year:</em></td><td></td><td></td></tr>
+<tr><td></td><td>last year</td><td>1</td></tr>
+<tr><td></td><td>year before</td><td>1</td></tr>
+<tr><td></td><td>population</td><td>2 = 1 + 1</td></tr>
+</table>
+
+<table>
+<tr><td><em>After two years:</em></td><td></td><td></td></tr>
+<tr><td></td><td>last year</td><td>2</td></tr>
+<tr><td></td><td>year before</td><td>1</td></tr>
+<tr><td></td><td>population</td><td>3 = 2 + 1</td></tr>
+</table>
+
+<table>
+<tr><td><em>After three years:</em></td><td></td><td></td></tr>
+<tr><td></td><td>last year</td><td>3</td></tr>
+<tr><td></td><td>year before</td><td>2</td></tr>
+<tr><td></td><td>population</td><td>5 = 3 + 2</td></tr>
+</table>
+
+<p>
+To get this working, you'll just need two extra instance variables (for example, <code>lastYear</code> and <code>yearBefore</code>) that are updated as indicated in the sample values above.
+
+</li>
+</ol>
+</p>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page10.html">&lt; The Rabbit Simulator</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page11.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Loops with arrays</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Loops with arrays</h2>
+
+By now you have seen a lot of loops that involve strings.  For example, here is a loop that counts the number of p's in a string:
+<p>
+<pre class="block">
+  public static int countPs(String s)
+  {
+    int total = 0;
+    for (int i = 0; i < s.length(); i += 1)
+    {
+      if (s.charAt(i) == 'p')
+      {
+        total += 1;
+      }
+    }
+    return total;
+  }
+</pre>
+
+<p>
+Suppose instead you want to count the number of positive values in an array of integers.  The code is almost the same:
+<p>
+<pre class="block">
+  public static int countPositiveNumbers(int[] numbers)
+  {
+    int total = 0;
+    for (int i = 0; i < numbers.length; i += 1)
+    {
+      if (numbers[i] > 0)
+      {
+        total += 1;
+      }
+    }
+    return total;    
+  }
+</pre>
+
+<h3>Example: filling an array</h3>
+
+When working with strings, you can write a loop that creates a new string by
+repeatedly adding on a new character.  That kind of strategy doesn't work with 
+arrays, because we have to know the length of the array in advance.
+<p>
+A common problem is to parse a stream of input and use the values to 
+initialize an array.  The simplest case would be a string containing numbers
+separated by whitespace, such as <code>"3 5 7 9 12"</code>.  The problem is that before parsing the input, we don't know how big to make the array.  One solution is to parse the input twice: once to count the items, and then again to fill the array.
+
+<pre class="block">
+  public static int[] readNumbers(String text)
+  {
+    // count the items in the string
+    Scanner scanner = new Scanner(text);
+    int count = 0;
+    while (scanner.hasNextInt())
+    {
+      scanner.nextInt();
+      count +=1;
+    }
+    
+    // now create an array the right size, and put each element into the next cell
+    int[] nums = new int[count];
+    int index = 0;
+
+    scanner = new Scanner(text);
+    while (scanner.hasNextInt())
+    {
+      int num = scanner.nextInt();
+      nums[index] = num;
+      index += 1;
+    }
+    return nums;  
+  }
+</pre>
+<p>
+(Import <a href="ArrayExample3.html">ArrayExample3.java</a> into your <code>lab7</code> package to try this yourself.)
+
+<p>
+(There are other ways to solve this problem too, for example, using partially filled arrays or <code>ArrayList</code>.)
+
+<h3>Exercise</h3>
+
+<li>Write a static method 
+<pre class="block">
+public static int[] getPositiveNumbers(int[] numbers)
+</pre>
+that, given an array of integers, returns a new array containing just the positive values in the given array.  (Hint: count them first.)
+
+<h3>Exercise</h3>
+
+<li>Write a static method 
+<pre class="block">
+public static int[] randomExperiment(int max, int iters)
+</pre>
+that generates <code>iters</code> random numbers in the range 0 through <code>max - 1</code> and returns an array <code>counts</code> in which the the element
+<code>counts[i]</code> is the number of times that value <code>i</code> was
+generated.  Write a main method that does this with <code>max = 10</code>
+and <code>iters = 1000</code> and prints the result.
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02.html">&lt; Arrays</a></td><td align="right"><a href="page04.html">Modifying an array &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:44 GMT -->
+</html>

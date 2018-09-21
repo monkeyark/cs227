@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page15.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Working Remotely</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Welcome</a></li><li><a href="page02.html">Lab Logistics</a></li><li><a href="page03.html">Help Us</a></li><li><a href="page04.html">Getting Help</a></li><li><a href="page05.html">Where Are My Files?</a></li><li><a href="page06.html">Mapping a Network Drive</a></li><li><a href="page06a.html">Backups</a></li><li><a href="page07.html">Eclipse</a></li><li><a href="page08.html">Creating a Workspace</a></li><li><a href="page09.html">Creating a Project</a></li><li><a href="page10.html">Creating a Class</a></li><li><a href="page11.html">Adding a main Method</a></li><li><a href="page12.html">Finding Your Project Files</a></li><li><a href="page13.html">Using a SpecChecker</a></li><li><a href="page14.html">Submitting an Assignment</a></li><li><a href="page15.html">Working Remotely</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Working Remotely</h2>
+
+There are 100 or so Windows computers in the Pearson labs (Rooms 108, 105/109, 113, and 158) that have Eclipse
+and the JDK installed. If you always plan to do your work in the labs, you can ignore this page.
+<p>
+However, most of us prefer to install the JDK and Eclipse on our own computers,
+as described in the 
+<a href="http://www.cs.iastate.edu/~cs227/installing.html" target=_blank>
+installation document</a>.  
+
+<h4>Note: TAs are not your IT staff</h4>
+All work for this course can be done in the labs. Using your own computer is a convenience for you.
+Although we will all try to be helpful when you have installation or network problems, please be aware that the hours for instructional staff in this course are severely limited, and the TAs cannot spend a large amount of time on personal computer issues.
+<p>
+For most personal computer or network connection problems not specifically related to Java or Eclipse, you should probably contact the ITS <em>Solution Center</em> located in Parks Library.  See <a href="https://www.it.iastate.edu/solution/">https://www.it.iastate.edu/solution/</a>
+<p>
+One excellent source of help is the Piazza discussion forum.  Other students who have had issues similar to yours can make suggestions.  Try to describe your problem clearly, and include specifics about your operating system, Java version, etc.
+
+<h2>Local workspace vs. Remote workspace</h2>
+When you use your own computer to do homework (or labs) for this course, you have a several options:
+
+<ul class="addSpace">
+
+<li><em>Option 1: Create an Eclipse workspace on your local hard drive, and regularly back up your files</em> on MyFiles using one of the remote access options below.
+<ul><li>This is probably the simplest option, especially if you have a slow internet connection, but it also means that when you do want to work on the lab machines, you'll have a different workspace and may have to manually transfer files.
+</ul>
+
+<li><em>Option 2: Always use the same workspace, both in lab and remotely.</em> 
+<ul><li>This basically just requires mapping your workspace location as a network drive, described below.
+<li>Note you will need the same version of Eclipse on your remote machine as is installed in labs, or else the workspace will be incompatible.
+<li>This is convenient, but the potential disadvantages are that you can't access your files without a network connection, and if it is a slow connection, Eclipse may become verrrrrry sluggish.
+<ul>
+<li>
+<strong>We would recommend that in any case you always keep a local copy of everything you're working on.</strong>
+</ul></ul>
+
+<li><em>Option 3: Set up a private git repository on a site such as BitBucket.</em>  Eclipse includes a plugin called eGit to make this easier; see 
+<a href="http://eclipsesource.com/blogs/tutorials/egit-tutorial/" target=_blank>
+http://eclipsesource.com/blogs/tutorials/egit-tutorial/
+</a>
+(Remember that <strong>code to be turned in for homework must be kept private prior to the final assignment deadline</strong>; therefore you cannot use GitHub unless you 
+pay for a private repository.)
+</ul>
+
+
+<p>
+It is also possible to set up your workspace on a flash drive that you can use both at home and in the labs, but we find that these are frequently lost or broken, so
+<a href="page06a.html">
+<strong>you are still expected to back up your work on university network storage</strong>.
+</a>
+
+<h2>Remote access</h2>
+
+<h4>Note: All off-campus access requires VPN</h4>
+If you are off-campus (not on the ISU
+network), you'll need to run the VPN client first before using any of the options below.  This is 
+described in the ITS document at
+<a href="https://www.it.iastate.edu/howtos/vpn" target=_blank>
+https://www.it.iastate.edu/howtos/vpn</a>.
+</a>.
+
+<h3>Accessing MyFiles remotely via Samba</h3>
+<p>
+This will give you a File Explorer or Finder window for your MyFiles, at which point you can easily a) copy files between your own computer and your MyFiles, or b) open your workspace directly via the mapped drive.
+<p>
+To connect, you can basically follow the instructions in the SSG FAQ:
+<a href="http://www.cs.iastate.edu/how-access-your-files-through-samba-server" target=_blank>
+http://www.cs.iastate.edu/how-access-your-files-through-samba-server</a>, using the network path:
+<p>
+\\my.files.iastate.edu\Users\<em>yournetid</em>
+<p>
+where <em>yournetid</em> is replaced with your ISU NetID.
+<p>
+On a Mac, the server address is:
+smb://my.files.iastate.edu/Users/<em>yournetid</em>
+
+<!--
+<h3>Accessing the CS servers via Samba or sftp</h3>
+See the SSG FAQ
+<a href="http://www.cs.iastate.edu/how-access-your-files-through-samba-server" target=_blank>
+http://www.cs.iastate.edu/how-access-your-files-through-samba-server</a>
+
+As with CyFiles, Samba gives you a File Explorer or Finder window and you can open your workspace directly from Eclipse.
+-->
+
+<!--
+<h4>Simple file transfers</h4>
+Another option available for the CS server (though not with CyFiles, apparently)
+is to use an sftp client such as Filezilla. See the SSG page
+<a href="http://www.cs.iastate.edu/how-use-filezilla" target=_blank>
+http://www.cs.iastate.edu/how-use-filezilla</a>
+<p>(This specifically describes FileZilla, but the instructions would essentially be the same for other sftp clients.) Once you are connected you can typically drag and drop files between the sftp client and an Explorer or Finder window.
+
+<p>
+There are some other suggestions in the SSG FAQ, see
+<a href="http://www.cs.iastate.edu/how-access-your-files-cs-file-server" target=_blank>
+http://www.cs.iastate.edu/how-access-your-files-cs-file-server</a>.
+-->
+<!--
+<h3>Using the CS department terminal server with Remote Desktop</h3>
+You can also access your CS department account using Remote Desktop from any computer
+with an internet connection.
+It will behave as though it was a private Windows machine, one which is very old and slow. 
+
+<ol>
+<li>Go to Start-&gt;All Programs-&gt;Accessories-&gt;Remote Desktop Connection.
+(On a Mac, Remote Desktop is found in the Applications folder.)
+</li>
+<li>Type <code>cstc.cs.iastate.edu</code> into the Computer field. Click the Connect button.</li>
+<li>Log in using your ISU credentials.
+</ol>
+You should now be able to treat the Remote Desktop Window as its own separate computer screen.  You can run Eclipse now from it.
+<strong>Make sure to log out when you are done.</strong>
+-->
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page14.html">&lt; Submitting an Assignment</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page15.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+</html>

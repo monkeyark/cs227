@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page06b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Writing the Code</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+    <script src="../labs.js"></script>
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Class 101</a></li><li><a href="page04.html">Java API</a></li><li><a href="page05.html">Checkpoint 1</a></li><li><a href="page06.html">Writing a Class</a></li><li><a href="page06a.html">Constructing Instances</a></li><li><a href="page06b.html">Writing the Code</a></li><li><a href="page07.html">Javadoc</a></li><li><a href="page08.html">Generating HTML</a></li><li><a href="page10.html">Your Own Class</a></li><li><a href="page11.html">Testing your code</a></li><li><a href="page13.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Writing the Code</h2>
+Now that we have seen how to construct and use a <code>Basketball</code> object,
+let's proceed to 
+<ul>
+<li>see how the code is written, and
+<li>see how the documentation is created.
+</ul>
+You can see the completed code is in the file <a href="Basketball.java">Basketball.java</a> that is in your project.
+First look at the basic structure.  The class <em>body</em> appears between
+the curly braces.  Most classes consist of the basic structure represented below by
+the three boxes. 
+<p> 
+<strong>Click on each part</strong> to show or hide the code (most of the comments from the original file are omitted here).
+<pre class="block">
+package lab2;
+
+public class Basketball
+{
+
+<div class="expandable_code" style="border-color: red; right-margin:1.0in"> 
+<span class="expandableTag">
+  // Instance variables represent the state or attributes
+</span>
+<!--div id="instanceVars" style="display:none;"-->
+<div class="expandableContent">
+  private boolean isInflated;
+  private double diameter;
+</div>
+</div>
+
+<div class="expandable_code" style="border-color: green; right-margin:1.0in"> 
+<span class="expandableTag">
+  // Constructors initialize the instance variables
+</span>
+<!--div id="constructors" style="display:none;"-->
+<div class="expandableContent">
+  public Basketball(double givenDiameter)
+  {
+    isInflated = false;
+    diameter = givenDiameter;
+  } 
+</div>
+</div>
+
+<div class="expandable_code" style="border-color: blue; right-margin:1.0in"> 
+<span class="expandableTag">
+  // Methods define the operations
+</span>
+<!--div id="methods" style="display:none;"-->
+<div class="expandableContent">
+  public double getDiameter()
+  {
+    return diameter;
+  }
+  
+  public boolean isDribbleable()
+  {
+    // can be dribbled only if it is inflated
+    return isInflated;
+  }
+  
+  public double getCircumference()
+  {
+    double result = Math.PI * diameter;
+    return result;
+  }
+  
+  public void inflate()
+  {
+    isInflated = true;
+  }
+</div>
+</div>
+}
+
+</pre>
+<h3>Instance variables</h3>
+The first thing to notice is that there are two variables that are 
+declared <em>outside</em> of any method.  
+<pre class="block">
+  private boolean isInflated;
+  private double diameter;
+</pre>
+These variables represent the attributes of a <code>Basketball</code>
+instance.  As you saw in the picture on the previous page, they can have
+different values for different <code>Basketball</code> instances.  For
+this reason they are called <em>instance variables</em>.  
+<p>
+The details of the keywords <code>public</code> and <code>private</code>
+will become more clear later in the course.  For now we'll just follow
+the rule that instance variables are always declared with the 
+<code>private</code> keyword.
+
+<h3>Constructors</h3>
+The next thing to notice is the <em>constructor</em>:
+<pre class="block">
+  public Basketball(double givenDiameter)
+  {
+    isInflated = false;
+    diameter = givenDiameter;
+  }
+</pre>
+<strong>The purpose of the constructor is to initialize the
+instance variables to correct initial values.  </strong>
+<p>
+Here, we first set
+the variable <code>isInflated</code> to <code>false</code>.
+To initialize the diameter, remember than when we constructed a Basketball
+on the previous page, we supplied the diameter we wanted to use:
+<pre class="block">
+b = new Basketball(4.0);
+</pre>
+When the code runs, the parameter
+<code>givenDiameter</code> will have the user-supplied value
+(4.0 in this example) so we store it into the instance variable
+<code>diameter</code>.
+<pre class="block">
+diameter = givenDiameter;
+</pre>
+
+<p>
+A constructor always has the same name as the class and it never has
+a return type.  
+The constructor is declared <code>public</code>, because we expect
+it to be called from other classes, as we did in our
+<code>BasketballTest</code> on the previous
+page.
+
+<h3>Methods</h3>
+The remainder of the code consists of method definitions.
+These are the operations that we can perform on a
+<code>Basketball</code>.  
+The methods <code>getDiameter</code>,
+<code>getCircumference</code>, and <code>isDribbleable</code>
+are <em>accessor</em> methods that return some information about the basketball's 
+current state.
+Each such method includes a
+<code>return</code> statement with the value to be reported and 
+a <em>return type</em> in its first line indicating the type of the value to be 
+returned.  
+<p>
+For example, the 
+<code>getCircumference</code> method
+has a return type of <code>double</code>.  In the method body between the curly braces,
+we compute the circumference from 
+the diameter, and then return that value to the caller.
+<pre class="block">
+public double getCircumference()
+{
+  double result = Math.PI * diameter;
+  return result;
+}
+</pre>
+
+<p>
+The method <code>inflate</code>
+is a <em>mutator</em> method that changes the state of 
+the object by updating the instance variable <code>isInflated</code>. It doesn't return any value, so it is declared
+with the return type <code>void</code>.
+<pre class="block">
+public void inflate()
+{
+  isInflated = true;
+}
+</pre>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06a.html">&lt; Constructing Instances</a></td><td align="right"><a href="page07.html">Javadoc &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page06b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+</html>

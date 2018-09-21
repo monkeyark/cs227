@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>The accumulator pattern</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Using an accumulator</h2>
+
+A common pattern in a loop is to initialize a variable outside the loop, and update it during each iteration (or some of the iterations).  Here is an example you may have seen before, a static method that counts the number of times the character 'p' occurs in a string:
+
+<pre class="block">
+  public static int countPs(String s)
+  {
+    int total = 0;
+    for (int i = 0; i < s.length(); i += 1)
+    {
+      // if the character is a 'p', add 1 to the total
+      char c = s.charAt(i);
+      if (c == 'p')
+      {
+        total += 1;
+      }
+    }
+    return total;
+  }
+</pre>
+
+Here is a less obvious example.  How would you create the reverse of a string?  The idea is to build the result string one character at a time, in a loop.  In pseudocode we want something like:
+
+<pre class = "block">
+start with an empty result string
+for each character c in the string, starting from the end
+    append c to the end of the result string
+</pre>
+
+<pre class="block">
+
+  public static String reverse(String s)
+  {
+    String result = "";  // start with empty string
+    for (int i = s.length() - 1; i >= 0; i = i - 1)
+    {
+      result += s.charAt(i); // add on characters one at a time
+    }
+    return result;
+  }
+
+</pre>
+
+Note that this is another example of the accumulator pattern, where the "accumulator" variable is a string and the operation is concatenation.
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02.html">&lt; While-loops vs for-loops</a></td><td align="right"><a href="page04.html">Reading input &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

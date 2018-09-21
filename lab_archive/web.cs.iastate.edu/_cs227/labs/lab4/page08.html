@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 1</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h1>Checkpoint 1</h1>
+
+<ol class="addSpace">
+
+<li>
+Read all three flowcharts, and try out some sample values by hand.  Decide which one or ones are correct, and which are incorrect.  For any that are incorrect, give a <strong>specific value</strong> for the weight on which it gives you the wrong price.
+
+<li>
+In your Eclipse project, create a new package <code>postage1</code>.  In it, put the following code:
+<pre class="block">
+
+    package postage1;
+    public class PostageUtil
+    {
+      /**
+       * Returns the cost of postage for a letter of the given weight.
+       * @param weight
+       *   given weight in ounces
+       * @return
+       *   cost of postage for the weight
+       */
+      public static double computePostage(double weight)
+      {
+        // TODO
+        return 0.0;
+      }
+    }
+</pre>
+
+<li>Write Java code implementing the logic of the first flowchart.  Put your code into the <code>computePostage</code> method of the skeleton class <code>PostageUtil.java</code> in your package <code>postage1</code>.  This is a simple mathematical function that calculates an output from an input.  No instance variables are needed, so we can make it a <code>static</code> method.  When you have written the code, go to the class <code>PostageTest.java</code> in your <code>lab4</code> package.  Make sure the <code>import</code> statement refers to package <code>postage1</code>, and run the main method. Verify that you are getting the results you expect (which, if you believe the flowchart logic to be incorrect, may not match the given "expected" values).
+
+<p>
+<ul class="addSpace">
+<li>You may be alarmed to see output such as "0.8899999999999999" where you're expecting ".89".  This is a normal consequence of using floating-point arithmetic: almost all values are not quite exact.  If you want to see the results, say, rounded to two decimal places, we can format the output.  The simplest way to do this is with <code>System.out.printf()</code>.  See the alternate test class </code>PostageTestFormatted.java</code> for an illustration.  Formatted output is discussed in Section 4.3 of the text.
+</ul>
+
+<li>Do the same for the logic of the second flowchart.  This time, put the code into a
+<code>PostageUtil.java</code> located in the package <code>postage2</code>.
+Edit the <code>package</code> declaration of <code>PostageTest.java</code> to refer to package <code>postage2</code>, and run it again.
+<p>
+<ul class="addSpace">
+<li>Now you can probably see why we're using different packages:  you can have the test code run a completely different implementation of <code>PostageUtil</code> just by changing the import statement.
+</ul>
+
+<li>Do the same for the third flowchart, using package <code>postage3</code>.
+
+<li>Finally, use one of your <code>PostageUtil</code> classes to write a short main method that reads a weight from the console and prints out the postage.
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page07.html">&lt; Reading flowcharts</a></td><td align="right"><a href="page20.html">Debugging &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

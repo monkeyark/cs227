@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>More about JUnit</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>More about JUnit</h2>
+
+<h3>Improving the output</h3>
+Test cases should be short and focused on testing a single fact about the class under test.
+It is important to document each test case with a brief statement stating what is being
+tested.  You can see an example of this in the inline comments in <code>BasketballExample</code>.
+<p>
+When using JUnit, it is easy to make such comments part of the output produced when a test fails.
+In each one of the <code>assertEquals</code> methods we can optionally provide a string
+message.  If the test fails, this string will be printed along with the expected and actual values.
+Here is an example.
+<pre>
+    @Test
+    public void testInitialDiameter()
+    {
+      String msg = "A newly constructed basketball should have the diameter it was constructed with";
+      Basketball b = new Basketball(5);
+      assertEquals(msg, 5.0, b.getDiameter(), EPSILON);
+    }
+</pre>
+Now, when the test fails, the output from the failure trace includes the message
+explaining what was being tested.
+<pre>
+A newly constructed basketball should have the diameter it was constructed with expected:<5.0> but was:<0.0></pre>
+
+<h3>Other assertion methods</h3>
+The most useful methods are the various forms of <code>assertEquals</code>.  (The third and fourth forms are 
+the ones used for comparing floating-point numbers.)
+<ul>
+<li><code>assertEquals(<em>expectedValue</em>, <em>actualValue</em>)</code>
+<li><code>assertEquals(<em>message</em>, <em>expectedValue</em>, <em>actualValue</em>)</code>
+<li><code>assertEquals(<em>expectedValue</em>, <em>actualValue</em>, <em>epsilon</em>)</code>
+<li><code>assertEquals(<em>message</em>, <em>expectedValue</em>, <em>actualValue</em>, <em>epsilon</em>)</code>
+</ul>
+<strong>Remember that the expected value always comes first!</strong>
+<p>
+Sometimes you just want to assert that some boolean expression is true or not:
+<ul>
+<li><code>assertTrue(<em>expression</em>)</code>
+<li><code>assertTrue(<em>message</em>, <em>expression</em>)</code>
+<li><code>assertFalse(<em>expression</em>)</code>
+<li><code>assertFalse(<em>message</em>, <em>expression</em>)</code>
+</ul>
+<p>
+And sometimes you want to simply indicate that a test should simply fail if a certain point in the code is reached.
+<ul>
+<li><code>fail()</code>
+<li><code>fail(<em>message</em>)</code>
+</ul>
+<p>
+There are a few more that you will probably use only rarely, and you can find the details in the 
+<a href="http://junit.sourceforge.net/javadoc/">
+JUnit API documentation</a>.  (Look for the class <code>org.junit.Assert</code>.)
+
+<h3>Before and After</h3>
+You might notice in the <code>BasketballTests</code> class that we had to create a 
+new <code>Basketball</code> at the beginning of each test case.  Almost all test cases
+require some sort of initialization, usually the creation of one or more objects.
+If the setup is the same for many of test cases, 
+you can use the <code>@Before</code> annotation to designate a method that the framework
+should run before each test case.  For the <code>BasketballTests</code> example, we could do
+something like this.  The <code>setup</code> method will automatically run before
+the execution of each test case to initialize the <code>bb</code> variable.  This can save
+you from writing a lot of repetitive code.
+<pre>
+package lab6;
+import org.junit.Test;
+import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+
+public class BasketballTests2
+{
+    // margin of error for floating-point comparisons
+    private static final double EPSILON = 10e-07;
+ 
+    private Basketball bb;
+
+    @Before    
+    public void setup()  // runs before every test case
+    {
+      bb = new Basketball(5);
+    }
+    
+    @Test
+    public void testInitial()
+    {
+      assertEquals(false, bb.isDribbleable());
+    }
+
+    @Test
+    public void testInitialDiameter()
+    {
+      assertEquals(5.0, bb.getDiameter(), EPSILON);
+    }
+
+    @Test
+    public void testInflate()
+    {
+      bb.inflate();
+      assertEquals(true, bb.isDribbleable());
+    }
+
+    @Test
+    public void testDiameterAfterInflation()
+    {
+      bb.inflate();
+      assertEquals(5.0, bb.getDiameter(), EPSILON);
+    }
+   
+  }
+
+
+
+</pre>
+Note that you'll need to add an import statement for <code>org.junit.Before</code>.
+Not surprisingly there is also an annotation <code>@After</code> that designates a method to run
+<em>after</em> each test case, but it is not nearly as useful as <code>@Before</code>.
+
+<h3>A more detailed example</h3>
+The functional tests used in the speccheckers are based on JUnit.  Take a look
+at the 
+<a href="CityAndTravelerTests.html">
+JUnit tests for Homework 1</a>.  Notice that
+there are many test cases, and each one checks just one 
+simple fact.  That fact is stated as a string message that documents what the test is for, and can be passed to <code>assertEquals</code> to be displayed when the test fails.
+
+ 
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page05a.html">&lt; Incremental Development</a></td><td align="right"><a href="page08.html">Unit Testing to Find Bugs &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+</html>

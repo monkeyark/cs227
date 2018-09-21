@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Group Portrait</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Group Portrait</h2>
+
+<p>
+We are going to compose a group "photo" which creates a programmatic drawing of everyone who completes this checkpoint. First, you are given the  
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab10/Portrait.java">
+<code>Portrait</code></a> class, which extends <code>JPanel</code>.  The <code>paintComponent</code> method just draws a stick figure.  There
+are a number of parameters that adjust the relative size of the head and arms, how much the legs are spread out, and so on.  The two constructors look like this:
+
+<pre class="block">
+   /** Create a portrait with the specified body shape. */
+   public Portrait(double headPercent, double neckPercent,
+                   double bodyPercent, double armPercent,
+                   double armRaisePercent, double spreadEaglePercent) {
+      setMinimumSize(new Dimension(SIZE, SIZE));
+      setPreferredSize(getMinimumSize());
+      setMaximumSize(getMinimumSize());
+
+      setHeadRadius(headPercent);
+      setNeckHeight(neckPercent);
+      setBodyHeight(bodyPercent);
+      setArmSpan(armPercent);
+      setArmRaise(armRaisePercent);
+      setSpreadEagleness(spreadEaglePercent);
+   }
+   
+   /** Create a portrait with default body shape. */
+   public Portrait(double headPercent) {
+      // Call sibling constructor.
+      this(headPercent, 0.1, 0.2, 0.3, 0.1, 0.3);
+   }
+
+</pre>
+
+You can also take a look at the <code>paintComponent</code>
+method.  You can see that the code just draws a circle for the head and a bunch of lines for the body, using some methods from <code>java.awt.Graphics</code>.  (Remember, with screen graphics the point (0, 0) is
+the <em>top</em> left corner of the screen, so the y-axis goes downwards.)
+
+<pre class="block">
+   @Override
+   public void paintComponent(Graphics g) {
+      g.setColor(Color.BLACK);
+
+      int midX = SIZE / 2;
+
+      // Draw head.  We specify a a circle by giving the upper-left corner
+      // of a box that contains it, followed by the width and height of the box
+      g.drawOval(midX - headRadius, 0, headRadius * 2, headRadius * 2);
+
+      // Draw neck.  A line is specified by two points (x1, y1, x2, y2)
+      int neckTop = headRadius * 2;
+      int neckBottom = neckTop + neckHeight;
+      int crotch = neckTop + neckHeight + bodyHeight;
+      g.drawLine(midX, neckTop, midX, crotch);
+
+      // Draw arms.
+      g.drawLine(midX, neckBottom, midX - armSpan, neckBottom + armRaise);
+      g.drawLine(midX, neckBottom, midX + armSpan, neckBottom + armRaise);
+
+      // Draw legs.
+      g.drawLine(midX, crotch, midX - spreadEagleness, getHeight());
+      g.drawLine(midX, crotch, midX + spreadEagleness, getHeight());
+   }
+
+</pre>
+ 
+<p>
+
+The class 
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab10/GroupPhoto.java">
+<code>GroupPhoto</code></a> has the main method, so you can go ahead and run it.
+As in the previous example, the main method just invokes a method <code>createAndShow</code> which does all the object creation.  Here's how it starts out.
+
+<pre class="block">
+   private static void createAndShow()
+   {
+     ArrayList<Portrait> portraits = new ArrayList<Portrait>();
+     
+     // Get the Portrait0CRJ class, and then 
+     // you can uncomment this line
+     //portraits.add(new Portrait0CRJ());
+
+     // Replace these lines with calls to constructors for 
+     // other code you pull from Piazza
+     portraits.add(new Portrait(0.2));
+     portraits.add(new Portrait(0.21));
+     portraits.add(new Portrait(0.22));
+     portraits.add(new Portrait(0.23));
+     portraits.add(new Portrait(0.24));
+     portraits.add(new Portrait(0.25));
+     portraits.add(new Portrait(0.26));
+     portraits.add(new Portrait(0.27));
+     portraits.add(new Portrait(0.28));
+     portraits.add(new Portrait(0.29));
+     portraits.add(new Portrait(0.3));
+     
+     // Now, create the GroupPhoto from our portraits 
+     JPanel panel = new GroupPhoto(portraits);  
+	  
+      // ...remaining code then creates a window and starts up the UI machinery
+    }
+}
+</pre>
+
+<p>
+In short, you give <code>GroupPhoto</code> an <code>ArrayList</code> of <code>Portrait</code>s on construction.  It displays all the portraits in a scrollable window. 
+
+<h3>Checkpoint 2</h3>
+<p>
+For this checkpoint, you are asked to create your own special subclass of the <code>Portrait</code> class and post it on Piazza. 
+
+<!--
+For this checkpoint, you are asked to create your own special subclass of the <code>Portrait</code> class and post it on Blackboard and Piazza.  
+-->
+Call your class <code>PortraitLABNUMBERINITIALS</code>, replacing <code>LABNUMBER</code> with your lab section number and <code>INITIALS</code> with your initials.  Bill Roy Dollar in lab section 9 will call his class <code>Portrait9BRD</code>.
+<p>
+Post your portrait class on Piazza, as a followup message, according to these instructions:
+<ol>
+<li>Find the post on Piazza entitled "Lab 10 Section X Portraits", where X is your
+lab section number.
+<li>Open the post and scroll to the bottom until you see the text box labeled
+"Click to start a new followup discussion".  Click in that box.
+<li>Click the button labeled "code" in the editor toolbar.
+<li>Go to your editor window in Eclipse and select the entire contents of the file (Ctrl-A)
+<li>Paste it into the Piazza editor, and click Submit
+<li>Mark the followup as "Resolved"
+</ol>
+
+<!--
+Please post your portrait on <strong>both</strong> Blackboard and Piazza:
+
+<ul>
+<li>On Blackboard under the assignment "Lab 10 portrait".  
+(Just upload the java file, don't package it in a zip archive.)
+</li>
+<li>
+On Piazza as a followup message according to these instructions:
+<ol>
+<li>Find the post on Piazza entitled "Lab 10 Section X Portraits", where X is your
+lab section number.
+<li>Open the post and scroll to the bottom until you see the text box labeled
+"Click to start a new followup discussion".  Click in that box.
+<li>Click the button labeled "code" in the editor toolbar.
+<li>Go to your editor window in Eclipse and select the entire contents of the file (Ctrl-A)
+<li>Paste it into the Piazza editor, and click Submit
+<li>Mark the followup as "Resolved"
+</ol>
+</li>
+</ul>
+-->
+
+
+
+<!--
+<p>
+For this checkpoint, you are asked to create your own special subclass of the <code>Portrait</code> class and post it on 
+the Blackboard discussion board, under the forum "Lab 10 Portraits."  Call your class <code>PortraitLABNUMBERINITIALS</code>, replacing <code>LABNUMBER</code> with your lab number and <code>INITIALS</code> with your initials.  Bill Roy Dollar in lab section 9 will call his class <code>Portrait9BRD</code>.
+-->
+
+<p>
+In honor of Chris Johnson, the original author of this lab, we'll start things off by posting his self-portrait.  Download
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab10/Portrait0CRJ.java">
+Portrait0CRJ.java</a> and add it to your project. 
+Then add it to the group photo by uncommenting the relevant line of <code>createAndShow</code>:
+</p>
+
+<pre class="block">
+portraits.add(new Portrait0CRJ());
+</pre>
+
+<p>
+You can also insert classes that other students have posted on Piazza - just create a new class in your project with the correct name, and
+copy/paste the code from Piazza.  When the lab is completely finished, a grand montage can be composed, which we can all hang on our fridges.
+</p>
+
+<p>
+Like <code>Portrait0CRJ</code> does, you should extend the <code>Portrait</code> class. Or you could choose to take a class that someone else posted and 
+create a subclass of it, but all contributions should fit into a hierarchy which has <code>Portrait</code> at its base. You can set your own body parameters and/or override <code>paintComponent</code>
+to draw a face.
+<p>
+  In the <code>paintComponent</code> method, you can invoke the superclass version
+by calling <code>super.paintComponent</code>,  and then draw new features on top of it. Or you can omit the <code>super.paintComponent</code> call altogether and draw something entirely new. Creative expression is welcomed. Use any method available in the <a href="http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html" target="_blank"><code>Graphics</code> class</a> to draw shapes, lines, arcs, text, and so on.
+  (Please, nothing obscene!)
+</p>
+
+<p>
+What's the take-home lesson here?  The <code>GroupPhoto</code> class can work with any subclass of <code>Portrait</code>. The only part that must be changed is the <code>main</code> method. And in writing your own classes, you can reuse existing classes written by others by subclassing them, without modifying their code. Any code that can work with a superclass can also work with a subclass. That's object-oriented programming for you!
+</p>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08a.html">&lt; Drawing in Swing</a></td><td align="right"><a href="page10.html">Reflection &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

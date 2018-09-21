@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page06a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Constructing Instances</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Class 101</a></li><li><a href="page04.html">Java API</a></li><li><a href="page05.html">Checkpoint 1</a></li><li><a href="page06.html">Writing a Class</a></li><li><a href="page06a.html">Constructing Instances</a></li><li><a href="page06b.html">Writing the Code</a></li><li><a href="page07.html">Javadoc</a></li><li><a href="page08.html">Generating HTML</a></li><li><a href="page10.html">Your Own Class</a></li><li><a href="page11.html">Testing your code</a></li><li><a href="page13.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Constructing Instances</h2>
+
+In order for you or other programmers to use
+basketballs in your own programs, you'll need to know what operations are defined.  Documentation for Java classes will normally be found in a set of html pages, just like those for the Java API.  Take a look at
+<a href="doc/lab2/Basketball.html" target=_blank>the <code>Basketball</code> documentation</a> now.  In the Method Summary you can see there are methods for getting the diameter or circumference, or for causing
+the basketball to be inflated.  You'll also see something called a <em>constructor</em>, which is the mechanism for creating a new object. 
+<p>
+Now, create a new class <code>BasketballTest</code> with a <code>main</code> method, and add the following code to your <code>main</code> method and try running it.
+
+<p>
+Declare a <code>Basketball</code> variable:
+<pre class="block">
+Basketball b;
+</pre>
+In order to assign this variable a value, we have to <em>construct</em>
+a <code>Basketball</code> object. This is done with the <code>new</code>
+keyword and the constructor.  We'll provide an argument of 4.0 to the constructor,
+to make a basketball with diameter 4.
+<pre class="block">
+b = new Basketball(4.0);
+</pre>
+We can try using the <code>getDiameter()</code> method to observe that
+the diameter really is 4.0 now.
+<pre class="block">
+System.out.println(b.getDiameter());
+</pre>
+We can also check that the <code>isDribbleable()</code> returns
+false, since a newly constructed <code>Basketball</code> is not inflated.
+<pre class="block">
+System.out.println(b.isDribbleable());
+</pre>
+Next, let's create a second basketball that has diameter 6.
+<pre class="block">
+Basketball b2 = new Basketball(6.0);
+
+</pre>
+The situation we have now can be pictured like this.  Each of the local variables
+in <code>main</code> refers to an <em>instance</em> of the <code>Basketball</code>
+class. Each instance has its own attributes.
+<p>
+<img src="memory_map.jpg" width=640 alt="Memory diagram for two Basketball objects">
+<p>
+Next, we can modify the state of a <code>Basketball</code> using the <code>inflate()</code>
+method:
+<pre class="block">
+b.inflate();
+</pre>
+We can check that the basketball <code>b</code> is now dribbleable, but that
+the second one is unchanged.
+<pre class="block">
+System.out.println(b.isDribbleable());  // should be true now
+System.out.println(b2.isDribbleable()); // should still be false
+</pre>
+And here is an updated picture.
+<p>
+<img src="memory_map2.jpg" width=640 alt="Memory diagram for two Basketball objects">
+
+<h3>Another way to visualize what's going on</h3>
+
+Use the "Forward" button at the bottom to step through the code one line at a time (you may need to scroll down to see the controls).  
+
+<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=/**%0A%20*%20Try%20out%20the%20Basketball%20class.%0A%20*/%0Apublic%20class%20BasketballTest%0A%7B%0A%20%20/**%0A%20%20%20*%20Entry%20point.%0A%20%20%20*/%0A%20%20public%20static%20void%20main(String%5B%5D%20args%29%0A%20%20%7B%0A%20%20%20%20//%20Construct%20an%20instance%20and%20examine%20its%20attributes%0A%20%20%20%20Basketball%20b%20%3D%20new%20Basketball(4.0%29%3B%0A%20%20%20%20System.out.println(b.getDiameter(%29%29%3B%0A%20%20%20%20System.out.println(b.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Construct%20another%20instance%20with%20a%20diameter%20of%206%0A%20%20%20%20Basketball%20b2%20%3D%20new%20Basketball(6.0%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Inflate%20the%20first%20one%0A%20%20%20%20b.inflate(%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20First%20one%20is%20now%20dribbleable%0A%20%20%20%20System.out.println(b.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Second%20one%20is%20unchanged%0A%20%20%20%20System.out.println(b2.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%7D%0A%7D%0A%0A/**%0A%20*%20Model%20of%20a%20basketball.%0A%20*%20(Note%20that%20to%20have%20this%20code%20in%20the%20same%20file%20as%20the%20main%0A%20*%20class%20above,%20we%20have%20to%20leave%20off%20the%20'public'%20keyword%20here.%29%0A%20*/%0Aclass%20Basketball%0A%7B%0A%20%20/**%0A%20%20%20*%20Inflation%20status%20of%20this%20Basketball.%0A%20%20%20*/%0A%20%20private%20boolean%20isInflated%3B%0A%20%20%0A%20%20/**%0A%20%20%20*%20Diameter%20of%20this%20Basketball.%0A%20%20%20*/%0A%20%20private%20double%20diameter%3B%0A%20%20%0A%20%20/**%0A%20%20%20*%20Constructs%20an%20uninflated%20Basketball%20with%20the%20given%20diameter.%0A%20%20%20*%20%40param%20givenDiameter%20%0A%20%20%20*%20%20%20the%20diameter%20for%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20Basketball(double%20givenDiameter%29%0A%20%20%7B%0A%20%20%20%20isInflated%20%3D%20false%3B%0A%20%20%20%20diameter%20%3D%20givenDiameter%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Returns%20the%20diameter%20of%20this%20Basketball.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20diameter%20of%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20double%20getDiameter(%29%0A%20%20%7B%0A%20%20%20%20return%20diameter%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Determines%20whether%20this%20Basketball%20can%20be%20dribbled.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20true%20if%20the%20basketball%20is%20inflated,%20false%20otherwise%0A%20%20%20*/%0A%20%20public%20boolean%20isDribbleable(%29%0A%20%20%7B%0A%20%20%20%20//%20can%20be%20dribbled%20only%20if%20it%20is%20inflated%0A%20%20%20%20return%20isInflated%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Returns%20the%20circumference%20of%20this%20Basketball.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20circumference%20of%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20double%20getCircumference(%29%0A%20%20%7B%0A%20%20%20%20//%20PI%20times%20the%20diameter%0A%20%20%20%20double%20result%20%3D%20Math.PI%20*%20diameter%3B%0A%20%20%20%20return%20result%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Inflates%20this%20Basketball.%0A%20%20%20*/%0A%20%20public%20void%20inflate(%29%0A%20%20%7B%0A%20%20%20%20isInflated%20%3D%20true%3B%0A%20%20%7D%0A%20%20%0A%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=false&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+
+If you want to edit the code yourself and try it again, 
+<a href="http://pythontutor.com/visualize.html#code=/**%0A%20*%20Try%20out%20the%20Basketball%20class.%0A%20*/%0Apublic%20class%20BasketballTest%0A%7B%0A%20%20/**%0A%20%20%20*%20Entry%20point.%0A%20%20%20*/%0A%20%20public%20static%20void%20main(String%5B%5D%20args%29%0A%20%20%7B%0A%20%20%20%20//%20Construct%20an%20instance%20and%20examine%20its%20attributes%0A%20%20%20%20Basketball%20b%20%3D%20new%20Basketball(4.0%29%3B%0A%20%20%20%20System.out.println(b.getDiameter(%29%29%3B%0A%20%20%20%20System.out.println(b.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Construct%20another%20instance%20with%20a%20diameter%20of%206%0A%20%20%20%20Basketball%20b2%20%3D%20new%20Basketball(6.0%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Inflate%20the%20first%20one%0A%20%20%20%20b.inflate(%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20First%20one%20is%20now%20dribbleable%0A%20%20%20%20System.out.println(b.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%20%20//%20Second%20one%20is%20unchanged%0A%20%20%20%20System.out.println(b2.isDribbleable(%29%29%3B%0A%20%20%20%20%0A%20%20%7D%0A%7D%0A%0A/**%0A%20*%20Model%20of%20a%20basketball.%0A%20*%20(Note%20that%20to%20have%20this%20code%20in%20the%20same%20file%20as%20the%20main%0A%20*%20class%20above,%20we%20have%20to%20leave%20off%20the%20'public'%20keyword%20here.%29%0A%20*/%0Aclass%20Basketball%0A%7B%0A%20%20/**%0A%20%20%20*%20Inflation%20status%20of%20this%20Basketball.%0A%20%20%20*/%0A%20%20private%20boolean%20isInflated%3B%0A%20%20%0A%20%20/**%0A%20%20%20*%20Diameter%20of%20this%20Basketball.%0A%20%20%20*/%0A%20%20private%20double%20diameter%3B%0A%20%20%0A%20%20/**%0A%20%20%20*%20Constructs%20an%20uninflated%20Basketball%20with%20the%20given%20diameter.%0A%20%20%20*%20%40param%20givenDiameter%20%0A%20%20%20*%20%20%20the%20diameter%20for%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20Basketball(double%20givenDiameter%29%0A%20%20%7B%0A%20%20%20%20isInflated%20%3D%20false%3B%0A%20%20%20%20diameter%20%3D%20givenDiameter%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Returns%20the%20diameter%20of%20this%20Basketball.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20diameter%20of%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20double%20getDiameter(%29%0A%20%20%7B%0A%20%20%20%20return%20diameter%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Determines%20whether%20this%20Basketball%20can%20be%20dribbled.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20true%20if%20the%20basketball%20is%20inflated,%20false%20otherwise%0A%20%20%20*/%0A%20%20public%20boolean%20isDribbleable(%29%0A%20%20%7B%0A%20%20%20%20//%20can%20be%20dribbled%20only%20if%20it%20is%20inflated%0A%20%20%20%20return%20isInflated%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Returns%20the%20circumference%20of%20this%20Basketball.%0A%20%20%20*%20%40return%0A%20%20%20*%20%20%20circumference%20of%20this%20Basketball%0A%20%20%20*/%0A%20%20public%20double%20getCircumference(%29%0A%20%20%7B%0A%20%20%20%20//%20PI%20times%20the%20diameter%0A%20%20%20%20double%20result%20%3D%20Math.PI%20*%20diameter%3B%0A%20%20%20%20return%20result%3B%0A%20%20%7D%0A%20%20%0A%20%20/**%0A%20%20%20*%20Inflates%20this%20Basketball.%0A%20%20%20*/%0A%20%20public%20void%20inflate(%29%0A%20%20%7B%0A%20%20%20%20isInflated%20%3D%20true%3B%0A%20%20%7D%0A%20%20%0A%0A%7D&cumulative=false&curInstr=0&heapPrimitives=false&mode=display&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false" target=_blank>use this link.</a>
+
+<p>
+Or, go to <a href="http://pythontutor.com/" target=_blank>http://pythontutor.com/</a>, click on "Start visualizing", and select "Java 8" from the drop-down list.
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; Writing a Class</a></td><td align="right"><a href="page06b.html">Writing the Code &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page06a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+</html>

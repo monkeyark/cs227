@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Why Recursion?</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Why Recursion?</h2>
+
+<p>
+The examples we have seen so far are all easy to implement using simple loops. 
+There are many problems that are difficult using only loops, but are straightforward to solve using recursion.
+ 
+<p>
+One such example is printing out <i>all</i> the contents of a directory. Directories may contain files or other directories, which may contain files or other directories,  which may in turn contain files or other directories, and so on.  There is no straightforward way to iterate over a potentially complex hierarchy of directories to print all the files.
+</p>
+
+<p>
+It is easy to visualize a recursive description of the solution:  Each item in a file hierarchy is either a file or a directory.  If it's a file, we just print its name.  If it's a directory, then iterate over the items it contains, and list each one.  
+In pseudocode:
+<pre>
+<em>
+to print a listing of all files below f 
+    if f is a file
+        print the file name
+    else
+        for each item g in f
+           print listing of all files below g
+</em> 
+</pre>
+
+<p>
+This problem is naturally recursive: <em>to write a method that prints a listing of a directory, we need a method that will print a listing of a sub-directory</em>.
+
+<p>
+To write the code, we'll have to make use of some methods of the class <code>java.io.File</code>.  A <code>File</code> object represents an item
+in a file hierarchy, which could be either a file or a directory.
+There are two methods we need:
+<ul>
+<li>The <code>isDirectory()</code> method, which returns true if the <code>File</code> object represents a directory, 
+and 
+<li>the <code>listFiles()</code> method, which (for a directory) returns an array of <code>File</code> objects representing
+the directory's contents.
+</ul>
+
+<p>
+The following code prints out the file listing starting at the current directory. You can change this directory to something else, but bear in mind that if the directory you specify contains a lot of files (like <code>C:\</code> does), then you'll probably be sitting around for a while. (You can always stop your program with the "Stop" button in Eclipse or using Ctrl-C in a command shell.)  You can find the code 
+<a href="FileLister.java">here</a>.
+</p>
+
+<pre class="block">
+package lab9;
+import java.io.File;
+
+public class FileLister
+{
+  public static void main(String[] args)
+  {
+    // Choose the directory you want to list.
+    // If running in Eclipse, "." will just be the current project directory.
+    // Use ".." to list the whole workspace directory, or enter a path to
+    // some other directory.
+    File rootDirectory = new File(".");
+
+    listAllFiles(rootDirectory);
+  }
+  
+  /**
+   * Print the names of all items in the hierarchy located under 
+   * a given directory. If the given File object is not a directory, 
+   * just prints the file's name.
+   */
+  public static void listAllFiles(File f)
+  {
+    if (!f.isDirectory())
+    {
+      // Base case: f is a file, so just print its name
+      System.out.println(f.getName());
+    }
+    else
+    {
+      // Recursive case: f is a directory, so go through the 
+      // files and directories it contains, and recursively call
+      // this method on each one
+      System.out.println("+ " + f.getName());
+      File[] files = f.listFiles();
+      for (int i = 0; i < files.length; ++i)
+      {
+        listAllFiles(files[i]);
+      }
+    }
+  }
+}
+</pre>
+
+<p>
+Could you have done this with a loop?  Yes. All recursive methods <em>can</em> be written without using recursion.  However, the code is likely to be more complex.  To solve the file lister problem nonrecursively, you have to manually keep track of which items in which directories still need to be processed. 
+<!--
+ We can do this with a "things to do list".
+You can see <a href="FileListerNonRecursive.java">an example of this strategy here</a>.
+</p>
+-->
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04.html">&lt; Checkpoint 1</a></td><td align="right"><a href="page06.html">Extra parameters &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+</html>

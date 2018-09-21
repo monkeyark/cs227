@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Sorting arrays</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Sorting Arrays</h2>
+Many algorithms require either searching or processing data in a particular order. For example, if an array is already sorted, then it is easy to find the maximum or minimum.
+
+<h3>Selection Sort</h3>
+
+There are many ways to sort an array.  One of the simplest sorting methods, especially for shorter arrays, is the <i>Selection Sort</i> algorithm. (Wikipedia has a great article on  <a href="https://en.wikipedia.org/wiki/Selection_sort"> Selection Sort</a>.) 
+<p>
+The idea is pretty simple.  Think about it like this: What element should end up at index 0 in the sorted array?  It should be the smallest element, right?  So, find the smallest element, and move it to index 0.  We also have to save the element that started out at index 0, so we swap it.  Then do the same thing for index 1, and so on.
+<p>
+
+The implementation of any sorting algorithm may vary depending on exactly how you want the items ordered.  For numbers, we can just compare their values.  The Card objects have both a suit and a rank.  One idea would be to order cards by suit, <i>CLUBS, DIAMONDS, HEARTS, SPADES</i>, and then within a suit, order the cards by their rank: A, 2, 3... J, Q, K. 
+That's what this example does:
+
+<pre class="block">
+  private void sortWithSuit()
+  {
+    for (int i = 0; i < cards.length - 1; ++i)
+    {
+      // Step 1: find the "minimal" element to the right of position i
+      int indexOfMin = findIndexOfMin(i);
+
+      // Step 2: swap the minimal element into position i
+      swap(i, indexOfMin);
+    }
+  }
+
+  /**
+   * Returns the index of the minimal element to the right of position 'start',
+   * where cards are ordered first by suit, and within the same suit, by rank.
+   * 
+   * @param start
+   *          first index at which to look
+   * @return index of the smallest element to the right of 'start'
+   */
+  private int findIndexOfMin(int start)
+  {
+    int indexOfMin = start;
+    for (int j = start + 1; j < cards.length; ++j)
+    {
+      // look at the two cards, the minimal one we've found,
+      // and the one at the current position j
+      Card min = cards[indexOfMin];
+      Card current = cards[j];
+
+      // if current has a lower suit than the current min, then it should come
+      // first (the call X.compareTo(Y) method returns a negative value if 
+      // X comes before Y)
+      if (current.getSuit().compareTo(min.getSuit()) < 0)
+      {
+        indexOfMin = j;
+      }
+      else if (current.getSuit().equals(min.getSuit()))
+      {
+        // suits are the same, so compare ranks
+        if (current.getRank() < min.getRank())
+        {
+          indexOfMin = j;
+        }
+      }
+      // otherwise, current does not come before min, so ignore it
+    }
+    return indexOfMin;
+  }
+
+</pre> 
+
+You can find the code above as part of the <code>PokerHand</code> class. A <code>PokerHand</code> is constructed from an array of five cards and has some methods for determining the value of the hand in a game.
+<ul>
+<li><a href="PokerHand.java">PokerHand.java</a>
+</ul>
+
+<h3>Algorithms that depend on sorting</h3>
+
+By sorting the array first, we can answer questions about the hand more simply.  For example, a poker hand is called a <em>flush</em> when all the cards have the same suit.  If the hand is unsorted, we have to look at all the cards to determine whether it's a flush.  If the hand is sorted by suit, we only have to look at the first and last cards.
+Here is a method you can see in the <code>PokerHand</code> class that determines
+whether the hand is a flush:
+<p>
+
+<pre class="block">
+public boolean isFlush() 
+{
+  sortWithSuit();
+
+  //After sorting the first card's suit and the last card's suit is only equal if 
+  //the cards have the same suit.
+  return hand[0].getSuit().equals(hand[hand.length - 1].getSuit());
+}
+</pre>
+
+
+Notice that even if we had a strange game in which a hand was 100 cards, we could still determine whether the hand is a flush by looking at just the first and last cards, as long as we've kept the array sorted by suit.  This is called a "constant-time" algorithm, since it takes the same amount of time regardless of the size of the array.  (In contrast, an algorithm that has to look at every card is called "linear time" because the time it takes is proportional to the size of the array.)
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page07.html">&lt; Checkpoint 1</a></td><td align="right"><a href="page09.html">Checkpoint 2 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+</html>

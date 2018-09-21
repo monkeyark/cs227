@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Arrays</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Arrays</h2>
+
+An array is a sequence of values of the same type, similar to the way that a String is a sequence of characters.  The individual <em>elements</em> or <em>cells</em> of the array can be accessed individually, similar to the way we can access individual characters of a string using <code>charAt</code>.  
+
+<p>Here is a simple example:
+<pre class="block">
+public class ArrayExample
+{
+  public static void main(String[] args)
+  {   
+    // Declares a variable whose type is "array of int"  
+    int[] arr;
+    
+    // Creates an array of four elements.  All values are zero by default.
+    arr = new int[4];
+    
+    // Assign some values
+    arr[0] = 17;
+    arr[1] = 42;
+    arr[2] = arr[1] - arr[0];
+    
+    // Print out all four elements (note the fourth one is still zero)
+    for (int i = 0; i < arr.length; i += 1)
+    {
+      System.out.println(arr[i]);
+    }
+    System.out.println();    
+  }
+}
+</pre>
+<p>
+(Import <a href="ArrayExample.java">ArrayExample.java</a> into your <code>lab7</code> package to try this yourself.)
+<p>
+From the example we can summaries the basic properties:
+<ul>
+  <li>Arrays are objects, and are (usually) created with the <code>new</code> keyword.
+  <li>Newly created arrays are filled with default values (0 for primitives, null for objects).
+  <li>Arrays are fixed in size, but individual cells can be modified.
+  <li>The type of the elements can be any primitive type or object type.
+  <li>Cells are accessed using an index and square brackets.  Indices start at zero.
+  <li>The number of elements is given by the <code>.length</code> attribute.  Note this is not a method, so there are no parentheses.
+  <li>We commonly use loops to iterate over the elements
+</ul>
+
+<h3>Some hints for testing</h3>
+
+There are two things above we do frequently when learning about arrays: creating small arrays for testing, and printing out the contents of an array.  
+<ul>
+<li>Simple arrays can be created and initialized at the same time just by listing the elements in curly braces.  (The compiler automatically figures out the length.)
+<li>You can print the contents of an array using the static method <code>Arrays.toString</code>.  The utility class <code>Arrays</code> is in the package <code>java.util</code> and has many methods for working with arrays.
+</ul>
+
+So we could rewrite the above example as:
+
+<pre class="block">
+import java.util.Arrays;
+public class ArrayExample2
+{
+  public static void main(String[] args)
+  {
+    int[] arr = {17, 42, 25, 0};
+    System.out.println(Arrays.toString(arr));
+  }
+}
+</pre>
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01a.html">&lt; Lab and TA Evaluation</a></td><td align="right"><a href="page03.html">Loops with arrays &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:44 GMT -->
+</html>

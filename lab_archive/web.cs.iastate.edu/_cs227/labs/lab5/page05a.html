@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page05a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Incremental Development</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Incremental Development</h2>
+
+The <code>Basketball</code> class is extremely simple and it is likely to be 
+obvious to you how to complete it.  (Or, you might remember from lab 2.)
+But let's finish it by doing the following.
+
+<ol>
+<li>Add instance variables to the basketball class representing the diameter and inflated status.
+Initialize them in the constructor. 
+<li>Re-run the unit tests. Are more of the tests passing now?
+<li>Fix the <code>isDribbleable</code> method.
+<li>Re-run the unit tests. Are more of the tests passing now?
+<li>Fix the inflate() method.
+<li>Re-run the unit tests. Is everything passing now? When all the tests pass, the horizontal bar should
+be green instead of red.  Victory!
+</ol>
+
+
+<h3>Test early, test often!</h3>
+The process we just went through in finishing the <code>Basketball</code> class is a tiny example of
+<em>incremental development</em>.  This is just a strategy of developing code by making small changes
+and testing frequently to ensure that the changes you made are working (and haven't
+broken some other code that was working before).  Effective programmers almost always use <em>some</em> form of
+incremental development.
+<p>
+A framework like JUnit is invaluable for an incremental development strategy because it takes almost no work at all to re-run the unit tests and evaluate the results.
+
+
+<h3>Checkpoint 1</h3>
+
+<ol>
+<li>Show the TA your JUnit test and demonstrate it on your finished basketball class. 
+<!--<li>Show the TA the confirmation page from your survey.-->
+</ol>
+ 
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page05.html">&lt; Running a JUnit Test</a></td><td align="right"><a href="page06.html">More about JUnit &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page05a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+</html>

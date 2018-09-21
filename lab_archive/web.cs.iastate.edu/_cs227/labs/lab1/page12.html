@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page12.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Finding Your Project Files</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Welcome</a></li><li><a href="page02.html">Lab Logistics</a></li><li><a href="page03.html">Help Us</a></li><li><a href="page04.html">Getting Help</a></li><li><a href="page05.html">Where Are My Files?</a></li><li><a href="page06.html">Mapping a Network Drive</a></li><li><a href="page06a.html">Backups</a></li><li><a href="page07.html">Eclipse</a></li><li><a href="page08.html">Creating a Workspace</a></li><li><a href="page09.html">Creating a Project</a></li><li><a href="page10.html">Creating a Class</a></li><li><a href="page11.html">Adding a main Method</a></li><li><a href="page12.html">Finding Your Project Files</a></li><li><a href="page13.html">Using a SpecChecker</a></li><li><a href="page14.html">Submitting an Assignment</a></li><li><a href="page15.html">Working Remotely</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Finding Your Project Files</h2>
+
+The Java code that you typed to make the <code>Greeter</code> class is called <em>source</em> code.  It is human-readable and is stored as a text file with the extension ".java".  In order for your code to be run, it is translated into executable instructions by a tool called a <em>compiler</em>.  Eclipse normally runs the compiler automatically each time you save a file. For Java code, the executable files are called <em>class files</em> and have the extension ".class".  
+<p>
+In Java, the name of the file always matches the name of the public class it contains, so our source file is called "Greeter.java".  In addition, if the class is within a package, the file has to be located in a directory matching the package name.  (Packages can also be nested, corresponding to a nested sequence of directories.)  
+<p>
+By default, Eclipse puts our source files in a directory called <code>src</code> and puts the corresponding class files in a directory called <code>bin</code>.  Both of these are located within the <em>project directory</em> in the workspace.  The name of the project directory matches the name of the project you created in Eclipse.  Putting this all together, we should be able to find two files:
+<p>
+<code>
+U:\cs227\workspace\project1\src\lab1\Greeter.java
+</code>
+<p>
+<code>
+U:\cs227\workspace\project1\bin\lab1\Greeter.class
+</code>
+<p>
+Using File Explorer (or the OS X Finder), find these two files.  
+
+
+
+
+<h3>Making file extensions visible</h3>
+
+Most filenames actually have an <em>extension</em> consisting of a period followed by several letters, such as <code>.class</code> or <code>.java</code>.  For some bizarre reason, the default for File Explorer is to <em>hide</em> that part of the file name.  
+In programming we frequently are in a situation where there are two or more files whose names only differ in the extension.  
+In this course it will be crucial for you to be able to distinguish between them, e.g., to distinguish <code>.java</code> files and <code>.class</code> files.
+
+<h4>Windows</h4>  
+
+<ol>
+<li>In File Explorer, click on the "View" tab.
+<li>In the "Options" drop-down menu, select "Change folder and search options".<br>
+<img src="folder_options_screenshot.jpg" width=700 alt="Changing folder view options">
+
+
+<li>In the Folder Options dialog that comes up, click on the "View" tab.  
+<li>UN-check the option "Hide extensions for known file types".  <br>
+<img src="folder_options_dialog_screenshot.jpg" width=400 alt="Changing folder view options">
+
+<li>Click "Apply to Folders" and then "OK".  (If "Apply to Folders" button is disabled, just click OK. )
+</ol>
+
+
+<h4>OS X</h4>
+Go to Finder -> Preferences -> Advanced and check the box "Show all filename extensions".
+
+
+
+<h3>Checkpoint 2</h3>
+<ol>
+<li>Run your Greeter program for the TA.
+<li>Show the TA the two files <code>Greeter.java</code> and <code>Greeter.class</code> in File Explorer.  The workspace should be on a network server and you should have the file extensions visible in File Explorer.
+</ol>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page11.html">&lt; Adding a main Method</a></td><td align="right"><a href="page13.html">Using a SpecChecker &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page12.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+</html>

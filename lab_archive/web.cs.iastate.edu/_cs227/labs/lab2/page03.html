@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Class 101</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Class 101</a></li><li><a href="page04.html">Java API</a></li><li><a href="page05.html">Checkpoint 1</a></li><li><a href="page06.html">Writing a Class</a></li><li><a href="page06a.html">Constructing Instances</a></li><li><a href="page06b.html">Writing the Code</a></li><li><a href="page07.html">Javadoc</a></li><li><a href="page08.html">Generating HTML</a></li><li><a href="page10.html">Your Own Class</a></li><li><a href="page11.html">Testing your code</a></li><li><a href="page13.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Class 101</h2>
+
+<!--p>
+A key advantage of organizing code into classes is the ability to program at a higher level. Instead of getting caught up in low-level manipulation of primitives, we <i>abstract</i> away operations into higher-level objects.
+</p-->
+
+<p>
+Java has 8 primitive types such as <code>int</code>, <code>double</code>, and <code>boolean</code> for numbers and simple true/false values.  Everything else
+is some kind of <em>object</em>.  The definition for an object type is called a 
+<em>class</em>.
+
+<p>
+Java provides a number of predefined classes: we have used <code>System</code> to access the standard output stream and we have also seen the <code>String</code> class for text.
+As with the primitive data types, you must declare a variable of a class in order to use it:
+</p>
+
+<pre class="block">
+String message;
+</pre>
+
+<p>
+Also, just as with primitives, you must initialize the variable.  A variable whose type is a class can store a reference to an object which is an <em>instance</em> of that class.  In the case of <code>String</code>, it is easy to construct a new instance: we can just put some text in quotes:
+
+<pre class="block">
+message = "Hello, world!";
+System.out.println(message);
+</pre>
+
+<!--
+However, in this case, the initialization is not as simple, since the class may contain a number of primitives that must be initialized. Thankfully, the details of this initialization are hidden away inside the class, and you need only invoke the <i>constructor</i> of the class.
+-->
+
+
+<!--p>
+The right-hand side of the assignment instructs the computer to reserve space in memory for whatever data a <code>String</code> needs to store. (Ask yourself, "What data does a <code>String</code> need to store?") That memory is then filled according to the constructor of the class, and you now have an <i>instance</i> of the <code>String</code> class which you can refer to. You will write your own constructor later in this lab.
+</p-->
+
+<h3>Invoking methods</h3>
+
+<p>
+Most classes also define operations, called <em>methods</em>, that allow you to examine or modify the data in each instance. 
+You can <em>invoke</em> or <em>call</em> a method using the dot operator on an instance of the class.
+<p>
+For example, the class <code>String</code> has many methods available. A commonly used method is <code>length</code>, which retrieves the length of a string. 
+</p>
+
+<pre class="block">
+int theLength = message.length();
+System.out.println(theLength);
+</pre>
+
+<p>
+In your <code>lab2</code> package, write a class named <code>StringTest</code> with a <code>main</code> method to try this out.  Consult the <a href="../lab1/page10.html">previous lab</a> if you do not remember to how create a class and <code>main</code> method. Run it and inspect the output.
+</p>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page04.html">Java API &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab2/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:34 GMT -->
+</html>

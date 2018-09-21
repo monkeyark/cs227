@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Modifying an array</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Modifying an array</h2>
+
+Unlike strings, arrays are <em>mutable</em>.  Even though the length is fixed, the 
+individual cells can be modified.  For example, we could take an array of integers and double each of the values.
+
+<pre class="block">
+import java.util.Arrays;
+
+public class ArrayExample4
+{
+  public static void main(String[] args)
+  {
+    int[] test = {1, 2, 3, 4};
+    System.out.println("Before: " + Arrays.toString(test));
+    doubleAll(test);
+    System.out.println("After:  " + Arrays.toString(test));   
+  }
+  
+  public static void doubleAll(int[] arr)
+  {
+    for (int i = 0; i < arr.length; i += 1)
+    {
+      arr[i] = arr[i] * 2;
+    }
+  }
+}
+</pre>
+<p>
+(Import <a href="ArrayExample4.html">ArrayExample4.java</a> into your <code>lab7</code> package to try this yourself.)
+<p>
+The output from running this is
+<pre class="block">
+Before: [1, 2, 3, 4]
+After:  [2, 4, 6, 8]
+</pre>
+<p>
+The important thing to notice is that the method returns <code>void</code>.  It does not create a new array, it <em>modifies</em> the given array. The variable <code>test</code> is just a reference to an object.  When it is passed to the <code>doubleAll</code> method, the variable <code>arr</code> is a reference to <em>the same object in memory</em>.
+
+<h3>Swapping elements</h3>
+
+Many operations on arrays (such as sorting) involve rearranging the existing elements rather than modifying them.  A basic step is to swap the elements at two indices.
+<p>
+
+<pre class="block">
+import java.util.Arrays;
+
+public class ArrayExample5
+{
+  public static void main(String[] args)
+  {
+    int[] test = {10, 20, 30, 40, 50};
+    System.out.println("Before: " + Arrays.toString(test));
+    swap(test, 1, 4);
+    System.out.println("After:  " + Arrays.toString(test));      
+  }
+  
+  // exchange the element at index i with the element at index j
+  public static void swap(int[] arr, int i, int j)
+  {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;  
+  }
+}
+</pre>
+<p>
+(Import <a href="ArrayExample5.html">ArrayExample5.java</a> into your <code>lab7</code> package to try this yourself.)
+
+<p>
+When we run this the output is:
+<pre class="block">
+Before: [10, 20, 30, 40, 50]
+After:  [10, 50, 30, 40, 20]
+</pre>
+
+<h3>Example: reversing an array</h3>
+
+The idea is to reverse the order by <em>swapping</em> elements instead of creating a whole new array.  To reverse a sequence of things, what happens? The first element becomes the last one, and the last element becomes the first one; then the second element becomes the next-to-last, and the next-to-last becomes second; and so on. 
+
+<pre class="block">
+  public static void reverse(int[] arr)
+  {
+    int front = 0;
+    int rear = arr.length - 1;
+    while (front < rear)
+    {
+      swap(arr, front, rear);
+      
+      // move indices towards the center
+      front += 1;
+      rear -= 1;
+    }
+  }
+</pre>
+<p>
+(Import <a href="ReverseArray.java">ReverseArray.java</a> into your <code>lab7</code> package to try this yourself.)
+<p>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; Loops with arrays</a></td><td align="right"><a href="page06.html">Example: selecting distinct random elements &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+</html>

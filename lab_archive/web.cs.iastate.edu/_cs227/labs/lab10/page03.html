@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Subtypes and Polymorphism</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Subtypes and Polymorphism</h2>
+
+<h3>Subtyping through interfaces</h3>
+<p>
+We'll start with a brief review of interfaces.
+<p>
+Suppose you were writing a video game.  You might start out with a <code>Hero</code>.
+A <code>Hero</code> has a weapon in each hand and blazes through the universe 
+fighting bad guys.  Maybe the code looks like this:
+<pre class="block">
+public class Hero {
+
+  private Weapon rightWeapon;
+  private Weapon leftWeapon;
+
+  ...
+
+  public void pickUpLeft(Weapon newWeapon) {
+    leftWeapon = newWeapon;
+  }
+
+  public void pickUpRight(Weapon newWeapon) {
+    rightWeapon = newWeapon;
+  }
+
+  public void fight() {
+    rightWeapon.use();
+  }
+
+  public void fightDirty() {
+    leftWeapon.use();
+    rightWeapon.use();
+  }
+}
+</pre>
+
+A <code>Hero</code> fights the bad guys by <em>using</em> one or both weapons.
+But what is a <code>Weapon</code>?  We might need lots of different kinds:
+Howitzers, Wet Noodles, Killer Sheep, Ice Swords, and so on. 
+
+<!--Well, here are a couple of 
+ways to handle this.
+<ol>
+<li>We could define a different <code>Hero</code> class for each possible combination of weapons:
+<pre>
+public class NoodleFlingingSwordWieldingHero {
+
+  private WetNoodle rightWeapon;
+  private IceSword leftWeapon;
+  
+</pre>
+and so on.  Complicated!
+-->
+
+We could define a <code>Weapon</code> class with a gigantic conditional statement:
+<pre>
+public class Weapon
+{
+  private static final int HOWITZER = 0;
+  private static final int WET_NOODLE = 1;
+  private static final int KILLER_SHEEP = 2;
+
+  // etc.
+  
+  private int weaponType;
+  
+  public void use()
+  {
+    if (weaponType == HOWITZER)
+    {
+      System.out.println("KABLOOIE");
+    }
+    else if (weaponType == WET_NOODLE)
+    {
+      System.out.println("fling swat swat");
+    }
+    else if (weaponType == KILLER_SHEEP)
+    {
+      System.out.println("Baaaaaa!");
+    }
+    // ... and so on
+	
+  }
+}
+</pre>
+But this is ugly and is problematic.  The problems show up later when you
+dream up 5 new kinds of weapons, and you have to go back and modify the code,
+<em>which you have already spent precious time testing and debugging</em>.
+
+The solution is to use an <em>interface</em>.  All that the <code>Hero</code>
+class needs to know about any kind of weapon is that it has a <code>use()</code> method.
+So we define <code>Weapon</code> as an interface that specifies that one method.
+
+<pre class="block">
+public interface Weapon 
+{
+   public void use();
+}
+</pre>
+
+Notice that in the interface, there is no method body - we only specify 
+that the method exists and has no parameters and returns void.
+Now we can define some types of <code>Weapon</code>s:
+
+
+<pre class="block">
+public class Howitzer implements Weapon {
+  public void use() {
+    System.out.println("KABLOOIE");
+  }
+}
+
+public class WetNoodle implements Weapon {
+  public void use() {
+    System.out.println("fling swat swat");
+  }
+}
+
+public class KillerSheep implements Weapon {
+  public void use() {
+    System.out.println("Baaaaaa!");
+  }
+}
+</pre>
+
+<p>
+Each of these classes is a <em>subtype</em> of <code>Weapon</code>.  
+A variable of type <code>Weapon</code> can refer to any of its subtypes.
+For example, the variables <code>leftWeapon</code> and <code>rightWeapon</code>
+in the <code>Hero</code> class can refer to <em>any</em> object that implements
+the <code>Weapon</code> interface:
+
+<pre class="block">
+hero.pickUpLeft(new WetNoodle()); 
+// hero fights left-handed with WetNoodle for a while
+hero.fight();
+// then decides to switch weapons
+hero.pickUpLeft(new Howitzer());  
+// now, the leftWeapon variable refers to a Howitzer
+</pre>
+
+And 6 months later, if we want to add some new kinds of weapons, we don't have to change 
+<code>Hero</code> or <code>Weapon</code>.
+
+<h3>Polymorphism</h3>
+This phenomenon, that a variable of some type can actually refer to an object of any of its subtypes, is called <em>polymorphism</em>, a word meaning "many forms".  If you see only the code
+<pre>
+w.use();
+</pre>
+there is no way to know what the result will be, because the variable <code>w</code> is a kind of shape-shifter - it may have many forms, and the result of the <code>use()</code> method depends on exactly which type of <code>Weapon</code> the variable <code>w</code> is referring to <em>at the moment the code is being executed</em>.  Because of polymorphism, every variable actually has two types associated with it.
+<ul>
+<li>the <em>declared type</em> is the type you gave the variable when you declared it
+<li>the <em>run-time type</em> is the actual type of the object that the variable refers to when the code runs.
+</ul>
+The declared type never changes, but the run-time type can vary as the code runs:
+
+<pre class="block">
+Weapon w;                // declared type of w is Weapon
+w = new Howitzer();      // now w refers to run-time type Howitzer 
+w.use();                 // prints KABLOOIE
+w = new KillerSheep();   // now w refers to a KillerSheep
+w.use();                 // prints Baaaaaa!
+</pre>
+
+
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page04.html">Subclass Example &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

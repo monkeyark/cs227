@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Abstract classes</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Abstract classes</h2>
+
+
+Since <code>Contact</code> is a class, not an interface, it would be possible to construct one:
+<pre>
+    Contact c = new Contact("Ewan", "Zimblekiss");
+    c.notify("Giraffe!");
+</pre>
+But this doesn't make any sense.  The <code>notify</code> method can't possibly do anything sensible, because the general <code>Contact</code> type doesn't know how to contact anyone.  Would it make more sense for <code>Contact</code> to be an interface?
+Well, sort of - we want to specify the <code>notify</code> method only, and leave it up to the subclasses to choose how to implement it.  On the other hand, there are some parts of the implementation, like storing the first and last name, that are the same for all possible subclasses.  
+<p>
+We want something that lets us specify the <code>notify</code> method without an implementation, yet allows us to provide some other aspects of the implementation to be inherited by all subclasses.  What we want is called an <em>abstract class</em>.  
+<pre class="block">
+public <span class="highlight">abstract</span> class Contact {
+   private String firstName;
+   private String lastName;
+
+   public Contact(String givenFirstName,
+                  String givenLastName) {
+      firstName = givenFirstName;
+      lastName = givenLastName;
+   }
+
+   public String getName() {
+      return firstName + " " + lastName;
+   }
+
+   public <span class="highlight">abstract</span> notify(String alertMessage);
+}
+</pre>
+By declaring the <code>notify</code> method to be <em>abstract</em>, we don't have to provide a method body.  This requires us to declare the whole class to be abstract as well.  This means that, like an interface, you can't directly create one using the <code>new</code> operator.
+
+<p>
+In an interface, all the methods are automatically abstract, so you don't need to use the <code>abstract</code> keyword. A class that is not abstract is called <em>concrete</em>.
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04b.html">&lt; More Polymorphism</a></td><td align="right"><a href="page08.html">An IntList class &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>More Debugging</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>More Debugging</h2>
+Add the following file to your project:
+<br>
+<a href="Lab6Example.java" target=_blank>
+Lab6Example.java</a>
+<br>
+The method <code>longestRun</code> is an attempt to implement a nice algorithm for finding the length of the longest run in a string, where a "run" just means the same character appearing multiple times in a row.  For example, here are a few test cases from the sample code:
+<pre class="block">
+  public static void main(String[] args)
+  {
+    System.out.println(longestRun("aabbbccd"));
+    System.out.println("Expected 3 (three b's in a row)");
+    System.out.println(longestRun("aaa"));
+    System.out.println("Expected 3 (three a's in a row)");
+    System.out.println(longestRun("acbbbb"));
+    System.out.println("Expected 4 (four b's in a row)");
+  } 
+</pre>
+
+Your task is to finish the implementation of the algorithm by correcting the errors.  Trace through the code carefully using the debugger. Debugging other people's code can be very difficult, but fortunately the code is pretty well commented and the variable names make sense, so we can see the programmer's intention. Leave the parts that work and fix it where it doesn't work.
+
+
+<p>
+<h3>Checkpoint 2</h3>
+Show your TA the corrected versions of
+<code>findLastP</code>,  <code>findFirstP</code>, and <code>longestRun</code>.  Demonstrate that you can
+<ul>
+<li>Step through the iterations of a loop
+<li>Break into an infinite loop
+<li>Set an exception breakpoint
+</ul>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08.html">&lt; Exceptions</a></td><td align="right"><a href="page10.html">Reflection &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

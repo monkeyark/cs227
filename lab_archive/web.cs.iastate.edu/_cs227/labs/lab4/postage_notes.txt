@@ -1,0 +1,19 @@
+The U.S. Postal Service has some complex rules for deciding how much it costs to mail a letter. For this assignment we'll use a small part of these rules.  Your task is to write an interactive Python program, postage.py, that inputs the weight of a letter in ounces, and prints the cost of mailing it.
+For an ordinary letter up to 3.5 ounces, the cost is .47 plus .21 for each additional ounce (or part of an ounce) . Try some examples: 
+
+•	A letter that is 1 ounce (or less) is just .47. 
+•	For a 3 ounce letter the cost is .47 + (2 * .21) = .89 
+•	For a 2.3 ounce letter, the cost is also .47 + (2 * .21) = .89, since 1.3 rounds up to 2
+•	For a 3.1 ounce letter the cost is .47 + (3 * .21) = 1.10, since 2.1 rounds up to 3
+To translate this into code, it would be nice to have a slick way to take a float value and round "up" to the next whole number. Fortunately there is a function in the Math class, called ceil() (short for “ceiling”) that does exactly what we want. Try executing these statements:
+
+System.out.println(Math.ceil(1.3));
+System.out.println(Math.ceil(2.0));
+System.out.println(Math.ceil(2.1));
+
+Now, to make things more interesting, let's add the rule for letters over 3.5 ounces: the cost is .94 plus .21 for each additional ounce (or part of an ounce). 
+For example, 
+•	a 3.5 ounce letter would cost .47 + (3 * .21) = 1.10, using the first rule
+•	a 3.8 ounce letter would cost .94 + (3 * .21) = 1.57 
+•	a 10 ounce letter would cost .94 + (9 * .21) = 2.83 
+Notice you have to check the actual weight to see if it is bigger than 3.5, but then round up when you calculate the extra ounces. 

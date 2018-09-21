@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Unit Testing With <code>println</code></title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Unit Testing With <code>println</code></h2>
+
+Testing is a discipline in itself. (At some point you may find yourself taking Com S 417, <em>Software Testing</em>.)  Determining whether a complex system is going to work correctly under all conditions is extremely difficult. In this course we will only focus on  <i>unit testing</i>, which is where we test 
+a single component (usually a class) all by itself to ensure that it conforms to its specification.
+<p>
+We have seen many examples of simple unit tests.  As one example, consider the class <code>Basketball</code>.
+We saw this class back in lab 2; you can review the 
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html" target="_blank">javadoc here</a>.
+In order to test it, we start thinking about what should be true about
+a correctly implemented basketball:
+<ul>
+<li>A newly constructed basketball is not dribbleable
+<li>A newly constructed basketball should have the diameter it was constructed with
+<li>After inflating, the basketball should be dribbleable
+<li>After inflating, the basketball should still have the diameter it was constructed with
+</ul>
+For each such assertion we come up with, we can write a simple test case in which the
+actual value we get from calling a method is printed out, 
+along with the correct or "expected" value we really should get.
+
+<pre>
+public class BasketballExample
+{
+  public static void main(String[] args)
+  {
+    Basketball b = new Basketball(5);
+    
+    // A newly constructed basketball should not be dribbleable
+    System.out.println(b.isDribbleable());
+    System.out.println("Expected: false");
+    
+    // A newly constructed basketball should have the diameter it was constructed with
+    System.out.println(b.getDiameter());
+    System.out.println("Expected: 5.0");
+    
+    // After inflating, the basketball should be dribbleable
+    b.inflate();
+    System.out.println(b.isDribbleable());
+    System.out.println("Expected: true");
+    
+    // After inflating, the basketball should still have the diameter it was constructed with
+    System.out.println(b.getDiameter());
+    System.out.println("Expected: 5.0");
+  }
+}</pre>
+If the <code>Basketball</code> class is implemented correctly, running this <code>main</code> method
+should produce the output:
+
+<pre>
+false
+Expected: false
+5.0
+Expected: 5.0
+true
+Expected: true
+5.0
+Expected: 5.0
+</pre>
+
+<h2>Using a test framework</h2>
+
+With only four test cases, it is easy enough to look at the output and see whether the actual values match the expected values.
+The <code>Basketball</code> class is very simple.  A more complex class may have dozens or hundreds
+of test cases, and it is tedious to have to read through the output to check for correct values.
+
+<!--
+For example, many of us used a 
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab5/TestClass.java">
+test class for Assignment 1</a> that was posted on Piazza by a fellow student.
+When it runs, it produces about 80 lines of text output that has to be read
+carefully to see whether the classes give correct output on all the tests:
+
+<pre class = "block">
+This ticket should have 1000 cents in it, it have 1000 now.
+This ticket should NOT be a discounted ticket, the discount status is false now.
+This ticket should NOT be in a transit, the transit status is false now.
+This ticket should return TicketUtil.INVALID_ZONE as start zone, does the return value equal to TicketUtil.INVALID_ZONE? true.
+Let's begin a trip from zone 5.
+Now the start zone should be 5, the actual value is 5.
+This ticket should be in a transit, the transit status is true now.
+...
+...
+</pre>
+-->
+<p>
+Since we are programmers, we wonder: couldn't we just write a program to automatically
+check the test output?  And (since we are programmers) of course the answer
+is yes!  That is the idea of a <em>test framework</em>.  Instead of using
+<code>System.out.println</code>, we write the test using a few special methods 
+defined by the framework, 
+and the framework completely automates the process of checking the
+results.  In this course we use a framework called JUnit that extremely easy
+to use and is nicely integrated with Eclipse.
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page04.html">Introducing JUnit &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+</html>

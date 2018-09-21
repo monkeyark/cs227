@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page13.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Using a SpecChecker</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Welcome</a></li><li><a href="page02.html">Lab Logistics</a></li><li><a href="page03.html">Help Us</a></li><li><a href="page04.html">Getting Help</a></li><li><a href="page05.html">Where Are My Files?</a></li><li><a href="page06.html">Mapping a Network Drive</a></li><li><a href="page06a.html">Backups</a></li><li><a href="page07.html">Eclipse</a></li><li><a href="page08.html">Creating a Workspace</a></li><li><a href="page09.html">Creating a Project</a></li><li><a href="page10.html">Creating a Class</a></li><li><a href="page11.html">Adding a main Method</a></li><li><a href="page12.html">Finding Your Project Files</a></li><li><a href="page13.html">Using a SpecChecker</a></li><li><a href="page14.html">Submitting an Assignment</a></li><li><a href="page15.html">Working Remotely</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Using a SpecChecker to validate your code</h2>
+
+Most of the time when you write code, it has to interact with libraries that 
+already exist or with code that other people are writing.  For this to work, 
+everybody's code has to behave according to its documented specifications.
+<p>
+In particular, some portion of your grade on each assignment will come from
+automated tests that we run.  In order for the tests to run, your code has to
+conform precisely to the specification we provide.  For most assignments, we
+will give you a tool called a SpecChecker.  The main purpose of the SpecChecker
+is to help you verify that your code is written according to an assignment's 
+specifications.  (For example, among many other things, it will check whether the 
+public method names and the types of the parameters are correct.)  
+
+<p>
+In some cases, the SpecChecker will run some functional tests of your code
+and/or create a zip file for you to submit to Blackboard.
+
+<h3>Assignments vs. Miniassignments</h3>
+This course has two kinds of homework: regular assignments, and <em>miniassignments</em> . 
+<ul>
+<li>For miniassignments, 100% of the points come from the SpecChecker's automated tests.  
+<li>For the regular assignments, 30% to 40% of the points come from automated tests and the remainder from reading and evaluating your code.
+</ul>
+
+<h3>Running a SpecChecker</h3>
+Running a SpecChecker is easy, but there are some detailed steps that have to be followed.
+(Most of these steps won't make a whole lot of sense at first, but we should be able
+to understand them by the end of the course!)
+<p>
+Each SpecChecker is a small Java library called a 
+"jar" file.  You download it, import it into your Eclipse project, and run it.
+The step-by-step instructions are found at 
+<a href="http://www.cs.iastate.edu/~cs227/specchecker.pdf" target=_blank>
+http://www.cs.iastate.edu/~cs227/specchecker.pdf
+</a>.
+
+<p>
+
+You can find a SpecChecker for your Greeter class at
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab1/speccheck_lab1.jar">
+http://www.cs.iastate.edu/~cs227/labs/lab1/speccheck_lab1.jar</a>.
+
+Follow the instructions in the pdf above to import the SpecChecker into your project and run it.  This SpecChecker
+is similar to the ones we will use for the miniassignments, that is, 
+it will run a simple functional test and will optionally create a zip file
+for you to submit.  When you see the message
+<p>
+<img src="specchecker.jpg" width=380 alt="SpecChecker dialog box">
+<p>
+click Yes, and select a directory on your network drive in which to save the zip file.  The SpecChecker will create a zip file called <code>SUBMIT_THIS_lab1.zip</code>.
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page12.html">&lt; Finding Your Project Files</a></td><td align="right"><a href="page14.html">Submitting an Assignment &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab1/page13.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:31 GMT -->
+</html>

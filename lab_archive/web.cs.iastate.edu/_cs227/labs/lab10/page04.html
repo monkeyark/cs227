@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Subclass Example</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h2>Subclasses and inheritance</h2>
+
+We have just seen that one way to create subtypes is to implement an interface.  Any class that implements the interface is a subtype of the interface type.   There is another dimension to the subtype relationship in Java, which is that a class can be defined to be a subtype of another <em>class</em>, referred to as a <em>subclass</em>.  
+
+<!--h2>Subclass example</h2-->
+
+<h3>Emergency contacts</h3>
+<p>
+<a href="http://www.isualert.iastate.edu/">Crisis alert systems</a> are all the rage these days. When an emergency manifests itself, all folks who have registered with the emergency contact database are notified via email, phone, text message, smoke signals, etc. We can use the concepts of inheritance to reduce the system's complexity and allow for future ways of contacting individuals.
+</p>
+
+<p>
+First, we model the general <code>Contact</code>. All contacts should have a name, but the particular way in which they are contacted depends upon their preferred method of communication.  
+For the moment, we'll just leave the body of the <code>notify</code> method 
+more or less blank.
+
+<!--We leave the <code>notify</code> method <code>abstract</code> since we do not know how to implement it at this very generic level. Any non-abstract subtype will need to implement this method.
+-->
+
+</p>
+
+<pre class="block">
+public class Contact {
+   private String firstName;
+   private String lastName;
+
+   public Contact(String givenFirstName,
+                  String givenLastName) {
+      firstName = givenFirstName;
+      lastName = givenLastName;
+   }
+
+   public String getName() {
+      return firstName + " " + lastName;
+   }
+
+   public void notify(String alertMessage)
+   {
+     System.out.println("Do nothing");
+   }
+}
+</pre>
+
+<!--p>
+When a class is <code>abstract</code>, it's much like an <code>interface</code>. We can't make an instance of <code>Contact</code>. But unlike an <code>interface</code>, we do have some implementation provided.
+</p-->
+
+<h3>Defining a subclass using the <code>extends</code> keyword</h3>
+<p>
+Now, let's make an <code>EmailContact</code> which is
+designed for email notification.  We don't have to start from scratch.
+An <code>EmailContact</code> is just like a <code>Contact</code>
+except the <code>notify()</code> method is different.
+We can define <code>EmailContact</code> to be a subclass of 
+<code>Contact</code> using the <code>extends</code> keyword.
+<code>EmailContact</code> will <em>inherit</em> the existing attributes and methods of 
+<code>Contact</code>, such as the first and last name and the <code>getName()</code>
+method.  But we can <em>override</em> the <code>notify()</code> method
+to specialize it.
+</p>
+
+<pre class="block">
+public class EmailContact <span class="highlight">extends Contact</span> 
+{
+   private String emailAddress;
+
+   public EmailContact(String givenFirstName,
+                       String givenLastName,
+                       String givenEmailAddress) 
+   {
+      // first, we call the superclass constructor to initialize the
+      // "inherited" instance variables
+      <span class="highlight">super(givenFirstName, givenLastName);</span>
+	 
+      // then, initialize everything that is special for EmailContact
+      emailAddress = givenEmailAddress;
+   }
+
+   <span class="highlight">// override the notify() method</span> 
+   public void notify(String alertMessage) 
+   {
+      // simulate sending an email to the address
+      System.out.println("Esteemed " + <span class="highlight">getName()</span> + ",");
+      System.out.println(alertMessage);
+   }
+}
+</pre>
+(Instead of System.out, we could be printing to a real email message using the Java Mail library, but let's keep it simple for now.)
+
+
+<p>
+  Note that all the attributes and methods from the superclass <code>Contact</code> are
+  inherited by the <code>EmailContact</code> class.  In particular, <code>getName</code> can be called freely in <code>notify</code>. Constructors are never inherited, so we make a constructor for <code>EmailContact</code> which explicitly passes off most of the work to the superclass constructor. (The call to a superclass constructor must be the first thing done inside the subclass constructor.) This class does have an instance variable of its own, <code>emailAddress</code>, so we must initialize that in the constructor too.
+</p>
+
+<p>
+Similarly, <code>PhoneContact</code> might be implemented like so:
+</p>
+
+<pre class="block">
+public class PhoneContact extends Contact 
+{
+   private String phoneNumber;
+
+   public PhoneContact(String givenFirstName,
+                       String givenLastName,
+                       String givenPhoneNumber) 
+   {
+      super(givenFirstName, givenLastName);
+      phoneNumber = givenPhoneNumber;
+   }
+
+   public void notify(String alertMessage) 
+   {
+      // electronically dial phoneNumber ...
+      System.out.println(alertMessage);
+      System.out.println("To repeat this message, press 1.");
+      System.out.println("To hear it in Spanish, press 1 also.");
+   }
+}
+</pre>
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; Subtypes and Polymorphism</a></td><td align="right"><a href="page04b.html">More Polymorphism &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

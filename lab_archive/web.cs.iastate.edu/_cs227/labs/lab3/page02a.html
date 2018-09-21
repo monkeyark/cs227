@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page02a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Exceptions</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Experimenting</a></li><li><a href="page02a.html">Exceptions</a></li><li><a href="page02b.html">Checkpoint 1</a></li><li><a href="page08.html">Meeting a Specification</a></li><li><a href="page09.html">The Rabbit Problem</a></li><li><a href="page10.html">The Rabbit Simulator</a></li><li><a href="page11.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Exceptions</h2>
+
+<p>
+As you experiment, you may try things that cause errors.  Java uses <em>exceptions</em> for reporting and handling errors.  For now, all we need to understand is how to interpret the exceptions that are reported by the Java runtime when something goes wrong.
+
+<p>
+Here is a good example. Create the following class and run it:
+<pre>
+package lab3;
+
+public class Test
+{
+  public static void main(String[] args)
+  {
+    String s = "Hello";
+    char c = s.charAt(10);
+    System.out.println(s); 
+  }
+}
+</pre>
+
+In the second line of <code>main</code>, we are asking for the 10th character in a 5-letter string.  The error is reported to us using an object called an exception.  Since we didn't do anything special to <em>handle</em> the error, the program ends and the exception is reported to us in the console output:
+<p>
+<img src="exception_screenshot.jpg" width=800 alt="Screenshot of exception stack trace">
+
+<p>
+In the first line of output you can see the name of the exception type, in this case <code>StringIndexOutOfBoundsException</code>.  The name usually tells you what went wrong.
+<p>
+The remaining lines of the message are a <em>stack trace</em> showing exactly where the error occurred.  
+To read a stack trace, start at the top:
+<ol>
+<li>The <code>charAt</code> method, at the top of the list, is what directly generated the exception.  Ok, but we don't expect to find our error there, because that's part of the Java libraries.
+<li>The next line shows that <code>charAt</code> was called from <code>main</code>, which is code we wrote.  That's where we should start looking for the error.  The text in blue, <span style="color:blue"><code>Test.java:11</code></span> tells us that the failed call to <code>charAt</code> happened on line 11 of <code>Test.java</code>.  In fact that text is a hyperlink, and if you click on it, the editor will open on exactly that line of code.
+</ol>
+
+<!--
+This one shows the <code>main</code> method at the bottom, which called the String <code>charAt</code> method, which generated the exception. Here we would ignore the line containing the <code>charAt</code>, because that code is part of the Java libraries, and we don't expect to find an error there.  But in the next line, the blue text <code>Test.java:11</code> tells us that the <code>charAt</code> method was called from line 11 in the file Test.java, which is the code that we wrote.  You can find line 11 in the file, or simply click on the blue text, to find the code that most likely caused the error.
+-->
+<p><strong>
+To interpret an exception message (stack trace), start reading it at the top.  Skip over code from the Java libraries.  When until you recognize a class whose code you wrote, start looking for the problem at the indicated line number.</strong>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02.html">&lt; Experimenting</a></td><td align="right"><a href="page02b.html">Checkpoint 1 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page02a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+</html>

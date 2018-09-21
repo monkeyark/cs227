@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Cases</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Cases</h2>
+
+<p>
+The idea of recursion is simple: a method completes a small portion of a problem, and calls <i>itself</i> to complete the remainder of the problem. Eventually, we peel off enough of the problem that we cannot peel off anymore -- the answer to our problem is trivial enough that the method doesn't need to call itself. The solutions are then fused together. 
+
+<p>
+Accordingly, recursive methods typically include a conditional statement that checks to see if the remainder of the problem is trivial to solve. If so, we execute what's called the <i>base case</i>. If the problem is not trivial, then we execute the <i>recursive case</i> which includes a call to the method itself.
+</p>
+
+<p>
+Note that a recursive method may have several base cases or several general cases. The Fibonacci sequence from <a href="../lab3/page11.html" target="_new">lab 3</a>, for example, can be recursively defined and has two base cases and one general case. 
+Recall that the sequence starts out 0, 1, 1, 2, 3, 5, 8, 13, ..., where
+each number (other than the first and second) is the sum of the two numbers before it.
+In particular, suppose we have a function <code>fib</code> that given a number <code>n</code>, returns the <code>n</code><sup>th</sup> number of the Fibonacci sequence:
+</p>
+
+<table class="block" cellpadding="10">
+<tr>
+<td><code>fib(n)</code></td>
+<td>=</td>
+<td>
+0, if <code>n</code> is 0 <br/>
+1, if <code>n</code> is 1 <br/>
+<code>fib(n - 1)</code> + <code>fib(n - 2)</code>, if <code>n</code> &gt; 1<br/>
+</td>
+</table>
+
+<p>
+The complete Java code for computing the <em>n</em>th Fibonacci number looks like the definition above:
+<pre class="block">
+  /**
+   * Recursively computes the nth Fibonacci number.
+   */
+  public static int fib(int n)
+  {
+    if (n == 0 || n == 1)
+    {
+      // base cases: return n
+      return n;
+    }
+    else
+    {
+      // recursive case: sum of previous two values
+      return fib(n - 1) + fib(n - 2);
+    }
+  }
+</pre>
+
+<h3>Infinite recursion</h3>
+If you omit a base case or if you never make the problem smaller, your recursive method will never stop! Try removing the base case and the conditional in <code>fib</code> and see what happens.  
+<p>
+If your method never stops calling itself, the Java virtual machine will soon run out of memory for creating new records on the call stack, and you normally end up throwing a <code>StackOverflowError</code>.
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02.html">&lt; Recursion</a></td><td align="right"><a href="page03a.html">Further Examples &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:57 GMT -->
+</html>

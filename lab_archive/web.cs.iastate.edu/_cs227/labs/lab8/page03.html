@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading input with System.in</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Reading input with System.in</h2>
+
+<p>
+Suppose we have the following class.  This main method should read input one line at
+a time, and print it out with line numbers:
+</p>
+
+<pre class="block">
+package lab8;
+import java.util.Scanner;
+
+public class LineNumberer
+{
+  public static void main(String[] args)
+  {
+    Scanner scanner = new Scanner(System.in);
+    int lineCount = 1;
+
+    while (scanner.hasNextLine())
+    {
+      String line = scanner.nextLine();
+      System.out.print(lineCount + " ");
+      System.out.println(line);
+      lineCount += 1;
+    }
+    
+    System.out.println("Done");
+  }
+}
+
+</pre>
+
+<p>
+Try creating and running this in Eclipse. 
+Click in the Console pane and then type a few lines.
+Each line that you type is echoed back to the console preceded by
+a line number.  
+When you get tired of doing this, you can normally type
+Ctrl-Z (on OS X or Linux, use Ctrl-D) to signal that there will be more input.  However, due to a bug in Eclipse, you might have to first click in another pane, and then click back in the console pane again. (If this doesn't seem to work, use the red button.)
+
+<h3>Delimiters and <code>nextLine()</code></h3>
+We know that by default, a scanner uses whitespace as the delimiter between
+items of input.  Notice that in the example above, the delimiters are being
+ignored.  Even if you type a sentence with spaces in it, the scanner will
+return the entire line of text.  
+<p>
+This is an example of a case in which the input is organized in the form
+of <em>lines</em> of text rather than individual words or numbers.  The purpose
+of the methods <code>hasNextLine()</code> and <code>nextLine()</code> is to
+read input one line at a time, rather than one word or item at a time.
+
+<p>
+It would be much more useful to run this program on a file, rather than on typed input.
+<p>
+
+<!--
+We saw in the DOS lab that we can <em>redirect</em> <code>System.in</code> to read from a file.  For example, suppose that in a command shell your working directory  contains the package directory lab07 and 
+the sample text file "story.txt".  Then you could use the following command to
+redirect <code>System.in</code> to the text file:
+
+<pre class="block">
+java lab07.LineNumberer &lt; story.txt
+</pre>
+
+<p>
+Redirection is a nice feature, but there are two limitations: it requires that users know a command-line environment, and it is difficult for one program to read multiple files. 
+
+If we know that our data is going to come from a file, it makes more sense to read from the file directly using a <code>Scanner</code>.
+</p>
+-->
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page04.html">Reading from a file &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page03.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:47 GMT -->
+</html>

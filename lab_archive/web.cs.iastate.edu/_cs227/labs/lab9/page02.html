@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Recursion</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Recursion</h2>
+
+<p>
+Recursion is simply the act of a method calling itself in order to solve a problem. It requires no new Java constructs -- just a little bit of alternative thinking!
+</p>
+
+<p>
+Consider the silly problem of trying to programmatically compose a string such as 9876543210123456789. Let's call this a digit sandwich. Our goal is to complete a method
+
+<pre class="block">
+public static String makeDigitSandwich(int outerDigit)
+{
+   // TODO
+}
+</pre>
+
+Sure, you could do this with a couple of loops.  But let's think about it differently. By far the easiest way to make a digit sandwich with an outer digit of 9 is to <em>have someone else</em> make you a digit sandwich with outer digit 8.  Then you can easily concatenate a "9" before and after it:
+
+<pre class="block">
+    return "9" + (digit sandwich with outer digit 8) + "9"
+</pre>
+
+Where do you get a digit sandwich with outer digit 8?  Easy.  All you need is a digit sandwich with outer digit 7:
+<pre class="block">
+    return "8" + (digit sandwich with outer digit 7) + "8"
+</pre>
+More generally, to make a digit sandwich with outer digit <em>d</em>, you just need a digit sandwich with outer digit <em>d</em> - 1:
+<pre class="block">
+    return d + (digit sandwich with outer digit d - 1) + d
+</pre>
+So, in order to write the method <code>makeDigitSandwich</code>, we just need to call a method that will make a slightly smaller digit sandwich.  
+The amazing thing is that <em>we can actually call the </em> 
+<code>makeDigitSandwich</code> <em>method that we are writing</em>. 
+
+<pre class="block">
+public class RecursiveDeli
+{
+
+  public static void main(String[] args)
+  {
+    String result = makeDigitSandwich(4);
+    System.out.println(result);
+  }
+
+  public static String makeDigitSandwich(int outerDigit)
+  {
+    if (outerDigit == 0)
+    {
+      // Base case
+      return "0";
+    }
+    else
+    {
+      // Recursive case
+      String middle = makeDigitSandwich(outerDigit - 1); 
+      String result = outerDigit + middle + outerDigit;
+      return result;
+    }
+  }
+}
+
+</pre>
+The key to getting away with this is you can't go on forever asking for smaller and smaller digit sandwiches.  Eventually you'll ask for a sandwich with outer digit zero, and then there's no more work to do - you can just return "0".  This is called the 
+<em>base case</em>.  The alternative, in which <code>makeDigitSandwich</code> calls <code>makeDigitSandwich</code> with a smaller value, is called the <em>recursive case</em>.
+
+<!--
+<h3>Visualizing execution with pythontutor</h3>
+Try stepping through the code using the pythontutor.com page embedded below.  
+
+<p>
+<iframe width="800" height="500" frameborder="0" src="http://pythontutor.com/iframe-embed.html#code=public%20class%20RecursiveDeli%0A%7B%0A%0A%20%20public%20static%20void%20main(String%5B%5D%20args%29%0A%20%20%7B%0A%20%20%20%20String%20result%20%3D%20makeDigitSandwich(4%29%3B%0A%20%20%20%20System.out.println(result%29%3B%0A%20%20%7D%0A%0A%20%20public%20static%20String%20makeDigitSandwich(int%20outerDigit%29%0A%20%20%7B%0A%20%20%20%20if%20(outerDigit%20%3D%3D%200%29%0A%20%20%20%20%7B%0A%20%20%20%20%20%20//%20Base%20case%0A%20%20%20%20%20%20return%20%220%22%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%0A%20%20%20%20%7B%0A%20%20%20%20%20%20//%20Recursive%20case%0A%20%20%20%20%20%20String%20middle%20%3D%20makeDigitSandwich(outerDigit%20-%201%29%3B%20%0A%20%20%20%20%20%20String%20result%20%3D%20outerDigit%20%2B%20middle%20%2B%20outerDigit%3B%0A%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=false&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+<p>
+
+
+Each time we reach the line
+<pre>
+      String middle = makeDigitSandwich(outerDigit - 1); 
+</pre>
+a new <em>frame</em> is created for the call to <code>makeDigitSandwich</code>.  In that frame are the local variables within that method call, such as <code>outerDigit</code> and result.  The frame is added to the <em>call stack</em>, which keeps track of which method call is currently being executed.  (In pythontutor it is pictured as growing "downwards".)  
+<p>
+Step through the code until you see the call in which the parameter <code>outerDigit</code> is zero.  At this point, the method directly returns "0" and exits.  As the call completes, the assignment of the return value to <code>middle</code>
+is able to complete and to continue executing to produce its own return value, and so on.
+-->
+
+<h3>Visualizing execution with Eclipse</h3>
+Run the code above in Eclipse.  Then, put a breakpoint on the second "return" statement and run it in Debug mode.  You should see something like this:
+
+<p>
+<img src="eclipse_screenshot.png" width=600 alt="Screenshot of Eclipse debugger" />
+
+<p>
+In the Debug Pane, you can see that there are multiple calls to 
+<code>makeDigitSandwich</code> on the call stack.  
+
+Each time we reach the line
+<pre>
+      String middle = makeDigitSandwich(outerDigit - 1); 
+</pre>
+a new <em>frame</em> is created for the call to <code>makeDigitSandwich</code>.  In that frame are the local variables within that method call, such as <code>outerDigit</code> and <code>result</code>.  The frame is added to the <em>call stack</em>, which keeps track of which method call is currently being executed.  
+<!--Each item in the stack is called a
+<em>frame</em> and contains the local variables for a particular method call.
+-->
+
+<p>
+Click on the lowest call to <code>makeDigitSandwich</code>.  Notice in the variables pane that the local variable <code>outerDigit</code> has value 4.  Then click on the next one up; notice that 
+<code>outerDigit</code> has value 3.  That is, 
+<code>makeDigitSandwich(4)</code> has called <code>makeDigitSandwich(3)</code>, which called <code>makeDigitSandwich(2)</code>, which called <code>makeDigitSandwich(1)</code>, which called <code>makeDigitSandwich(0)</code>.   If you click on the topmost frame, you can see that the call to 
+<code>makeDigitSandwich(0)</code> has returned the string "0", and the method 
+is about to return the sandwich "101".
+
+<p>
+Next, use the F6 key (or the Step Over button) to execute through the rest of the code.  Each time the <code>return</code> statement is executed, the call finishes and we end up in the previous frame with a slightly larger digit sandwich stored in the local variable <code>middle</code>.
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page03.html">Cases &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:57 GMT -->
+</html>

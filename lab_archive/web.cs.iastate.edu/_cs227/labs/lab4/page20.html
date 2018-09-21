@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page20.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Debugging</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Debugging</h2>
+
+<p>
+By now you have realized that no matter how careful we are, our first attempt to write a complex piece of software is likely to have errors, or "bugs" in it.  In class we have talked about <i>unit testing</i> to identify whether there are errors in a component.  In this lab, we concentrate on the skills of <em>debugging</em>, that is, or finding and fixing the errors themselves.  In particular we introduce a tool called a <em>symbolic debugger</em> that can help you enormously in this process.
+<!--
+<p>
+Debugging skills are crucial for all programmers, but you'll find your work much more satisfying (and you'll get your projects done a <em>lot</em> more quickly) if you strive to write code that doesn't have bugs in the first place.  Sounds like a no-brainer, right?  Who would <em>want</em> to write code with errors? 
+On the last page of the lab we think about the question and look at some of the collective wisdom of extremely successful programmers.
+</p>
+-->
+
+<h3>Debuggers</h3>
+
+<p>
+A debugger is a piece of software that takes your executable code and allows you to suspend execution and step through a line at a time and inspect the contents of memory. In a sense, it is much like a tape player with play, pause, and stop buttons. In this way, what happens between the time you start your program and the time it fails because of a bug doesn't have to be a mystery. 
+</p>
+
+<p>
+There are several features that are common to most debuggers:
+</p>
+
+<dl class="block">
+
+<dt>Breakpoints</dt>
+<dd>You can set a <i>breakpoint</i> at a line of your choice so that execution is suspended when the breakpoint is reached. You can examine the values of your variables, step to the next line of code, or resume normal execution until another breakpoint is reached.<p></dd>
+<dt>Single-stepping</dt>
+<dd>When the program is suspended, you have several options:
+<ul>
+<li>Step Over - execute one complete line of code and suspend again
+<li>Step Into - "descend" into any method calls contained in the line
+<li>Step Return - execute the rest of the current method and return to where it was called
+<li>Resume - continue execution normally (until the next breakpoint is hit)
+</ul>
+</dd>
+<dt>Suspend (Pause)</dt>
+<dd>Interrupt a running program to examine what it's doing.</dd>
+</dl>
+In the next few pages you will have a chance to try out these features as implemented in Eclipse.
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08.html">&lt; Checkpoint 1</a></td><td align="right"><a href="page21.html">Breakpoints and single-stepping &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page20.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

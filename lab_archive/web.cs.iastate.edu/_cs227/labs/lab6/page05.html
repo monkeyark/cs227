@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Search problems</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Returning early from a loop</h2>
+
+For a problem like <code>countPs</code> that we saw previously, we have to iterate over the entire string in order to correctly compute the answer.  After all, the last character might be a 'p'.  In many problems, we know the answer well before we reach the end of the data.  As an example, take the simpler problem, "Is there a p in this string?"
+
+<p>
+Here is an <strong>incorrect</strong> attempt to solve it.
+
+<pre class="block">
+  public static boolean containsPBad(String s)
+  {
+    boolean answer = false;
+    for (int i = 0; i < s.length(); i += 1)
+    {
+      if (s.charAt(i) == 'p')
+      {
+        answer = true;
+      }
+      else
+      {
+        answer = false;
+      }
+    }
+    return answer;
+  }
+</pre>
+
+What goes wrong?  Suppose you have a string like "apple".  Trace through the execution and see what answer is returned.  The problem is that once we find a P, we should <strong>stop</strong> searching for Ps, since the answer is now known.  When the only task of a method is to produce the answer to an isolated question like this, the simplest strategy is to <code>return</code> from the method as soon as the answer is known.
+
+
+<pre class="block">
+
+  public static boolean containsP(String s)
+  {
+    for (int i = 0; i < s.length(); i += 1)
+    {
+      if (s.charAt(i) == 'p')
+      {
+        return true;
+      }
+    }
+    
+    // we only reach this statement if there wasn't a 'p'
+    return false;
+  }
+</pre>
+
+In cases where it isn't practical to return from the method, you can also "break out" of a loop using the <code>break</code> statement.
+
+<pre class="block">
+  public static boolean containsPAlt(String s)
+  {
+    // assume false until we find a 'p'
+    boolean answer = false;
+    
+    for (int i = 0; i < s.length(); i += 1)
+    {
+      if (s.charAt(i) == 'p')
+      {
+        // found one, "break" out of loop
+        answer = true;
+        break;
+      }
+    }
+
+    return answer;
+  }
+</pre>
+
+Using <code>break</code> can be tricky, especially when there are nested loops or multiple variables being updated.  In general, the form with the early return is preferable.
+
+<h3>Moral of story</h3>
+
+Whenever you go to write a loop, ask yourself: Do I always have to examine every piece of data, or can I stop early if I find what I'm looking for?  
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04.html">&lt; Reading input</a></td><td align="right"><a href="page06.html">Checkpoint 1 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

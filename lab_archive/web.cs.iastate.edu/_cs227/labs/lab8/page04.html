@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading from a file</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Reading from a file</h2>
+
+
+
+<p>
+We have seen that a <code>Scanner</code> can be constructed to read from 
+<code>System.in</code>, and in previous labs we have seen 
+examples in which a Scanner reads its input from a String.  We can also
+construct a <code>Scanner</code> to read from other kinds of input streams, and in
+particular we can use a <code>Scanner</code> to read from a text file.
+<p>
+With very few changes, we can rewrite the line numberer to read from a file.
+
+<pre class="block">
+package lab8;
+<span style="color:red">import java.io.File;</span>
+<span style="color:red">import java.io.FileNotFoundException;</span>
+import java.util.Scanner;
+
+public class LineNumberer2
+{
+  public static void main(String[] args) <span style="color:red">throws FileNotFoundException</span>
+  {
+    <span style="color:red">File file = new File("story.txt");</span>
+    Scanner scanner = new Scanner(<span style="color:red">file</span>);
+    int lineCount = 1;
+
+    while (scanner.hasNextLine())
+    {
+      String line = scanner.nextLine();
+      System.out.print(lineCount + " ");
+      System.out.println(line);
+      lineCount += 1;
+    }
+    <span style="color:red">scanner.close();</span>
+  }
+}
+
+</pre>
+
+<p>
+Try this code out! To run in Eclipse, the file <a href="story.txt">story.txt</a> must be present
+in the project directory.  
+
+<p>
+Try changing the filename to something invalid and
+see what happens. 
+When the file you've named in the <code>Scanner</code> constructor isn't there, the program fails prematurely and something called an <i>exception</i> is generated, in this case a 
+<code>FileNotFoundException</code>.  You have seen some kinds of exceptions in previous labs.  The <code>FileNotFoundException</code>
+is a bit different than the exceptions we've seen before, because the compiler requires us to declare in the method heading
+that this exception might occur:
+<pre class="block">
+  public static void main(String[] args) <span style="color:red">throws FileNotFoundException</span>
+</pre>
+
+<p>
+The main change is the way that we construct the <code>Scanner</code>. First, we
+create a <code>File</code> object by giving the constructor the name of the file we
+want to read.  Then we use the <code>File</code> object to construct our <code>Scanner</code>:
+<pre class="block">
+    <span style="color:red">File file = new File("story.txt");</span>
+    Scanner scanner = new Scanner(<span style="color:red">file</span>);
+</pre>
+ 
+When we construct the <code>Scanner</code> from the given file, the file 
+is <em>opened</em>.  This means that the operating system gets involved with finding the 
+actual file on the hard drive and preparing to read its contents.  When you're 
+finished reading a file, you should tell the operating system you're done so that
+it can clean things up (for example, most operating systems record the date and time at which a file was
+last accessed).  This is called <em>closing</em> the file, which we can
+do with the <code>close</code> method of the scanner:
+
+<pre class="block">
+    <span style="color:red">scanner.close();</span>
+</pre>
+
+
+<!--You should see what's called a <i>stack trace</i>, which shows which method called which method which called ... which method that generated the exception. The layering of method calls that lead to a particular point in the execution of your program is known as the <i>call stack</i>, thus the name stack trace. You saw last week how you can view the call stack at any break- or watchpoint in the Eclipse debugger.
+-->
+
+</p>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; Reading input with System.in</a></td><td align="right"><a href="page05.html">The File Class &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:47 GMT -->
+</html>

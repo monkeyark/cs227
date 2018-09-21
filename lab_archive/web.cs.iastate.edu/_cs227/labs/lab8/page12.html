@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page12.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading a file into an ArrayList</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Reading a file into an ArrayList</h2>
+
+An <code>ArrayList</code> is also useful whenever you are reading input because you don't have to know in advance how many items there will be.
+<p>
+
+Instead of hard-coding the color and point data for the polylines as in
+the <code>TestPlotter</code> example, we would like to be able to read
+the data from a text file.  Suppose that each line of the file corresponds to
+one polyline, and consists of
+the following:
+<ul>
+<li>An optional integer <em>line width</em> 
+<li>A <em>color</em>, which is a string such as "red" or "blue" (see the polyline javadoc for details on recognized colors)
+<li>A sequence of integers representing coordinates of the points, where each pair is one point, x followed by y (there is always an even number of integers following the color name)
+</ul>
+A file may also contain <em>blank lines</em>, which should be ignored, and <em>comments</em>, which should be ignored.  Any line starting with the pound sign character "#" is considered a comment.
+<p>
+For example, the text file describing the output from our test program could look like this
+(you can find it <a href="test.txt">here</a> too):
+<pre class="block">
+# draws a red square
+red 100 100 200 100 200 200 100 200 100 100
+
+# draws a blue triangle with line width of 2 pixels
+2 blue 250 100 400 350 100 350 250 100
+
+# draws a green zig-zag with a 6-pixel line
+6 green 100 400 200 450 300 400 400 450
+</pre>
+
+<p>
+
+(Note: a simple way to tell whether a line is blank is to first use the String method <code>trim()</code>, which removes all leading and trailing whitespace, and then check whether the length is zero.)
+
+<h3>Checkpoint 3</h3>
+Write a program that will read files of the above format and plot the polylines using the plotter.  You can refer to the sample code <code>QuizAverager</code> as a model for the file-reading loop. Start with a helper method that parses just <em>one</em> line and returns the corresponding <code>Polyline</code> object.  Then write a helper method that opens and reads the file, and returns an <code>ArrayList</code> of <code>Polyline</code> objects:
+<pre class="block">
+  private static ArrayList&lt;Polyline&gt; readFile(String filename)
+      throws FileNotFoundException
+  {
+  }
+</pre>
+<p>
+Then the main method can iterate over the list, and call <code>plot()</code>
+for each <code>Polyline</code>.
+
+<p>
+Then, try it on the file <a href="hello.txt">hello.txt.</a>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page11.html">&lt; Using an ArrayList</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page12.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

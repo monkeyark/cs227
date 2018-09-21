@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page21.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Breakpoints and single-stepping</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Breakpoints and single-stepping</h2>
+
+<p>
+Create a project in Eclipse with the file:
+<br>
+<a href="Donuts.java" target="New_Win">
+Donuts.java
+</a>
+</p>
+This is a short program that uses a helper method to calculate the total
+cost for an order of donuts and coffees.  See the javadoc for an explanation.
+There are couple of bugs.  The errors may or may not be obvious to you,
+but either way, let us illustrate how a debugger might be used to find them quickly.
+<p>
+First, run the program and see that the outputs are incorrect. The <code>main</code> method attempts to find the cost of 52 donuts and 10 coffees. 52 donuts is 
+four dozen plus four singles, which should be 35.00 (4 * 8.00 plus 4 * .75), and we should get 8 free coffees, so the two additional coffees are 3.00, for a grand total of 38.00.
+
+
+<h3>Setting a breakpoint</h3>
+<ol class="addSpace">
+<li>Find the first line of the helper method <code>donutHelper()</code> and double-click in the left margin.  You should see a small blue circle appear to the left of the line. 
+
+<li>Now, start the program again, but start it in "Debug mode".  That just means that when you right-click on the project, choose "Debug As... Java Application" instead of "Run As...".  (Alternatively, instead of using the "Play" button from the toolbar to run it, use the button with the little beetle-like icon.)
+<ul>
+  <li>You can also run a JUnit test in debug mode, using "Debug As ... JUnit Test".
+</ul>
+
+<li>A dialog comes up asking you whether you want to switch to "Debug perspective".  Click Yes.
+
+<li>You'll see an editor window with your code, along with some other unfamiliar panes.  
+<p>
+<img src="debug_screenshot.jpg" width=972 />
+</p>
+<ul>
+  <li>The pane at the top left, labeled "Debug" is the <em>call stack</em>.  At the
+  top of the stack you can see <code>donutHelper</code>, the method currently being executed, and just below that you see <code>main</code>, the method that called it.
+  <li>The pane at the top right has two tabs, labeled "Variables" and "Breakpoints".  
+  The Variables tab lists all the local variables that are currently in scope.  You see
+  two variables, namely the parameters <code>donuts</code> and <code>coffees</code>.  There are other local variables defined later in this method, but at this point in the code, they haven't been defined yet.
+</ul>
+</ol>
+
+<h3>Single-stepping with Step Over</h3>
+<ol class="addSpace">
+<li>At the top of the Debug pane you'll see some buttons with funny-looking arrows.
+If you hover your mouse over them, you'll see that they are called "Step Into", "Step Over", and "Step Return" and that they are also available using the F5, F6, and F7 keys, respectively.
+
+<li>Press the Step Over button (or the F6 key) once.  This causes the current line of code to be executed.  Notice in the Variables pane, the variable <code>dozens</code> is now defined. 
+The green highlight in the editor pane is normally the line of code that is about to be executed.  
+
+<li>Use Step Over or F6 to step through the next line.  Notice that now <code>singles</code> is defined too.  At this point you can identify the first error in the program.  Look at the values of the two incoming parameters, <code>donuts</code> and <code>coffees</code>.  Weren't we trying to test this for 52 donuts and 10 coffees?  We're calling it with the arguments mixed up.  No wonder it's giving us incorrect values!
+
+<li>Continue to step through the remaining lines of the method.  When it reaches the end, you'll be back in the main method.  Notice that the method <code>donutHelper</code> is no longer on the call stack.
+
+<li>Press the square red button to terminate the program.  Let's fix the error we found: in the main method, switch the order of the arguments to <code>donutHelper</code>.  Note you can stay in the Debug perspective to edit your code and start it again.  Remember to start it in Debug mode.
+
+</ol>
+
+<h3>Managing breakpoints</h3>
+<ol class="addSpace">
+<li>After fixing the code, let's set a breakpoint in <code>main</code> this time.  Double-click in the left margin by the first line of <code>main</code>.  Now, let's also disable the breakpoint we set before.  Click on the Breakpoints tab, next to Variables.  You'll probably see two breakpoints listed.  Un-check the breakpoint in donutHelper to disable it - the debugger remembers where the breakpoint is, but won't stop execution there. 
+<ul>
+<li>Eclipse will list all the breakpoints you've set in all your projects, not just the one that's open.  To clean things up, you can <em>remove</em> a breakpoint by right-clicking on it and choosing Remove.
+<li>If you want to see the code where the breakpoint is set, just double-click on the listed breakpoint.  (Use the back-arrow in the main toolbar to return.)
+</ul>
+<li>After you've examined the breakpoints, click on the Variables tab again to make sure it's visible.
+</ol>
+
+
+<h3>Step Into</h3>
+<ol class="addSpace">
+<li>Now, run the program again in debug mode.  It should stop on the first line of <code>main</code>.  Press Step Over or F6 now and see what happens.  Notice it executes the current line of code completely, <em>including the method call</em>. 
+<li>Step through the next line, which includes the call to System.out.println.
+You should see the correct output this time.
+<li>For the next line, that is, the second call to <code>donutHelper</code>, let us try something different.  In this case, we want to step <em>into</em> the method call so we can see what it's doing.  Use the Step Into button or F5.
+<li>Step through the first few lines. (When you see the <code>coffees</code> variable updated to a negative value, you should have a clue about what's going wrong.  Note that
+variables that have <em>changed</em> are highlighted in yellow.)
+</ol>
+
+<h3>Step Return</h3>
+<ol class="addSpace">
+<li>Now, suppose we are done examining a method and want to just return to the point where it was called.  That's what Step Return is for.  Click the Step Return button or F7 and you'll be back on the line containing the call to <code>donutHelper</code>.
+
+<li>Press Step Over or F6 to finish executing the current line. The green highlight will be on the <code>println</code> statement.
+
+<li>Now we're going to do something odd that frequently happens by accident. Press Step Into again. Depending on exactly how your JDK is set up, you will either see a message saying "the source code is not available", or you might see the actual source code from some class in the Java libraries. Either way, <em>we don't want to debug the Java libraries!</em>  Use your Step Return button to get back to your own code. 
+
+<li>Before you leave this page, fix the bug in the <code>donutHelper</code> method, and make sure you get the right output.
+</ol>
+
+<h3>Switching perspectives</h3>
+For regular code editing, you probably don't want your workspace cluttered with the extra panes in the Debug perspective.  You can easily switch between perspectives.
+<ul>
+<li>Under the main Window menu, go to Open Perspective and select "Java".
+<li>When in Java perspective, you can use the same menu to switch to "Debug"
+<li>There are usually some shortcut buttons on the upper right side of the toolbar as well.
+</ul>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page20.html">&lt; Debugging</a></td><td align="right"><a href="page22.html">Objects and instance variables &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page21.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

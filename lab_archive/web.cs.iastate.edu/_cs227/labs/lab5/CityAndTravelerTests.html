@@ -1,0 +1,401 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import hw1.City;
+import hw1.Traveler;
+
+/**
+ * JUnit tests for City and Traveler classes.
+ * @author smkautz
+ */
+public class CityAndTravelerTests
+{
+  private City paris;
+  private City rome;
+  private Traveler t;
+  
+  @Before
+  public void setup()
+  {
+    paris = new City("Paris", 75);
+    rome = new City("Rome", 50);
+    t = new Traveler(500, paris);
+  }
+  
+  // City
+  
+  @Test
+  public void testCityInitial()
+  {
+    String msg="For new City (Paris, 75), getName should return correct value. ";
+    assertEquals(msg, "Paris", paris.getName());
+  }
+  
+  @Test
+  public void testCityInitial2()
+  {
+    String msg="For new City (Paris, 75), lodgingCost should return 75. ";
+    assertEquals(msg, 75, paris.lodgingCost());
+  }
+
+  @Test
+  public void testCityPostcard()
+  {
+    String msg="For City (Paris, 75), postcard cost should be 4. ";
+    assertEquals(msg, 4, paris.costToSendPostcard());
+  } 
+  
+  @Test
+  public void testCityPostcard2()
+  {
+    String msg="For City (Barcelona, 45), postcard cost should be 2. ";
+    City barcelona = new City("Barcelona", 45);
+    assertEquals(msg, 2, barcelona.costToSendPostcard());
+  } 
+  
+  @Test
+  public void testCityMaxNights()
+  {
+    String msg="For City (Paris, 75), max length of stay with 500 should be 6. ";
+    assertEquals(msg, 6, paris.maxLengthOfStay(500));
+  }
+  
+  @Test
+  public void testCityMaxNights2()
+  {
+    String msg="For City (Paris, 75), max length of stay with 50 should be 0. ";
+    assertEquals(msg, 0, paris.maxLengthOfStay(50));
+  }  
+
+  @Test
+  public void testCityMaxNights3()
+  {
+    String msg="For City (Rome, 50), max length of stay with 500 should be 10. ";
+    assertEquals(msg, 10, rome.maxLengthOfStay(500));
+  }  
+
+  @Test
+  public void testCityMaxPostcards()
+  {
+    String msg="For City (Paris, 75), max postcards with 50 should be 12. ";
+    assertEquals(msg, 12, paris.maxNumberOfPostcards(50));
+  }
+  
+  @Test
+  public void testCityMaxPostcards2()
+  {
+    String msg="For City (Paris, 75), max postcards with 3 should be 0. ";
+    assertEquals(msg, 0, paris.maxNumberOfPostcards(3));
+  }
+  
+  // Traveler
+  
+  // Name ops
+  @Test
+  public void testName()
+  {
+    String msg="For new Traveler (500, Paris/75), getCurrentCity should return string 'Paris'. ";
+    assertEquals(msg, "Paris", t.getCurrentCity());
+  }
+
+  @Test
+  public void testJournal()
+  {
+    String msg="For new Traveler (500, Paris/75), getJournal should return string 'Paris(start)'. ";
+    //assertEquals(msg, "Paris(start)", t.getJournal());
+    assertJournal(msg, "Paris(start)", t.getJournal());
+  }
+
+  @Test
+  public void testName2()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50, getCurrentCity should return string 'Rome'. ";
+    t.visit(rome, 2);
+    assertEquals(msg, "Rome", t.getCurrentCity());
+  }
+
+  @Test
+  public void testJournal2()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, getJournal should return correct string. ";
+    t.visit(rome, 2);
+    assertJournal(msg, "Paris(start),Rome(2)", t.getJournal());
+  }
+  
+  @Test
+  public void testName3()
+  {
+    String msg="For new Traveler (1000, London/200), after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, getCurrentCity should return string 'Paris'. ";
+    t = new Traveler(1000, new City("London", 200));
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    assertEquals(msg, "Paris", t.getCurrentCity());
+  }
+
+  @Test
+  public void testJournal3()
+  {
+    String msg="For new Traveler (1000, London/200),, after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, getJournal should return correct string. ";
+    t = new Traveler(1000, new City("London", 200));
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    assertJournal(msg, "London(start),Rome(2),Paris(7)", t.getJournal());
+  }
+  
+  @Test
+  public void testJournalMany()
+  {
+    String msg="For new Traveler (500, Paris/75), after visiting 10 cities, journal should be correct. ";
+    String expected = "Paris(start)";
+    for (int i = 1; i <= 10; ++i)
+    {
+      String name = "City" + i;
+      City c = new City(name, 100);
+      t.visit(c, i);
+      expected += "," + name + "(" + i + ")";
+     }
+    assertJournal(msg, expected, t.getJournal());
+  }
+  
+  // Basic ops for funds
+ 
+  @Test
+  public void testFunds()
+  {
+    String msg="For new Traveler (500, Paris/75), getCurrentFunds should return 500. ";
+    assertEquals(msg, 500, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testFunds2()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, getCurrentFunds should return 400. ";
+    t.visit(rome, 2);
+    assertEquals(msg, 400, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testFunds3()
+  {
+    String msg="For new Traveler (400, Rome/50), after visit to Paris/75 x 7 nights, getCurrentFunds should return 25. ";
+    t = new Traveler(400, rome);
+    t.visit(paris, 7);
+    assertEquals(msg, 25, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testFundsMultiple()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, getCurrentFunds should return 25. ";
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    assertEquals(msg, 25, t.getCurrentFunds());
+  }
+  
+  @Test
+  public void testFundsMultiple2()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, then Paris/75 x 7 nights, getCurrentFunds should return 25. ";
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    t.visit(paris, 7);
+    assertEquals(msg, 25, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testFundsMultiple3()
+  {
+    String msg="For new Traveler (1000, Paris/75), after visit to London/200 x 3 nights, then Paris/75 x 7 nights, then Prague/7 x 10 nights, getCurrentFunds should return 4. ";
+    t = new Traveler(1000, paris);
+    t.visit(new City("London", 200), 3);
+    t.visit(paris, 7);
+    t.visit(new City("Prague", 7), 10);    
+    assertEquals(msg, 4, t.getCurrentFunds());
+  }
+  
+  @Test
+  public void testFundsMultiple4()
+  {
+    t = new Traveler(1000, rome);
+    String msg="For new Traveler (1000, Rome/50), after visiting 10 cities (City_i/10i) 1 night each, funds should be correct. ";
+    int funds = 1000;
+    for (int i = 1; i <= 10; ++i)
+    {
+      String name = "City_" + i;
+      City c = new City(name, i * 10);
+      t.visit(c, 1);
+      funds -= i * 10;
+     }
+
+    assertEquals(msg, funds, t.getCurrentFunds());
+  }
+
+
+  
+  // train station
+
+  
+  @Test
+  public void testTrainStation()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, nights in train station should be 2. ";
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    assertEquals(msg, 2, t.getTotalNightsInTrainStation());
+  }
+  
+  @Test
+  public void testTrainStation2()
+  {
+    String msg="For new Traveler (500, Paris/75), after visit to Rome/50 x 2 nights, then Paris/75 x 7 nights, then Paris/75 x 7 nights, nights in train station should be 9. ";
+    t.visit(rome, 2);
+    t.visit(paris, 7);
+    t.visit(paris, 7);
+    assertEquals(msg, 9, t.getTotalNightsInTrainStation());
+  }
+  
+  @Test
+  public void testTrainStation3()
+  {
+    String msg="For new Traveler (1000, Paris/75), after visit to London/200 x 3 nights, then Paris/75 x 7 nights, then Prague/7 x 12 nights, getCurrentFunds should return 4. ";
+    t = new Traveler(1000, paris);
+    t.visit(new City("London", 200), 3);
+    t.visit(paris, 7);
+    t.visit(new City("Prague", 7), 12);    
+    assertEquals(msg, 11, t.getTotalNightsInTrainStation());
+  }
+
+  // postcards
+  
+  @Test
+  public void testBuyPostcard()
+  {
+    String msg="For new Traveler (25, Paris/75), after attempt to send 1 postcard, getCurrentFunds should return 21. ";
+    t = new Traveler(25, paris);
+    t.sendPostcardsHome(1);
+    assertEquals(msg, 21, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testBuyPostcard2()
+  {
+    String msg="For new Traveler (25, Paris/75), after attempt to send 1 postcard, then 12 postcards, getCurrentFunds should return 1. ";
+    t = new Traveler(25, paris);
+    t.sendPostcardsHome(1);
+    t.sendPostcardsHome(12);
+    assertEquals(msg, 1, t.getCurrentFunds());
+  }
+  
+  @Test
+  public void testBuyPostcard3()
+  {
+    String msg="For new Traveler (25, Barcelona/45), after send 3 postcards from Barcelona/45, 1 from Paris/75, 2 from Barcelona/45, 5 from Paris/75, getCurrentFunds should return 3. ";
+    City barcelona = new City("Barcelona", 45);
+    t = new Traveler(25, barcelona);
+    t.sendPostcardsHome(3);
+    t.visit(paris, 1);
+    t.sendPostcardsHome(1);
+    t.visit(barcelona, 1);
+    t.sendPostcardsHome(2);
+    t.visit(paris, 1);
+    t.sendPostcardsHome(5);
+    assertEquals(msg, 3, t.getCurrentFunds());
+  }
+  
+  
+  
+  // write home for money
+  
+  @Test
+  public void testCallHome()
+  {
+    String msg="For new Traveler (25, Paris/75), after 1 postcard, then callHomeForMoney, getCurrentFunds should return 51. ";
+    t = new Traveler(25, paris);
+    t.sendPostcardsHome(1);
+    t.callHomeForMoney();
+    assertEquals(msg, 51, t.getCurrentFunds());
+  }
+
+  @Test
+  public void testCallHome2()
+  {
+    String msg="For new Traveler (25, Paris/75), after 6 postcards, then callHomeForMoney, getCurrentFunds should return 181. ";
+    t = new Traveler(25, paris);
+    t.sendPostcardsHome(6);
+    t.callHomeForMoney();
+    assertEquals(msg, 181, t.getCurrentFunds());
+  }
+  
+  @Test
+  public void testCallHome3()
+  {
+    String msg="For new Traveler (25, Paris/75), after 1 postcard, then callHomeForMoney twice, getCurrentFunds should return 51. ";
+    t = new Traveler(25, paris);
+    t.sendPostcardsHome(1);
+    t.callHomeForMoney();
+    t.callHomeForMoney();
+    assertEquals(msg, 51, t.getCurrentFunds());
+  }
+  
+  @Test
+  public void testCallHome4()
+  {
+    String msg="For new Traveler (25, Barcelona/45), after send 3 postcards from Barcelona/45, 1 from Paris/75, 2 from Barcelona/45, 5 from Paris/75, then callHomeForMoney, getCurrentFunds should return 243. ";
+    City barcelona = new City("Barcelona", 45);
+    t = new Traveler(25, barcelona);
+    t.sendPostcardsHome(3);
+    t.visit(paris, 1);
+    t.sendPostcardsHome(1);
+    t.visit(barcelona, 1);
+    t.sendPostcardsHome(2);
+    t.visit(paris, 1);
+    t.sendPostcardsHome(5);
+    t.callHomeForMoney();
+    assertEquals(msg, 243, t.getCurrentFunds());
+  }
+  
+  
+  // SOL
+  
+  @Test
+  public void testSOL()
+  {
+    String msg="For new Traveler (4, Paris/75), isSOL should return false. ";
+    t = new Traveler(4, paris);
+    assertEquals(msg, false, t.isSOL());
+  }
+  
+  @Test
+  public void testSOL2()
+  {
+    String msg="For new Traveler (3, Paris/75), isSOL should return true. ";
+    t = new Traveler(3, paris);
+    assertEquals(msg, true, t.isSOL());
+  }
+  
+  @Test
+  public void testSOL3()
+  {
+    String msg="For new Traveler (3, Paris/75), isSOL should return true, but after going to Barcelona/45, isSOL should return false. ";
+    t = new Traveler(3, paris);
+    assertEquals(msg, true, t.isSOL());
+    t.visit(new City("Barcelona", 45), 1);
+    assertEquals(msg, false, t.isSOL());    
+  }
+
+  
+  // check journal string ignoring spaces
+  private void assertJournal(String msg, String expected, String actual)
+  {
+    String tempActual = actual.replace(" ", "");
+    if (!expected.equals(tempActual))
+    {
+      String msg2 = "Expected: \"" + expected + "\", found \"" + actual + "\". ";
+      fail(msg + msg2);
+    }
+  }
+
+}

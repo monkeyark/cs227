@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading data</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h2>Reading data</h2>
+
+Since an ArrayList will expand as needed when we add elements, it is ideal for reading data from an input stream.  In the previous lab, we wrote a method that parses a string of text containing numbers (such as <code>"42 137 19 17 5"</code>) and fills an array with the values.  Recall that we had to read the data twice - once to count the values, in order to create the array the right size, and again to actually put the values in the array.  
+<p>
+
+Here is the ArrayList version:
+<pre class="block">
+  public static ArrayList&lt;Integer&gt; readNumbers(String text)
+  {
+    Scanner scanner = new Scanner(text);
+
+    ArrayList&lt;Integer&gt; nums = new ArrayList&lt;Integer&gt;();
+    
+    scanner = new Scanner(text);
+    while (scanner.hasNextInt())
+    { 
+      nums.add(scanner.nextInt());
+    }
+    return nums;  
+  }
+</pre>
+
+To try out this code see the complete example
+<a href="ArrayListExample1.html">ArrayListExample1.java</a>
+<p>
+Note that if we really wanted the same method as before, which returns an int array of the correct size, we'd still have to create the array to be returned, and copy the elements over.
+
+<pre class="block">
+  public static int[] readNumbers(String text)
+  {
+    Scanner scanner = new Scanner(text);
+
+    ArrayList&lt;Integer&gt; nums = new ArrayList&lt;Integer&gt;();
+    
+    scanner = new Scanner(text);
+    while (scanner.hasNextInt())
+    { 
+      nums.add(scanner.nextInt());
+    }
+    
+    int[] ret = new int[nums.size()];
+    for (int i = 0; i < nums.size(); i += 1)
+    {
+      ret[i] = nums.get(i);
+    }
+    return ret;
+  }
+</pre>
+
+See
+<a href="ArrayListExample2.html">ArrayListExample2.java</a>
+<p>
+The code is not really any shorter than the original version, but it is more efficient, since parsing the data from the input stream only has to be done once.  In practice you would almost always use an ArrayList for reading data.
+
+Note that there is a method <code>toArray</code> in the ArrayList class that converts an ArrayList to an array, but we can't use it here: we specifically need to return an array of int, and the <code>toArray</code> method would return an array of the wrapper type <code>Integer</code>.
+
+
+<h3>Selecting elements</h3>
+
+Using an ArrayList can also simplify problems such as the method <code>getPositiveNumbers</code> from lab 7, in which we needed to iterate over an array of integers and return a new array containing just the positive values.  Again, since the ArrayList can grow as needed, there is no need to count the positive elements first:
+
+<pre class="block">
+  public static int[] getPositiveNumbers(int[] arr)
+  {
+    ArrayList&lt;Integer&gt; positiveNums = new ArrayList&lt;Integer&gt;();
+    for (int num : arr)
+    {
+      if (num > 0)
+      {
+        positiveNums.add(num);
+      }
+    }
+    
+    int[] ret = new int[positiveNums.size()];
+    for (int i = 0; i < positiveNums.size(); i += 1)
+    {
+      ret[i] = positiveNums.get(i);
+    }
+    return ret;
+  }
+</pre>
+See
+<a href="ArrayListExample3.html">ArrayListExample3.java</a>.
+<p>
+
+<h3>Checkpoint 2</h3>
+
+Write a method 
+<pre class="block">
+    public static void removeDuplicates(ArrayList<String> words)
+</pre>
+that removes duplicates from a list of strings.  (The simplest approach is to create a second ArrayList without the duplicates, and then copy it back to the original array.  Note that ArrayList has a method <code>contains</code> that tells you whether a given object is in the list, a method <code>clear</code> that removes all elements, and a method <code>addAll</code> that adds an entire collection to the list.)
+
+<!--
+<p>
+<em>Optional</em>: The solution proposed in Checkpoint 2 suffers from two problems.  One is the extra memory requirement of the second list.  The other is that each call to the  <code>contains</code> method requires iterating through the whole second list to check whether your next string is already there.  We should be able to avoid the second issue by sorting the list first (ArrayList has a <code>sort</code> method).  Can you also avoid the first problem (and avoid the problems of <code>remove</code>)?  The idea is to <em>copy</em> elements into the correct position without using <code>remove</code> to alter the list structure.  
+-->
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08.html">&lt; ArrayLists and arrays</a></td><td align="right"><a href="page10.html">Polylines &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

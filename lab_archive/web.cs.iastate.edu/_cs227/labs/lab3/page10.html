@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>The Rabbit Simulator</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Experimenting</a></li><li><a href="page02a.html">Exceptions</a></li><li><a href="page02b.html">Checkpoint 1</a></li><li><a href="page08.html">Meeting a Specification</a></li><li><a href="page09.html">The Rabbit Problem</a></li><li><a href="page10.html">The Rabbit Simulator</a></li><li><a href="page11.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>The Rabbit Simulator</h2>
+
+<p>
+The reason it's important for <code>RabbitModel</code> to carefully follow the specification is that it will now be used by an existing class named <code>SimulationPlotter</code> that will plot a graph of the population according to your model. If the model doesn't follow the spec, the plotter won't work, the system will be a failure, your spouse will gamble away your life savings and all your children will grow up to be drug addicts.
+</p>
+
+<h3>JAR Files</h3>
+
+<p>
+You will not actually get the source code for the <code>SimulationPlotter</code> class. Instead, you will download and import a <em>JAR</em> file (Java ARchive) that contains the compiled code for the class.  (This is an extremely common way of distributing Java libraries and applications.)
+</p>
+
+<p>
+To download and import the JAR file, follow these steps.  This part is exactly the same as importing a specchecker.
+</p>
+
+<ol>
+<li>Download <a href="rabbits.jar" type="application/x-jar"><code>rabbits.jar</code></a> and save it somewhere convenient that is NOT inside your <code>project3</code> directory.</li>
+<li>Right-click on your <code>project3</code> project directory in Eclipse and select Import, expand General, select File System, and click Next.
+<li> Browse to the directory where you saved <code>rabbits.jar</code> and hit OK.
+<li> Check the box next to <code>rabbits.jar</code> in the right pane, and click Finish.</li>
+<li>Right-click on <code>rabbits.jar</code> in Eclipse's Package Explorer, select Build Path, and select Add to Build Path.</li>
+<li>The <code>SimulationPlotter</code> class will now be available to you in your lab 3 code. 
+</li>
+</ol>
+
+<h3>Putting It Together</h3>
+
+<p>
+The jar file <code>rabbits.jar</code> doesn't contain a <code>main</code> method, so you can't "run" it as we did for the speccheckers.  You'll need to write a <code>main</code> method in which you create 
+an instance of <code>SimulationPlotter</code> and provide it an instance of your model so that the simulator can do its work. 
+
+<p>
+Create a new class called <code>RabbitSimApp</code> with a <code>main</code> method.  
+
+<p>
+To figure out how to use the <code>SimulationPlotter</code> in your main method, take a look at the 
+<a href="doc/plotter/SimulationPlotter.html" target=_blank>Javadoc documentation</a>.
+As with most Java objects, in order to use a <code>SimulationPlotter</code> we first have to <em>construct</em> one.  The documentation shows there is just one constructor, 
+not requiring any arguments:
+<p>
+<img src="plotter1.jpg" width=640 alt="Screenshot SimulationPlotter constructor doc">
+<p>
+So, in the main method, we need to put in the line:
+<pre class="block">
+SimulationPlotter plotter = new SimulationPlotter();
+</pre>
+In order to start the simulation and see the results plotted, we need to call the
+plotter's <code>simulate</code> method:
+<p>
+<img src="plotter2.jpg" width=640 alt="Screenshot SimulationPlotter simulate method doc">
+<p>
+The <code>simulate</code> method requires us to provide an argument which is an instance of our <code>RabbitModel</code>:
+<pre class="block">
+RabbitModel myModel = new RabbitModel();
+plotter.simulate(myModel);
+</pre>
+We will also need an <code>import</code> statement at the top of the file (after the <code>package</code> declaration), since the <code>SimulationPlotter</code> is in a different package:
+<pre>
+import plotter.SimulationPlotter;
+</pre>
+</p>
+
+<p>
+Verify that the simple model and your <code>main</code> method work okay. In adding a single rabbit to the population each year, you should see a straight line plotted by the simulator.  <em>If the plotter output is not correct, go back to the previous page and see the section, "Unit testing the model".
+</p>
+<img src="plotter_screenshot.jpg" width=300 alt="Screenshot SimulationPlotter window">
+
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page09.html">&lt; The Rabbit Problem</a></td><td align="right"><a href="page11.html">Checkpoint 2 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+</html>

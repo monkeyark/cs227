@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page22.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Objects and instance variables</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Objects and instance variables</h2>
+Add the following files to your project
+<br>
+<a href="PiggyBank.java" target=_blank>
+PiggyBank.java</a>
+<br>
+<a href="PiggyBankExample.html" target=_blank>
+PiggyBankExample.java</a>
+<p>
+Read the javadoc comment at the top of PiggyBank.java to see how it is supposed to work.
+If you run the main method of <code>PiggyBankExample</code>, you can see that the results are not quite right.
+<ol class="addSpace">  
+<li>Set a breakpoint at the first line of <code>main</code> and run in Debug mode.  
+
+<li>Use Step Over or F6 to execute the first line, and take a look at the Variables pane again.  You see the parameter <code>args</code> and also the local variable <code>piggy</code>.
+
+<li>Since <code>piggy</code> is an object, all we initially see for its value is the name of the class.  But when you hover the cursor over that line of the table, a small triangle appears on the left.  Click the triangle to expand.  Now you can see the values of the three instance variables in the object.
+
+<li>The green highlight should now be over the call to <code>addCoin</code>.  
+
+<li>Use Step Into or F5 to <em>enter</em> the <code>addCoin</code> method.  Notice that the Variables pane doesn't have any local variables, since there aren't any, but 
+it includes something called <code>this</code>.  The implicit variable <code>this</code> <em>always refers to the object on which the executing method was invoked</em> (here it is the <code>PiggyBank</code> we created in <code>main</code>).
+
+<li>Hover over the <code>this</code> line of the Variables pane; again the little triangle appears so you can expand and see the instance variables.
+<p>
+<img src="instance_vars_screenshot.png" width=400 />
+<p>
+
+<li>Now use Step Over or F6 twice, so that you execute the line <code>coins += 1</code>.  You can see the instance variable <code>coins</code> updated in the Variables pane.
+<li>Step again to return to main.
+<li>Step over (F6) the next line in <code>main</code> (another call to <code>addCoin()</code>).
+<li>The next line of main is a <code>println</code> statement.  The line actually contains 
+<em>two</em> method calls, one to <code>println()</code>, and one to <code>getNumCoins()
+</code>.  If we press Step Into again, which one do we go into?  In this case, the runtime 
+has to evaluate the <em>argument</em> to <code>println</code> before it can execute <code>
+println</code>, so the debugger will step into the <code>getNumCoins()</code> method first.  
+Try it, and continue stepping until you get back to main.  
+<ul>
+<li>Remember, if you accidentally step 
+into any Java library code, such as the <code>println</code> method, you can use Step Return 
+or F7 to get back.
+</ul>
+<li>When you get to the next line in <code>main</code>, step into the <code>isSmashed()</code>method. Keep an eye on the instance variables, and identify the error!
+<li>Terminate the program, fix the error, and check that the results are correct now.
+</ol>
+
+
+<h2>Checkpoint 2</h2>
+Demonstrate to the TA that you can set breakpoints, single step through code, step return from a method such as <code>println</code> and view instance variables of objects.  Explain the error you found in <code>PiggyBank</code>.
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page21.html">&lt; Breakpoints and single-stepping</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page22.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

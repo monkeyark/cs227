@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Example: selecting distinct random elements</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Example: selecting distinct random elements</h2>
+
+In the preceding examples we have practiced writing loops using arrays of integers.  
+This example is somewhat more realistic and involves an array of objects.  
+
+<p>
+Imagine that for programming a card game we have a <code>Card</code> class and we represent a standard 52-card deck with an array of 52 <code>Card</code> objects.
+How would you "deal" a hand of 5 cards, that is, how would you select 5 cards at random?  Suppose your array is called <code>cards</code>, and suppose that you have an instance <code>rand</code> of <code>java.util.Random</code> available.  You might start with something like this:
+<pre>
+    Card[] hand = new Card[5];
+    for (int i = 0; i < 5; i += 1)
+    {
+      int index = rand.nextInt(52);
+      hand[i] = cards[index];
+    }
+</pre>
+What's wrong with this?  Well, although unlikely, it is entirely possible to get a hand with five aces or other duplicates.  What we need is to sample from the deck "without replacement", that is, we need a way to select 5 <em>distinct</em> objects from the array.
+
+<p>
+Here is one possible algorithm for doing this.  
+<ol>
+<li>First, choose an random index in the range 0 through 51. 
+<li>Exchange that element with the last one.
+<li>Choose a random index in the range 0 through 50.  (Notice that the first element selected can't be selected again, since it's in position 51.)
+<li>Exchange that element with whatever is in position 50.
+<li>Choose a random index in the range 0 through 49.
+<li>...and so on, until you've made 5 selections.
+</ol>
+When done, the last 5 elements of the array are the ones you want.  
+
+<p>In general you might be selecting a larger number of elements, so you would use a loop, where in the <code>i</code>th iteration you select an index in the range 0 through (array length - <code>i</code>).
+<!--
+ In pseudocode:
+<pre>
+   initially last = array length - 1
+   for the number of selections needed:
+       generate an index in the range [0, last]
+       swap the element at index with the element at last
+       decrement last
+</pre>
+-->
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04.html">&lt; Modifying an array</a></td><td align="right"><a href="page07.html">Checkpoint 1 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+</html>

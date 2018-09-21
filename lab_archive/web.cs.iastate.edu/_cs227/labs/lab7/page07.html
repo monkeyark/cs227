@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 1</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Exercise</h2>
+
+
+<p>
+Your task is to implement the algorithm described informally in the previous slide. You'll need the files
+<a href="Card.java" target=_blank><code>Card.java</code></a>
+and
+<a href="Deck.java" target=_blank><code>Deck.java</code></a>.
+It is not strictly necessary that you understand all of the provided code, but it contains plenty of examples of manipulating arrays.
+<p>
+Implement your algorithm in the method <code>select(int k)</code> of the <code>Deck</code>
+class (look for the <strong>TODO</strong> marker):
+
+<pre>
+  /**
+   * Returns a new array containing k elements selected
+   * at random from this deck.
+   */
+  public Card[] select(int k)
+  {
+    // TODO
+    return null;
+  }
+</pre>
+<p>
+As always we suggest you start by writing the algorithm in pseudocode.
+<p>
+You can test your class by writing a short main method, for example:
+<pre>
+public class DeckTest
+{
+  public static void main(String[] args)
+  {
+    Deck deck = new Deck();
+    Card[] hand = deck.select(5);
+    System.out.println(Card.toString(hand));
+  }
+}
+</pre>
+Note the utility method <code>toString(Card[] arr)</code> in the 
+<code>Card</code> class for displaying an array of cards as a string.
+
+<p>
+Now you can play poker with the person next to you in lab :).
+
+
+
+<h3>Checkpoint 1</h3>
+<ol>
+<li>Demonstrate your code for the three preceding exercises to the TA (<code>getPositiveNumbers</code>,
+<code>randomExperiment</code>, and the <code>select</code> method)
+<li>Show the TA the confirmation page from the Lab and TA Evaluation survey.
+</ol>
+
+<p>
+<em>Optional</em>: What do you think should happen if you call <code>select</code> a second time on the same <code>Deck</code>?  Try modifying the class so that, for example, if you first select
+5 cards, then
+the second time you call <code>select</code> it will only select cards from the remaining 47.
+
+<h3>Aside: Testing code that uses randomization</h3>
+
+When you are testing code, if you find a bug you want to be able to repeat it.  Then,
+when you fix the code, you can try the same thing again and make sure it doesn't
+still occur.  When you are testing code that uses randomization, how can you make
+the results repeatable?
+<p>
+The answer is to "seed" the random number generator with a known value. The seed value is used internally by the generator to initialize the algorithms it uses. The useful thing is that instances of
+<code>Random</code> that are created with the same seed will always produce exactly the same sequence of pseudorandom values.  So, for example, if we change the DeckTest like this:
+<pre>
+public class DeckTest
+{
+  public static void main(String[] args)
+  {
+    Random rand = new Random(42);  // "seed" the random number generator with a value we choose
+    Deck deck = new Deck(rand);    // construct the deck to use that generator
+    Card[] hand = deck.select(5);
+    System.out.println(Card.toString(hand));
+  }
+}
+</pre>
+The results will be the same every time you run the program.  This is useful for
+testing.  That's the reason for having the second constructor for <code>Deck</code> that
+lets you pass in the <code>Random</code> of your choice.
+<p>
+An instance of <code>Random</code> created with the default constructor just
+uses an arbitrary value for the seed that is likely to be different for different runs of the program (e.g. a number based on the system clock).  When you are using random values for a game, this usually makes the results sufficiently unpredictable.
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; Example: selecting distinct random elements</a></td><td align="right"><a href="page08.html">Sorting arrays &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+</html>

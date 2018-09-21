@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page08a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Drawing in Swing</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Drawing in Swing</h2>
+The second checkpoint is a somewhat whimsical application of inheritance that involves drawing simple pictures.  To draw pictures in Java we use a framework called <em>Swing</em>.  The main purpose of Swing is to create GUIs, so there are many classes representing controls such as buttons and menus, but it is also possible to simply create a blank window and issue commands to draw things.
+
+<p>
+The basic mechanism is pretty simple once you know about inheritance: you create a subclass of the class <code>JPanel</code>, and then override the method <code>paintComponent</code>.  You can see this illustrated in the very short application <a href="http://www.cs.iastate.edu/~cs227/labs/lab10/SwingGraphicsExample.java"><code>SwingGraphicsExample.java</code></a>.  Here is the <code>paintComponent</code> method:
+<pre class="block">
+  public void paintComponent(Graphics g)
+  {
+    g.drawOval(150, 100, 100, 100);
+  }
+</pre>
+<p>
+<img src="screenshot1.jpg" width="426" />
+
+<p>
+Here is how to make sense of the numbers in the call to drawOval.  The panel is a rectangular grid of <em>pixels</em>, or dots.  In this example, we are setting the panel size to 400 wide by 300 high.  The upper-left corner is (0, 0).  A shape is specified by its "bounding box", shown as a red square below.  The first two numbers are the coordinates of the upper-left corner of the bounding box.  The third and fourth numbers are the width and height.
+
+<p>
+<img src="screenshot2a.jpg" width="426" />
+
+<p>
+You can experiment with other methods of the class
+<a href="http://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html" target="_blank"><code>java.awt.Graphics</code></a>
+ to see how to draw lines and rectangles and so on.  Just add your code to the <code>paintComponent</code> method.
+
+<p>
+There are two dozen more lines of code in this example, but there is no real need to read them unless you are curious. They are just "boilerplate" code for creating the window and putting our panel in the window, which takes place in the static method <code>createAndShow</code>.  Then the <code>main</code> method starts everything up by adding the <code>createAndShow</code> method to the framework's <em>event queue</em>.  These steps are pretty much the same for all Swing applications.
+
+<p>
+<h3>Further references</h3>
+Graphics and GUIs are outside the scope of this course, so we emphasize that you are not going to be tested on this material.  They do provide some good examples of the use of polymorphism, and they are kind of fun to play with.
+<p>
+If you are interested in seeing an example that uses some GUI controls rather than drawing pictures, check out the example 
+<a href="http://www.cs.iastate.edu/~cs227/labs/lab10/FirstSwingExample.java" target=_blank><code>FirstSwingExample.java</code></a>.  
+
+<p>
+There also a collection of 
+<a href="http://www.cs.iastate.edu/~smkautz/#swingexamples" >
+Swing examples on Steve's web page</a>.
+<p>
+For a comprehensive reference on Swing, there is nothing better than the official
+<a href="http://docs.oracle.com/javase/tutorial/uiswing/TOC.html" target=_blank>Swing tutorials</a> from Sun/Oracle.
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08.html">&lt; An IntList class</a></td><td align="right"><a href="page09.html">Group Portrait &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page08a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

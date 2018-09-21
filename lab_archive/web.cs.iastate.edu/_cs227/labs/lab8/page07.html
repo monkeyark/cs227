@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Parsing lines of a file</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Parsing lines of a file</h2>
+Text files are usually organized into lines, and so 
+a loop for processing a text file usually has the following form:
+<pre class="block">
+open the file
+while there are more lines
+    get the next line
+    process the line
+close the file
+</pre>
+<!--
+You check whether there are more lines and get the next line using the <code>hasNextLine</code> and <code>nextLine</code> methods of <code>Scanner</code>:
+<pre class="block">
+// open the file
+File myFile = ...
+Scanner scanner = new Scanner(myFile);
+
+while (scanner.hasNextLine())
+    String line = scanner.nextLine();
+    // process the line ...
+	
+scanner.close()
+</pre>
+-->
+
+The step where it says "process the line" can be quite involved, however. For example, suppose a file contains lines such as
+<pre class="block">
+Firstname Lastname 8 10 7 7 4
+</pre>
+where the numbers are lab scores, and the desired output for each line is to print the name followed by the sum of the scores divided by a fixed possible total.  If the total possible in this case is 50, we'd get output of the form
+<pre class="block">
+Firstname Lastname 7.2
+</pre>
+for this line.  The pseudocode for "process the line" might look like this:
+<pre class="block">
+read the first name
+read the last name
+while there are more numbers
+    add the numbers to the total
+print name and average
+</pre>
+Each line is just a string that you can read with a temporary <code>Scanner</code>.
+This is simplest if you first write a helper method whose job is to process just one line
+and print the name and average:
+<pre class="block">
+
+  private static void printOneAverage(String line, int pointsPossible)
+  {   
+    // construct a temporary scanner, just to read data from this line
+    Scanner temp = new Scanner(line);
+    
+    // get the first and last name
+    String first = temp.next();
+    String last = temp.next();
+    
+    // add up all the scores
+    double total = 0.0;
+    while (temp.hasNextInt())
+    {
+      int value = temp.nextInt();
+      total += value;
+    }
+    
+    // print the average
+    double average = total / pointsPossible;
+    System.out.println(first + " " + last + " " + average);
+  }
+
+</pre>
+
+Then the original pseudocode is captured in a method that opens and
+reads the file, calling <code>printOneAverage</code> for each line:
+<pre class="block">
+  private static void printAllAverages(String filename, int pointsPossible) 
+      throws FileNotFoundException
+  {
+    // open the file
+    File file = new File(filename);    
+    Scanner scanner = new Scanner(file);
+    
+    // while there are more lines...
+    while (scanner.hasNextLine())
+    {
+      // get the next line
+      String line = scanner.nextLine();
+      
+      // process the line
+      printOneAverage(line, pointsPossible);
+    }
+    
+    // close the file
+    scanner.close();
+
+  }
+</pre>
+
+Then the code for the main method is simple:
+<pre class="block">
+public class QuizAverager
+{
+  public static void main(String[] args) throws FileNotFoundException
+  {
+    // read from a file called "scores.txt", assume total possible points is 50
+    printAllAverages("scores.txt", 50);
+  }
+  
+</pre>
+
+Try this on the sample text file <a href="scores.txt">scores.txt</a>.  You can find the complete <a href="QuizAverager.java">QuizAverager.java source code here.</a> 
+
+<p>
+<p>
+<div style="border: 2px solid #000000;border-color: red; "> 
+<em>
+Advice: When you read a file, decide whether you want to read it item-by-item, or line-by-line.  Use <code>hasNextLine()</code> with <code>nextLine()</code>; use <code>hasNext()</code>
+with <code>next()</code>.  Don't mix them up.
+</em>
+</div>
+
+<h2>Checkpoint 1</h2>
+<ol>
+<li>Modify the code for <code>LineNumberer</code> so that the input file comes from 
+a different project, using a <em>relative path</em> to identify it.  For example, run
+<code>LineNumberer</code> on the source file <code>Deck.java</code> that was
+part of lab 7.
+<li>Write a method that reads a text file and, for each line, prints out the number of words in the line.  Try it on the file <a href="story.txt">story.txt</a>.
+</ol>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; Writing to a file</a></td><td align="right"><a href="page08.html">ArrayLists and arrays &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

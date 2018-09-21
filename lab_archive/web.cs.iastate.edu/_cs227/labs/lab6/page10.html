@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reflection</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Reflection</h2>
+
+Debugging can be extremely difficult.  Often you will be stuck in the situation of needing to track down errors in code written by someone else (as in today's exercise).  When you write your own code, you have control over its quality.  What can you do to improve your chances of getting it right the first time?
+<p>
+Novice programmers have a tendency to start writing code before they really understand what it is supposed to do. 
+
+Here are some guidelines that experienced programmers have shared over the years:
+<ul class="addSpace">
+<li><i>Think away from the computer.</i> Avoid the temptation of coding first by thinking about the problem to be solved away from the computer. Have paper handy.  Start with small, concrete examples that you can work out by hand.</li>
+<br>
+
+<li><i>Start small.</i> If you don't see how to solve a problem, try solving just part of the problem. Try solving a simpler problem that might be related.</li>
+<br>
+
+<li><i>Write down what needs to be done in your native language.</i> You are likely far more comfortable speaking your native language than you are in coding Java, and errors in your strategy for solving a problem will be more obvious to you. If you can't express your problem in spoken language, it will not be any easier to write Java code to solve it. 
+Programmers use <em>pseudocode</em> to first describe the steps of an algorithm at a high level, then use that outline as a basis for writing Java code.
+</li>
+<br>
+
+<li><i>Write test cases.</i> Whether or not you prefer a labor-saving framework such as JUnit, you always need to construct simple examples of what the code should actually do.  Whenever you go to implement a method, ask yourself, "If this method was working correctly, how would I be able to tell"?
+</li>
+<br>
+
+<li><i>Draw pictures.</i> Walk through confusing code on paper or markerboard. Draw the state of variables and refer to your drawings as you evaluate each expression. Update your drawing as variables are reassigned and erase or cross out previous values.</li>
+<br>
+
+<!--
+Here's an example of writing <i>pseudocode</i> to sketch out how to find the average
+of a bunch of numbers given as a string of text.
+
+<p>
+First, an example.  Maybe we have some string like this of arbitrary length:
+
+<pre class="block">
+5 10 15 1 3 7 19 25 100 100 100 13
+</pre>
+
+<p>
+Then a first draft of pseudocode:
+</p>
+
+<pre class="block">
+get first number from the string, add it to total
+get second number, add it to total
+get third number, add it to the total
+...
+average is the total / number of numbers found
+</pre>
+
+<p>
+You see some repetition, so you formulate your pseudocode using a loop:
+</p>
+
+<pre class="block">
+while there are more numbers in the string
+    get the next number
+    add number to total
+    add 1 to the count
+average is total / count
+</pre>
+
+<p>
+Now, this isn't that far from Java:
+</p>
+
+<pre class="block">
+double total = 0.0;
+int numberCount = 0;
+Scanner in = new Scanner(theString);
+while (in.hasNextInt) 
+{
+    total += in.nextInt();
+    numberCount++;
+}
+System.out.println("Average: " + total / numberCount);
+
+</pre>
+-->
+
+
+<li><i>Document each method before you implement it.</i> In writing the documentation, you focus on what one method needs to do -- and you won't be tempted to try and solve the entire problem at once. 
+</li>
+<br>
+
+
+<li><i>Choose good variable names.</i> If you choose meaningful variable names, expressions will be easier to write since it will be obvious what data is being manipulated. 
+</li>
+<br>
+<li><i>Follow good style.</i> By being consistent in your coding style, you will be able to look at the code you write and know certain things just from a glance. If you see a word like <code>maxTime</code>, you can be certain that this is a variable. If you see <code>Family</code>, you know there must be a <code>Family</code> class. Likewise, <code>addMember(...)</code> must be a method. Proper indentation will reveal the structure of your code. After every opening brace (<code>{</code>), the indentation should be one level deeper than before the brace. Just by looking a line's indentation you can see easily how it's contained inside loops, conditional statements, and methods. Eclipse helps you to clean up indentation and whitespace of your code with <code>Control-Shift-I</code> to fix indentation of a selection, or <code>Control-Shift-F</code> to reformat a selection.
+</li>
+</ul>
+
+
+<p>
+As you leave lab and walk across campus, ask yourself some questions:
+</p>
+
+<ul>
+<li>Why should I use a debugger when <code>System.out.println</code> can show me the values of our variables whenever we want?</li>
+<li>Why is most software sold without any guarantee?</li>
+<li>Am I a random code generator? Or do I take a more systematic approach to writing code?</li>
+</ul>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page09.html">&lt; More Debugging</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

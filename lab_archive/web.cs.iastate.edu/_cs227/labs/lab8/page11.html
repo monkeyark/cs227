@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page11.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Using an ArrayList</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Using an ArrayList</h2>
+
+We are actually going to be using <code>ArrayList</code> in two different ways here.
+<p>
+First, notice that a <code>Polyline</code> can contain an arbitrary number of points,
+and these points have to be stored in the <code>Polyline</code> object.
+In order to implement the <code>Polyline</code> class, we use an <code>ArrayList</code>
+to store the points.  
+You can see 
+<a href="Polyline.java">the code for Polyline.java here</a>.
+<p>
+Take a brief look at the relevant parts of the code:
+<p>
+First we declare an <code>ArrayList</code> of <code>Point</code> objects:
+<pre class="block">
+public class Polyline
+{
+  private ArrayList&lt;Point&gt; points;
+  
+</pre>
+<p>
+In the constructor, we create the <code>ArrayList</code>, which
+is initially empty.
+<pre class="block">
+  public Polyline(String givenColor, int givenWidth)
+  {
+    color = givenColor;
+    width = givenWidth;
+    points = new ArrayList&lt;Point&gt;();
+  }
+</pre>
+<p>
+Then the <code>addPoint</code> method just has to put the new point at
+the end of the list:
+<pre class="block">
+  public void addPoint(Point point)
+  {
+    points.add(point);
+  }
+</pre>
+
+<p>
+An <code>ArrayList</code> is useful here because we don't know in advance, when constructing a <code>Polyline</code> object, how many points will eventually
+be added to it.
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page10.html">&lt; Polylines</a></td><td align="right"><a href="page12.html">Reading a file into an ArrayList &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page11.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

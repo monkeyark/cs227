@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Scanner</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Parsing input</h2>
+
+Reading input is harder than writing output.  For example, suppose you have the input:
+<pre>
+12 Monkeys
+</pre>
+is this supposed to be
+<ol>
+<li>A single string, "12 Monkeys"?
+<li>The integer 12 and then the string "Monkeys"?
+<li>Ten individual characters '1', '2', ' ', 'M', and so on?
+</ol>
+A stream of text that comes from the console or some other source has to be <em>parsed</em>.  Parsing input means separating it into individual items, or <em>tokens</em>, that you want.  The most common case is that the items 
+are words or numbers separated by "whitespace" (spaces or tabs or newlines).
+In this case we say that whitespace is the <em>delimiter</em> for our input.
+
+
+<h3>Scanner</h3>
+The best way to parse input in Java is using the class <code>Scanner</code>,
+which is in the package <code>java.util</code>.
+A Scanner object can be constructed to read from any stream of text - 
+input typed at the console, a String, a file, or a stream of data from
+an internet connection.  By default, it will treat whitespace as the delimiter (but that can be changed if, for example, your input elements are separated by commas or some other characters).
+
+<h3>next()</h3>
+The most basic method of Scanner is <code>next()</code>, which returns the next
+item of input and returns it as a String.  Try this example, which 
+reads three words from a string. 
+
+<pre class="block">
+package lab4;
+import java.util.Scanner;
+
+public class ScannerTest
+{
+  public static void main(String[] args)
+  {
+    String theInput = "Huey Louie Dewey";
+    
+    // construct a scanner to read from the string
+    Scanner in = new Scanner(theInput);
+    
+    // parse the input to get the three items
+    String first = in.next();
+    String second = in.next();
+    String third = in.next();
+    
+    // print them out
+    System.out.println(first);
+    System.out.println(second);
+    System.out.println(third);
+  }
+}
+</pre>
+
+Create a class <code>ScannerTest</code> in your lab4 package and paste in the code above.
+Notice there is a compile error, since we are trying to use the <code>Scanner</code> class without an import statement.  
+Here is a nice trick in Eclipse for fixing up missing import statements: put the cursor anywhere in the editor window, and hit Control-Shift-O.  You should see the import statement for <code>java.util.Scanner</code> appear after the <code>package</code> statement.
+<p>
+(You'll also see a yellow "warning" marker in the code suggesting that you 
+close the Scanner.  That will be important in the future when we read from files,
+but is meaningless for reading from a string or from the console.)
+<p>
+There is an important thing to notice.  <strong>Each time you make a call to <code>next()</code>,
+<em>you get a different value</em>.</strong>  There is no way to back up and read the same item again.  Internally the Scanner has a marker or "cursor" that moves forward through 
+the input as it is read.
+
+<h3>Reading from the console</h3>
+Corresponding to the standard output stream <code>System.out</code> there is 
+an input stream called <code>System.in</code> for input that you type
+in the console window.
+A Scanner can be constructed to read from System.in.  The main difference
+between reading from the console and reading from other kinds of input is
+that when you call <code>next()</code>, <em>the program will stop and wait for you ty
+type something.</em> 
+
+<p>
+Try this example in Eclipse.  After it starts, click in the console
+window and type some words, then press the Enter key.
+<pre class="block">
+package lab4;
+import java.util.Scanner;
+
+public class ScannerTest2
+{
+  public static void main(String[] args)
+  {
+    // construct a scanner to read from the console
+    Scanner in = new Scanner(System.in);
+    
+    // print a "prompt" so the user knows why the program is waiting
+    System.out.print("Enter three words separated by spaces: ");
+    
+    // parse the input to get the three items
+    String first = in.next();
+    String second = in.next();
+    String third = in.next();
+    
+    // print them out
+    System.out.println(first);
+    System.out.println(second);
+    System.out.println(third);
+  }
+}
+</pre>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page01.html">&lt; Introduction</a></td><td align="right"><a href="page03.html">Reading numbers &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page02.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

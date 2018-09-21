@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading input</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Reading input</h2>
+
+In the previous lab we saw an example similar to this.  Here we have input in the form of a string of text, containing three numbers.  The <code>sumThree</code> method <em>parses</em> the string to find the three numbers, and adds each of them to the total.
+<pre class="block">
+package lab6;
+
+import java.util.Scanner;
+
+public class ScannerTest
+{
+  public static void main(String[] args)
+  {
+    int result = sumThree("42 237 5");
+    System.out.println(result);
+  }
+  
+  public static int sumThree(String text)
+  {
+    Scanner in = new Scanner(text);
+    int total = 0;
+    int num = in.nextInt();
+    total = total + num;
+    num = in.nextInt();
+    total = total + num;
+    num = in.nextInt();
+    total = total + num;
+    return total;
+  }
+}
+
+</pre>
+
+How would we do this for a longer string of text with many numbers in it, such as
+<pre>
+String text = "7 12 42 100 8 16 17 -9 55 2 2 2 1055 -99 0 3"
+</pre>
+We would like to write a loop to compute the sum.  But there is no general way to know in advance, given a string of text, how many numbers there are in it. (We can determine the number of <em>characters</em> in the string with the <code>.length()</code> method, but that tells us very little.)
+<p>
+What we need is something to implement the following pseudocode:
+<pre class="block">
+while there is another item in the input stream
+    get the next item
+    process it
+</pre>
+
+The key is that the Scanner class has methods for <em>looking ahead</em> at the next item in the input stream - to see if there is one, and to check whether it can be parsed as a number.  These methods do not actually read any input, but just return true or false without modifying the scanner or the input stream:
+<ul>
+<li><code>hasNext()</code> returns true if there is another item in the input stream
+<li><code>hasNextInt()</code> returns true if there is another item in the input stream <strong>and</strong> it can be parsed as an integer
+<li><code>hasNextDouble()</code> returns true if there is another item in the input stream <strong>and</strong> it can be parsed as a floating-point number
+</ul>
+
+The method for adding up the numbers in a text string then looks just like the pseudocode:
+<pre class="block">
+  public static int sumMany(String text)
+  {
+    Scanner in = new Scanner(text);
+    int total = 0;
+    while (in.hasNextInt())
+    {
+      int num = in.nextInt();
+      total = total + num;     
+    }
+    return total;
+  }
+</pre>
+
+<h3>Reading from the console</h3>
+The behavior of <code>hasNext</code> and the related methods is a bit surprising when reading from the console.  The problem is obvious if you think about it: after you type something and hit Return, the runtime has no way of knowing whether you <em>intend</em> to type some more.  When reading from a string, <code>hasNext</code> immediately returns true or false.  When reading from the console, if you haven't typed ahead enough, it just waits for you to type some more.  In order to ever conclude that <code>hasNext</code> is false, it needs to see a special <em>sentinel</em> value indicating the the end of input.  
+<p>
+In most systems, the special value is a character produced by the key combination Ctrl-D (OS X or Linux) or Ctrl-Z (Windows).  This mechanism is not entirely reliable when using the console pane within Eclipse, since Eclipse has its own ideas for special keystrokes.  (You might try Cmd-D on a Mac.)
+
+Try out this version.
+<pre class="block">
+  public static int sumFromConsole()
+  {
+    Scanner in = new Scanner(System.in);
+    int total = 0;
+    while (in.hasNextInt())
+    {
+      System.out.print("Enter a number: ");
+      int num = in.nextInt();
+      total = total + num;     
+    }
+    return total;
+  }
+</pre>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; The accumulator pattern</a></td><td align="right"><a href="page05.html">Search problems &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

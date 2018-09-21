@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page03a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Further Examples</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Further Examples</h2>
+
+<p>
+<p>
+The key to every recursive algorithm is finding a way to <em>reduce</em> a given problem into one or more sub-problems that are simpler.  
+<!--
+If you are already comfortable, you can skip ahead to Checkpoint 2 and come back to these examples later.
+-->
+</p>
+
+<h3>Divide-and-conquer</h3>
+
+For problems involving arrays,
+the reduction often involves dividing the array in half and solving the problem for each half separately.  To solve the problem for each sub-array, well, the sub-array is divided in half and the the problem solved for those two halves.  Eventually you have to reach a case in which the sub-array has length 1, which is normally an easy base case.  <em>Mergesort</em> and <em>binary search</em> are two well-known algorithms that use this technique, which is called <em>divide-and-conquer</em>
+
+<p>
+To illustrate the technique, we will solve a much simpler problem: finding the sum of all elements in an array.  You might imagine you have a big list of numbers to add up.  One way to approach the problem is to split the list in half, and give each half to one of your friends.  You get an answer from each one, and you just have to add the results together.  Each of them, meanwhile, splits their list in half and gives each half to friends of friends.  Eventually some distant acquaintances ends up with lists of length 1, and the one number on the list is the answer.
+
+In pseudocode:
+
+<pre>
+<em>
+to find the sum of an array
+    if the array has length 1
+        return the number
+    else
+        split it into a left half and a right half
+        find the sum of the left half
+        find the sum of the right half
+        add the answers together and return the result
+</em>
+</pre>
+
+<p>
+In order to avoid creating bunches of new arrays, we just describe a subarray by specifying where it starts and ends within the original array. The recursive helper method has these values as extra parameters to describe the subarray.
+
+<pre class="block">
+public class ArraySum
+{
+  /**
+   * Try it out.
+   */
+  public static void main(String[] args)
+  {
+    int[] test = {3, 4, 5, 1, 2, 3, 2}; // sum should be 20
+    int result = arraySum(test);
+    System.out.println(result);
+  }
+
+  /**
+   * Returns the sum of all array elements.
+   */
+  public static int arraySum(int[] arr)
+  {
+    return arraySum(arr, 0, arr.length - 1);
+  }
+  
+  /**
+   * Returns the sum of array elements from start to end, inclusive.
+   */
+  private static int arraySum(int[] arr, int start, int end)
+  {
+    if (start == end)
+    {
+      return arr[start];
+    }
+    else
+    {
+      int mid = (start + end) / 2;
+      int leftSum = arraySum(arr, start, mid);
+      int rightSum = arraySum(arr, mid + 1, end);
+      return leftSum + rightSum;
+    }
+  }
+}
+</pre>
+
+To better visualize what's going on we can print the subarrays as they are processed.
+The output below is produced using a modified version of the code above that you can download <a href="ArraySumVerbose.java" target=_blank>here</a>.
+
+<p>
+Each array is printed at the beginning the method call, and again after its sum has been returned (indicated by the little arrows).
+<pre>
+
+[3, 4, 5, 1, 2, 3, 2]
+[3, 4, 5, 1] [2, 3, 2]
+[3, 4, 5, 1]
+[3, 4] [5, 1]
+[3, 4]
+[3] [4]
+[3] -> 3
+    [4] -> 4
+[3, 4] -> 7
+       [5, 1]
+       [5] [1]
+       [5] -> 5
+           [1] -> 1
+       [5, 1] -> 6
+[3, 4, 5, 1] -> 13
+             [2, 3, 2]
+             [2, 3] [2]
+             [2, 3]
+             [2] [3]
+             [2] -> 2
+                 [3] -> 3
+             [2, 3] -> 5
+                    [2] -> 2
+             [2, 3, 2] -> 7
+[3, 4, 5, 1, 2, 3, 2] -> 20
+</pre>
+
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; Cases</a></td><td align="right"><a href="page04.html">Checkpoint 1 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page03a.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+</html>

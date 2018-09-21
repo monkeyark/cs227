@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 2</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page01a.html">Lab and TA Evaluation</a></li><li><a href="page02.html">Arrays</a></li><li><a href="page03.html">Loops with arrays</a></li><li><a href="page04.html">Modifying an array</a></li><li><a href="page06.html">Example: selecting distinct random elements</a></li><li><a href="page07.html">Checkpoint 1</a></li><li><a href="page08.html">Sorting arrays</a></li><li><a href="page09.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h2>Checkpoint 2</h2>
+
+<ol class="addSpace">
+
+<li>Complete the <code>sortNoSuit()</code> method in <i>PokerHand.java</i> (on the previous page). You can look at the similar <code>sortWithSuit()</code> method for help; just ignore the suit comparison.
+<p>
+Try out your code for this method, and the next two, using  
+<a href="DeckTest2.java">DeckTest2.java</a>.
+
+<li>Complete the <code>isStraight()</code> method. A straight is whenever you have 5 cards in a row, for example: 4, 5, 6, 7, 8.  (<em>Note:</em> We are interpreting the ranks literally, meaning that we ignore the situation in many versions of the game of poker in which the ace or 1 card may be counted as <em>higher</em> than a king.)
+
+
+<li>Complete the <code>isFullHouse()</code> method. A full house is whenever you have a pair and a triple, such as 3, 3, K, K, K or 3, 3, 3, K, K.
+
+<li>Add the code for 
+<a href="DeckTest3.java">DeckTest3.java</a> to your project and run it.  This will use your Deck class to generate a million 5-card hands, and then use your PokerHand class to count how many are flushes, how many are straights, and how many are full houses.
+
+<ul>
+<li>If your Deck's <code>select</code> method is implemented correctly, you should see a  proportion of about .00198 for the flushes (5148 possible flushes out of 2598960 possible 5-card combinations).
+
+<li>If your methods from the first three steps are implemented correctly, 
+you should also see about .00355 for straights and about .00144 for full houses.</ul>
+</ol>
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page08.html">&lt; Sorting arrays</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab7/page09.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:45 GMT -->
+</html>

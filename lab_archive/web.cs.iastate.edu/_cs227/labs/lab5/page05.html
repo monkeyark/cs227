@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Running a JUnit Test</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Creating and Running a JUnit Test</h2>
+
+
+First, in your lab6 package, create a class <code>Basketball</code> with just the method stubs:
+<pre>
+public class Basketball
+{
+  public Basketball(double givenDiameter)
+  {
+  }
+
+  public boolean isDribbleable()
+  {
+    return false;
+  }
+
+  public double getDiameter()
+  {
+    return 0;
+  }
+
+  public double getCircumference()
+  {
+    return 0;
+  }
+
+  public void inflate()
+  {
+  }
+}
+
+</pre>
+<h3>Creating a JUnit test in an Eclipse project</h3>
+Eclipse makes this easy for us. 
+<ol>
+<li>In your lab6 package, create a new class called <code>BasketballTests</code>. 
+<li>Add JUnit 4 to the build path, just as you have done for running a specchecker.  (Right click on the project, select Build Path, and choose Add Libraries.  Select JUnit and click Next. Choose JUnit 4 from the drop-down list and click Finish.)
+<li>Add the line <code>import org.junit.Test;</code> after the package statement at the top of the file.
+<li>Add the line <code>import static org.junit.Assert.*;</code>.
+<li>Now you can start writing test cases. Each test case
+is just a <code>public void</code> method, with no parameters, that you have annotated
+with <code>@Test</code>.
+</ol>
+For now, just 
+copy and paste the code from <code>BasketballTests</code> on the previous page.
+
+
+<h3>Running a JUnit test</h3>
+Right-click on the <code>BasketballTests</code> class and select Run As --&gt; JUnit Test.  
+That's it.  You'll normally see a new pane appear on the left side of the workspace labeled "JUnit":
+<p>
+<img src="junit_screenshot.jpg" width="600" />
+<p>
+The red colored bar indicates that some test cases have failed.  In the list underneath it, tests that
+failed have an "X" in a blue circle, and those that succeeded have a check mark in a green circle.
+If you click on any of the test cases in the list, the "Failure Trace" pane below shows you
+which assertion failed along with its expected and actual values.  Double-clicking on the assertion message
+will take you to the test case that failed.
+<p>
+You can re-run the entire set of tests by right-clicking on the class name in the JUnit pane and selecting Run.  You can also do the same for any individual test case in the list.
+
+
+ 
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04.html">&lt; Introducing JUnit</a></td><td align="right"><a href="page05a.html">Incremental Development &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page05.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+</html>

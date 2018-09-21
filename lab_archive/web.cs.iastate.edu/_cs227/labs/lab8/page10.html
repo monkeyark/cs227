@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Polylines</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Polylines</h2>
+
+<p>
+For the next checkpoint, you will write an application that will parse data from a text file that contains instructions for drawing some simple graphics.  Each line of the file describes a <em>polyline</em>, that is, a sequence of points with line segments drawn between them.  
+We'll encapsulate the data for one polyline in an object of type <code>Polyline</code>,
+and we'll draw everything using an application called <code>Plotter</code>.
+The code for these is provided for you in a jar file.  
+
+<p>
+To start out, let's try an example to see how it works.
+First import the jar file 
+<a href="polyline_plotter.jar">polyline_plotter.jar</a> into your project and add it to the build path (just as you would a specchecker). 
+ Then, try running the code <a href="TestPlotter.java">TestPlotter.java</a> 
+The main method looks like this:
+
+<pre class="block">
+  public static void main(String[] args)
+  {    
+    // make a red square using default line width of one pixel
+    Polyline pl = new Polyline("red");
+    pl.addPoint(new Point(100, 100));
+    pl.addPoint(new Point(200, 100));
+    pl.addPoint(new Point(200, 200));
+    pl.addPoint(new Point(100, 200));
+    pl.addPoint(new Point(100, 100));
+    
+    // make a blue triangle with a line width of 2 pixels
+    Polyline pl2 = new Polyline("blue", 2);
+    pl2.addPoint(new Point(250, 100));
+    pl2.addPoint(new Point(400, 350));
+    pl2.addPoint(new Point(100, 350));
+    pl2.addPoint(new Point(250, 100));
+    
+    // make some green zig-zags with a thick line
+    Polyline pl3 = new Polyline("green", 6);
+    pl3.addPoint(new Point(100, 400));
+    pl3.addPoint(new Point(200, 450));
+    pl3.addPoint(new Point(300, 400));
+    pl3.addPoint(new Point(400, 450));
+    
+    // plot the three polylines using the plotter
+    Plotter plotter = new Plotter();
+    plotter.plot(pl);
+    plotter.plot(pl2);
+    plotter.plot(pl3);
+  }
+</pre>
+
+Drawing takes place on a window that is roughly 500 by 500 pixels.  Points are specified using integer coordinates.  The upper-left corner is (0, 0), where x-coordinates increase from left to right and y-coordinates increase from top to bottom.  
+<p>
+To construct a <code>Polyline</code> object, we specify one of several possible colors,  and optionally a line width in pixels.  Then we use the  <code>addPoint</code> method
+to add points to the polyline.  The plotter will start at the first point given and
+draw a line segment between each successive pair of points. (The <code>Point</code> class comes from the package <code>java.awt</code>, see the import statements at the top of the 
+TestPlotter.java file.)
+<p>
+When we have one or more polylines to plot, we can create a <code>Plotter</code>
+and call the <code>plot</code> method for each polyline.
+
+
+<p>
+For more details you can consult the <a href="doc/plotter/Plotter.html">javadoc for <code>Plotter</code></a> and the <a href="doc/plotter/Polyline.html">javadoc for <code>Polyline</code></a>.
+
+<p>
+The code above produces the following:
+<p>
+<img src="plotter_screenshot.png" alt="Plotter screenshot" />
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page09.html">&lt; Reading data</a></td><td align="right"><a href="page11.html">Using an ArrayList &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page10.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

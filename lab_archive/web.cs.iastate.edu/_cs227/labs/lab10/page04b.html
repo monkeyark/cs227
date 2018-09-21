@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page04b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>More Polymorphism</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Subtypes and Polymorphism</a></li><li><a href="page04.html">Subclass Example</a></li><li><a href="page04b.html">More Polymorphism</a></li><li><a href="page05.html">Abstract classes</a></li><li><a href="page08.html">An IntList class</a></li><li><a href="page08a.html">Drawing in Swing</a></li><li><a href="page09.html">Group Portrait</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h2>More Polymorphism</h2>
+
+<h3>Putting it together</h3>
+Now, let's pull this all together. We can make an <code>EmergencyDatabase</code> class that collects a bunch of <code>Contact</code>s together. 
+<!--We can even extend the <code>ArrayList</code> class and add a totally new method for alerting all the registered individuals:
+-->
+</p>
+
+<pre class="block">
+public class EmergencyDatabase
+  private ArrayList&lt;Contact&gt; list;
+  public EmergencyDatabase() {
+      list = new ArrayList&lt;Contact&gt;();
+   }
+
+   public void addContact(Contact c) {
+      list.add(c);
+   }
+   
+   public void alertEverybody(String alertMessage) {
+      for (int i = 0; i &lt; list.size(); ++i) {
+         Contact c = list.get(i);
+         c.notify(alertMessage);
+      }
+   }
+}
+</pre>
+
+<p>
+We can try out the
+whole system with a main method, as follows:
+</p>
+
+<pre class="block">
+public class EmergencyTester {
+   public static void main(String[] args) {
+      EmergencyDatabase db = new EmergencyDatabase();
+      db.addContact(new EmailContact("Bill", "Dollar", "xxx@iastate.edu"));
+      db.addContact(new PhoneContact("Don", "Kees", "(515) 555-5555"));
+      db.alertEverybody("A giraffe is loose near the campanile!");
+   }
+}
+</pre>
+
+
+<h3>Using polymorphism</h3>
+Look at the <code>alertEverybody</code> method in the line:
+<pre class="block">
+   c.notify(alertMessage);
+</pre>
+What does this do?  The answer is the same as it was for interfaces: <em>The code
+that actually gets executed depends on the runtime type of the variable</em>.
+When variable <code>c</code> refers to an <code>EmailContact</code> object, then the 
+call to <code>notify()</code> executes the code in <code>EmailContact</code>.
+When <code>c</code> refers to a <code>PhoneContact</code> object, then the 
+call to <code>notify()</code> executes that code.
+
+
+<p>
+One of the benefits of polymorphism is that as new ways of contacting people are developed, the <code>EmergencyDatabase</code> will not have to change. Though <code>EmergencyDatabase</code> knows only of <code>Contact</code>, the correct version of <code>notify</code> for the underlying, more specialized type, will always be called.
+<p>
+We saw the same thing in the <code>Hero</code>'s use of the <code>Weapon</code> type.
+But there is is an important difference in the two examples.  In the emergency notification example, we are accomplishing something more by using class inheritance: since <code>Contact</code> is a class, each of its subtypes <code>EmailContact</code> and <code>PhoneContact</code> is able to <em>reuse</em> 
+the code in <code>Contact</code>.  
+<!--Likewise the <code>EmergencyDatabase</code> class is able to reuse all the existing code for <code>ArrayList</code> by extending it.-->
+</p>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page04.html">&lt; Subclass Example</a></td><td align="right"><a href="page05.html">Abstract classes &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab10/page04b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:59 GMT -->
+</html>

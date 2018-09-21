@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Reading flowcharts</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Scanner</a></li><li><a href="page03.html">Reading numbers</a></li><li><a href="page06.html">Conditional statements</a></li><li><a href="page07.html">Reading flowcharts</a></li><li><a href="page08.html">Checkpoint 1</a></li><li><a href="page20.html">Debugging</a></li><li><a href="page21.html">Breakpoints and single-stepping</a></li><li><a href="page22.html">Objects and instance variables</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+
+<h1>Representing conditional logic with flowcharts</h1>
+
+Flowcharts are completely useless for designing large, realistic systems. However, sketching and reading a flowchart is a good way to practice with conditional logic.  Here is one example of a flowchart for the postage-calculation problem:
+
+<p>
+<img src="postage1.png" width="600" alt="First postage flowchart" />
+<br>
+<strong>Flowchart 1 (above)</strong>
+
+<p>
+The same logic can be represented more compactly in <em>pseudocode</em>:
+
+<pre class="block">
+    if weight <= 1
+        cost = .47
+    else
+        if weight <= 3.5
+            cost = .47 + ceil(weight - 1) * .21
+        else
+            cost = .94 + ceil(weight - 1) * .21
+</pre>
+Notice that in pseudocode we use <em>indentation</em> to show the block structure the logic.  For example, the entire statement,
+<pre class="block">
+        if weight <= 3.5
+            cost = .47 + ceil(weight - 1) * .21
+        else
+            cost = .94 + ceil(weight - 1) * .21
+</pre>
+is "inside" the outer else, and only gets executed in the case that the weight is greater than 1.  This fact is easier to see in the flowchart.  Notice that the pseudocode describes <em>exactly</em> the same sequence of decisions and actions as the flowchart.
+
+<p>
+Below there are two different flowcharts that attempt to solve the same problem.
+
+<p>
+<img src="postage2.png" width="700" alt="Second postage flowchart" />
+<br>
+<strong>Flowchart 2 (above)</strong>
+
+<p>
+<p>
+<p>
+<p>
+<p>
+<img src="postage3.png" width="300" alt="Third postage flowchart" />
+<br>
+<strong>Flowchart 3 (above)</strong>
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; Conditional statements</a></td><td align="right"><a href="page08.html">Checkpoint 1 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab4/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:39 GMT -->
+</html>

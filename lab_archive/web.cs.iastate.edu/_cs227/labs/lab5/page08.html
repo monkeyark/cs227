@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Unit Testing to Find Bugs</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Unit Testing to Find Bugs</h2>
+Mistakes in software are affectionately referred to as <em>bugs</em>.
+(The term
+<a href="http://en.wikipedia.org/wiki/Software_bug#Etymology" target=_blank>
+did not originate with programmers</a>, although it appears that 
+programmers are responsible for the use of the word 
+<a href="http://www.eps.mcgill.ca/jargon/jargon.html#feature" target=_blank>
+<em>feature</em> </a> to mean
+"a bug that that has been documented".)
+
+<p>
+The purpose of testing is to reveal bugs.  When we find bugs, we are happy!  
+We are happy because we love to fix them, and we are especially happy when we can find 
+them before shipping the product to the customer.  (Or before submitting the 
+product on Blackboard, as the case may be.)
+<p>
+There may yet be other reasons that bugs make programmers happy...
+<img src="minivan.gif" width="600" />
+<p>
+In this exercise, you will write a set of JUnit test cases for a class called 
+<code>Balloon</code>
+that models a simple toy balloon. 
+See the <a href="balloon/Balloon.html" target="_blank">javadoc for the <code>Balloon</code> class here.</a>
+There are 5 versions of this class for you to try your tests on.  
+Your task is to write a comprehensive set of unit test cases
+that enables you to identify what is wrong in the buggy versions,
+without seeing the source code.  (This is sometimes called "black-box" style testing, since
+we can't see inside the implementation.)
+
+
+<p>
+The class files for all 5 versions of <code>Balloon</code> are in a jar file 
+<a href="balloons.jar">balloons.jar</a> which you'll need to download and import into your lab6 project.
+This is just like importing a specchecker:
+<ol>
+<li>Right-click on the lab5 project, select Import --&gt; General --&gt; File System, and click Next.
+<li>Click Browse (From Directory) and find the directory where you downloaded balloons.jar.
+<li>Check the box next to balloons.jar and click Finish.  
+<li>Now balloons.jar should appear under your lab5 project in the Package Explorer.  Right-click on it and select 
+Build Path --&gt; Add to Build Path.
+</ol>
+
+<p>
+Then you can create a test class <code>BalloonTests</code> similar to
+<code>BasketballExample</code> test.  Add an <code>import</code> statement:
+<pre>
+import balloon.Balloon;
+</pre>
+
+<ul>
+<li>
+<em>Warning: do not name your class <code>Test</code>, since that name will conflict with the name <code>Test</code> used for the JUnit annotation!</em>
+</ul>
+
+<p>
+All versions of the class are named <code>Balloon</code>,
+but they are in different packages.  The correct implementation is <code>balloon.Balloon</code>, and
+the other four are in packages named <code>balloon1</code> through <code>balloon4</code>.   
+We suggest that when you start writing your tests, you
+validate them on the correct version.  When you think you have a pretty good set of test cases, you 
+can try the other versions just by changing the import statement, for example, to
+
+<pre>
+import balloon1.Balloon;
+</pre>
+
+Then when you run the test, you'll be testing the version of <code>Balloon</code> from the 
+<code>balloon1</code> package (which should have some bugs). 
+No other changes are needed in your test class.  You can do the same to try the other 
+versions of <code>Balloon</code> by changing the import statement.
+
+<h3>Checkpoint 2</h3>
+Write a set of unit test cases for <code>Balloon</code>.  
+
+Each test case should focus on checking
+one simple fact about the behavior of the class. For example you might start by making a list of
+statements such as
+<pre>
+A newly constructed Balloon should have radius zero.
+A newly constructed Balloon should not be popped.
+After calling blow(5) on a Balloon with maximum radius 10, the radius should be 5.
+</pre>
+Study the javadoc and write down some more facts that you might want to verify.
+Each of these facts becomes a test case.
+Write enough test cases that you would be comfortable spending your own hard-earned money
+on one of these <code>Balloon</code> objects, confident that it will work correctly.
+
+<p>
+For the correct version of <code>Balloon</code>,
+all your tests should pass.  For the remaining versions of <code>Balloon</code>, your tests should
+enable you to to make a <em>reasonable</em> guess as to what the problem is in each of these classes.
+<p>
+<ol>
+<li>Show your tests to the TA.
+<li>Demonstrate that they all pass for the correct version of <code>Balloon</code>.
+<li>Demonstrate that <em>at least one</em> test case fails for each of the buggy versions
+<li>Explain your conclusions about what is wrong in each of the buggy versions.
+</ol>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; More about JUnit</a></td><td align="right"></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:42 GMT -->
+</html>

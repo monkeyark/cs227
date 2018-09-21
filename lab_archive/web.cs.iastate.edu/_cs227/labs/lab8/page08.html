@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>ArrayLists and arrays</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Reading input with System.in</a></li><li><a href="page04.html">Reading from a file</a></li><li><a href="page05.html">The File Class</a></li><li><a href="page06.html">Writing to a file</a></li><li><a href="page07.html">Parsing lines of a file</a></li><li><a href="page08.html">ArrayLists and arrays</a></li><li><a href="page09.html">Reading data</a></li><li><a href="page10.html">Polylines</a></li><li><a href="page11.html">Using an ArrayList</a></li><li><a href="page12.html">Reading a file into an ArrayList</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>ArrayLists and arrays</h2>
+Arrays and <code>ArrayList</code>s are examples of <em>structured</em> data types: they can store multiple elements in order, and the elements can be accessed by their indices.  Earlier in the course we encountered Strings.  A String is similar in that it contains multiple elements (the characters) and they can be accessed by their indices (using the <code>charAt</code> method).
+However, unlike Strings, arrays and <code>ArrayList</code>s are <em>mutable</em>, that is, their contents can be modified after construction.
+
+<h3>Here is a brief comparison of some of the features of arrays and <code>ArrayList</code>s.
+
+<h4>ArrayLists</h4>
+<ul>
+  <li>Created using the <code>new</code> operator. The type of data it holds goes in the 
+  angle brackets.  Example:
+    <pre>
+     ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    </pre>
+  <li>An <code>ArrayList</code> can be created to hold any type of <em>Java object</em> (but <em>not</em> primitive types; we have to use the wrapper classes such as <code>Integer</code> instead)
+  <li>A newly created <code>ArrayList</code> has length 0.
+  <li>The length of the list will expand as necessary as elements are added.
+  <li>The length of the list can be obtained using the method <code>size()</code>.
+  <li>New elements are added to the end of the list using the <code>add(element)</code> method.
+  <li>The element at index <code>i</code> can be accessed using the <code>get</code> method:
+     <pre>
+     String s = list.get(i);
+     </pre>
+  <li>The element at index <code>i</code> can be changed using the <code>set</code> method:
+    <pre>
+      list.set(i, "foo");
+    </pre>  
+   <li>The <code>ArrayList</code> has a large number of useful methods in addition to <code>add</code>, </code>get</code> and <code>get</code>.  Some useful ones include <code>contains</code>, <code>remove</code>, <code>addAll</code>, and <code>sort</code>.
+   Check out the 
+   <a href="http://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html"  target=_blank>ArrayList API documentation</a>
+ 
+</ul>
+
+<h4>Arrays</h4>
+<ul>
+  <li>Created using the <code>new</code> operator. The type of data it holds goes before the square brackets.  Example:
+    <pre>
+     String[] arr = new String[5];
+    </pre>
+  <li>An array can be created to hold any type of data, including primitive types.
+  <li>The length must be specified when the array is constructed.  A newly created array of primitive type contains all zeros.  A newly created array of objects contains all <code>null</code>s.
+  <li>The length can be obtained by accessing the <code>length</code> attribute (without parentheses).
+  <li>New elements cannot be added, since the length is fixed.
+  <li>The element at index <code>i</code> can be accessed using the bracket notation:
+    <pre>
+    String s = arr[i];
+    </pre>
+  <li>The element at index <code>i</code> can be changed using the bracket notation:
+    <pre>
+    arr[i] = "foo";
+    </pre>
+    <li>There are no useful methods that are part of an array type.  You can, however, find some static utility methods in the <code>Arrays</code> class, including <code>toString</code>, <code>copyOf</code>, and <code>sort</code>.  See the 
+    <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html" target=_blank>Arrays API documentation</a>
+</ul>
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page07.html">&lt; Parsing lines of a file</a></td><td align="right"><a href="page09.html">Reading data &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab8/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:48 GMT -->
+</html>

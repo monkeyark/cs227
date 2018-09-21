@@ -1,0 +1,46 @@
+HTTrack3.49-2+htsswf+htsjava launched on Thu, 30 Nov 2017 21:08:47 at http://web.cs.iastate.edu/~cs227/labs/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qYC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" -Y http://web.cs.iastate.edu/~cs227/labs/ -O1 "U:\Desktop\My Web Sites\ComS227Lab" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+21:12:11	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/resources/fonts/dejavu.css (from web.cs.iastate.edu/~cs227/labs/lab5/stylesheet.css)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/resources/titlebar.gif (from web.cs.iastate.edu/~cs227/labs/lab2/doc/stylesheet.css)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/resources/background.gif (from web.cs.iastate.edu/~cs227/labs/lab2/doc/stylesheet.css)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/resources/tab.gif (from web.cs.iastate.edu/~cs227/labs/lab2/doc/stylesheet.css)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/resources/titlebar_end.gif (from web.cs.iastate.edu/~cs227/labs/lab2/doc/stylesheet.css)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/package-summary.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/class-use/Basketball.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:16	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/package-tree.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:17	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/deprecated-list.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:17	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/index-files/index-1.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:17	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/help-doc.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:17	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/index.html?lab2/Basketball.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:17	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab2/doc/allclasses-noframe.html (from web.cs.iastate.edu/~cs227/labs/lab2/doc/lab2/Basketball.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/resources/titlebar.gif (from web.cs.iastate.edu/~cs227/labs/lab3/doc/stylesheet.css)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/resources/background.gif (from web.cs.iastate.edu/~cs227/labs/lab3/doc/stylesheet.css)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/resources/tab.gif (from web.cs.iastate.edu/~cs227/labs/lab3/doc/stylesheet.css)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/resources/titlebar_end.gif (from web.cs.iastate.edu/~cs227/labs/lab3/doc/stylesheet.css)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/package-summary.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/class-use/SimulationPlotter.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/package-tree.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/deprecated-list.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/index-files/index-1.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/help-doc.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/index.html?plotter/SimulationPlotter.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab3/doc/allclasses-noframe.html (from web.cs.iastate.edu/~cs227/labs/lab3/doc/plotter/SimulationPlotter.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/script.js (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/balloon/package-summary.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:18	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/balloon/class-use/Balloon.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/balloon/package-tree.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/deprecated-list.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/index-files/index-1.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/help-doc.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/index.html?balloon/Balloon.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:19	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab5/allclasses-noframe.html (from web.cs.iastate.edu/~cs227/labs/lab5/balloon/Balloon.html)
+21:12:24	Error: 	"Not Found" (404) at link web.cs.iastate.edu/~cs227/labs/lab8/doc/resources/fonts/dejavu.css (from web.cs.iastate.edu/~cs227/labs/lab8/doc/stylesheet.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 3 minutes 39 seconds : 415 links scanned, 379 files written (4754564 bytes overall) [4890537 bytes received at 22331 bytes/sec], 11.2 requests per connection
+(35 errors, 0 warnings, 0 messages)

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 1</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Checkpoint 1</h2>
+
+<ol>
+
+<!--
+<li>Write a static recursive method <code>power</code> that takes two <code>int</code> arguments named <code>x</code> and <code>p</code> and returns <code>x</code> multiplied by itself <code>p</code> times. Don't use a loop! Instead, think about it recursively.  For example, suppose <code>x</code> is 2 and <code>p</code> is 8. The easiest way to calculate 2<sup>8</sup> is to make someone else calculate 
+2<sup>7</sup> for you, and then multiply the answer by 2.  2<sup>8</sup> is just 2 * 2<sup>7</sup>.  The base case would be when the exponent is zero. Anything raised to 0th power is 1.  In pseudocode:
+<pre>
+<em>
+to calculate x to the power p
+    if p is zero
+       return 1
+    else
+       find x to the power (p - 1)
+       multiply the answer by x and return the result 
+    
+</em>
+</pre>
+-->
+
+<li>Write a method that uses a divide-and-conquer strategy to find the maximum value in an integer array.  The maximum value of a one-element array is that element.  The maximum of any other array is the maximum of the left half, or the maximum of the right half, whichever is larger.  (You can use <code>ArraySum</code> as a starting point.)
+<br>
+<br>
+<br>
+<li>How many balls are in this pyramid?
+
+<p><img src="pyramid.png"/></p>
+
+Each level in the pyramid is a square, so if there are n levels, the bottom level has n * n balls, and the total number of balls is just 
+<p>
+(n * n) + (number of balls in a pyramid of height n - 1).
+<p>
+There is just one ball in a pyramid of height 1.
+Write a static recursive method <code>getPyramidCount</code> that takes a single <code>int</code> argument representing the number of levels in a pyramid, and returns the total number of balls. </li>
+</ol>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03a.html">&lt; Further Examples</a></td><td align="right"><a href="page05.html">Why Recursion? &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+</html>

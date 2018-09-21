@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Extra parameters</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Recursion</a></li><li><a href="page03.html">Cases</a></li><li><a href="page03a.html">Further Examples</a></li><li><a href="page04.html">Checkpoint 1</a></li><li><a href="page05.html">Why Recursion?</a></li><li><a href="page06.html">Extra parameters</a></li><li><a href="page09.html">Checkpoint 2</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Another version of FileLister</h2>
+
+It might be more useful to have a method that returns an ArrayList of the file names instead of just printing them out.  The simplest way to do this is to use a recursive helper method that has an extra parameter, namely, the list to which you want to add the new names that are found.  You start off by passing in an empty list.  You can find the
+complete code <a href="FileLister2.java"> here </a>.
+
+<pre class="block">
+  /**
+   * Returns a list of files beneath the given file or directory.
+   * @param file
+   * @return
+   */
+  public static ArrayList&lt;String&gt; findFiles(File file)
+  {
+    // create an empty array list...
+    ArrayList<String> arr = new ArrayList&lt;String&gt;();
+    
+    // pass it into the recursive method
+    findFiles(file, arr);
+    
+    // and return the filled-up ArrayList
+    return arr;
+  }
+  
+  /**
+   * Recursive helper method includes an array list as an argument.
+   * Filenames are added to the array list as they are found.
+   * @param file
+   * @param list
+   */
+  private static void findFiles(File file, ArrayList&lt;String&gt; list)
+  {
+    if (!file.isDirectory())
+    {
+       list.add(file.getName());
+    }
+    else
+    {
+      // recursively search the subdirectory
+      for (File f : file.listFiles())
+      {
+        findFiles(f, list);
+      }
+    }
+  }
+
+
+</pre>
+
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page05.html">&lt; Why Recursion?</a></td><td align="right"><a href="page09.html">Checkpoint 2 &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab9/page06.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:58 GMT -->
+</html>

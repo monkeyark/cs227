@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Exceptions</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Exceptions</h2>
+
+The code in a method can call another method, which can in turn call another method, and so on.  When an error occurs in a method, Java uses a mechanism called <em>exceptions</em> to report the error back to the caller of the method.  In turn, that method may need to report the error back to <em>its</em> caller.  If nothing is done to handle the exception along the way, it gets displayed on the console and the program exits.
+ 
+<h3>Interpreting an exception trace</h3>
+
+We'll try a couple of things using the method <code>findFirstP</code>:
+<ol class="addSpace">
+<li>Edit the main method of <code>SimpleLoops</code> as follows: comment out the first four lines, and uncomment the next two lines:
+<pre>
+  int result = findFirstP("stop");
+  System.out.println(result);
+</pre>
+<li>Run the program and verify that the result is correct.
+<li>Now, comment out those two lines and uncomment the next two, so that it tries to find
+the first "P" in "xxxyyyzzz":
+<pre>
+  int result = findFirstP("xxxyyyzzz");
+  System.out.println(result);
+</pre>
+Run it again.
+<li>You'll see a list like this, called a <em>stack trace</em>.
+<pre>
+Exception in thread "main" java.lang.StringIndexOutOfBoundsException: String index out of range: 3
+	at java.lang.String.charAt(String.java:695)
+	at lab6.SimpleLoops.findFirstP(SimpleLoops.java:91)
+	at lab6.SimpleLoops.main(SimpleLoops.java:25)
+</pre>
+The first line is the most important: the <em>type</em> of exception is a big clue as to the nature of the error, in this case a "string index out of bounds". The rest of the lines give us a picture of the call stack.  This shows us that the exception actually occurred in <code>charAt</code> in the String class, which was called by <code>findFirstP</code>, which was called by <code>main</code>. In most cases, you can also see the line number at which the call or exception occurred.
+
+<li>In Eclipse, the classes listed in the stack trace are actually hyperlinks, so you can quickly jump to the line of code that caused the error.  Start reading at the top of the stack trace.  Notice that the first call in the list is to the <code>charAt</code> method of String.  Remember, we don't want to debug the Java libraries, so skip that one, and go down to the next line, the <code>findFirstP</code>.  We recognize that as code written by us, so click on it and Eclipse will jump to the indicated line of code.
+
+<li>We can see which line of code is causing the problem. That is sometimes enough to figure out what is wrong, but not always.  The problem is, we can't see the values of other variables that might be affecting execution at that point.  One thing you can do pretty easily is to set a breakpoint on that line, run the program again in debug mode, and step through the loop using the resume button.  Keep track of the values of the variables just before the error occurs.  Try it (but don't fix the error yet).
+</ol>
+
+<h3>Setting an exception breakpoint</h3>
+
+Sometimes what we really want is a way to automatically stop execution <em>right before</em> the error occurs without having to step through all the code leading up to it. There is a way to do this.
+<ol class="addSpace">
+<li>In the top menu bar of Eclipse is a menu called "Run".  Under "Run", find "Add Java Exception Breakpoint".  Start typing "StringIndexOutOfBoundsException" until you see it available in the dialog.  Select that exception.
+<li>Un-check the checkbox labeled "Suspend on caught exceptions", and check the one labeled "Suspend on uncaught exceptions".  (We will explore what this "catching" business means in a few weeks.)
+
+<p>
+<img src="exception_breakpoint.png" width=400>
+<p>
+
+<li>Now, run the program in debug mode.  
+<li>Instead of exiting and printing the exception stack trace as before, the debugger suspends execution right before the exception occurs.  (Depending on your JDK installation, you may see the source code for the <code>charAt</code> method.)
+<li>What we want to know is: what was <em>our</em> code doing that caused the exception?  So, in the Debug pane, look in the call stack for the method <code>findFirstP</code> and click on it.  Now we can examine the values of the variables that were in effect when we made the fateful call to <code>charAt</code> that caused the error.  Notice we have a string of length 9, whose characters are indexed 0 through 8, and we also have an index <code>i</code> with value 9.
+<li>Go ahead and fix it now.
+</ol>
+Note: If you look at your Breakpoints pane now, you'll see the breakpoint for StringOutOfBoundsException.  Remember you will probably want  to disable or remove it before debugging some other project.
+
+<p>
+Now that we are starting loops, you'll find that  StringIndexOutOfBoundsException (and its relatives) is going to be your New Best Friend for a while.  There are many, many other kinds of exceptions we'll see before the semester is out, and the simple techniques you have experimented with just now will be useful to you for a long time.
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page07.html">&lt; Debugging Loops</a></td><td align="right"><a href="page09.html">More Debugging &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page08.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>

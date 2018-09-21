@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page02b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Checkpoint 1</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">Experimenting</a></li><li><a href="page02a.html">Exceptions</a></li><li><a href="page02b.html">Checkpoint 1</a></li><li><a href="page08.html">Meeting a Specification</a></li><li><a href="page09.html">The Rabbit Problem</a></li><li><a href="page10.html">The Rabbit Simulator</a></li><li><a href="page11.html">Checkpoint 2</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Checkpoint 1</h2>
+Try each of the following and show the TA the results of your experiments for 1 through 5.
+
+
+<h3>1.</h3>
+As you know, the "mod" operator (%) gives you the remainder from an integer division operation, for example, <code>25 % 10</code> is 5.  
+Suppose you have a repeating sequence of numbers like this:
+<p>
+1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, ...
+<p>
+Write a line of code that determines the one millionth number in this sequence.
+<p>
+<em>Hint:</em> First look at a simpler question such as, what's the 20th
+number in the sequence?  And what's the value of <code>20 % 7</code> ?  How about the 25th number?
+
+<h3>2.</h3>
+Create a class <code>Person</code> and then paste in the following code:
+
+<pre>
+package lab3;
+
+public class Person
+{
+  private String name;
+  private int age;
+  
+  public Person(String givenName, int givenAge)
+  {
+  }
+  
+  public String getName()
+  {
+    return name;
+  }
+  
+  public int getAge()
+  {
+    return age;
+  }
+  
+  public int getNameLength()
+  {
+    return name.length();
+  }
+}
+</pre>
+Notice that the constructor isn't doing anything to initialize the two instance variables, but the code still compiles. Create another test class with a <code>main</code> method that creates a <code>Person</code> and then prints out the results of calling the <code>getName</code> and <code>getAge</code> methods.  
+
+<p>
+What value do you see for the name?  Since we didn't initialize the instance variables in the constructor, the compiler supplied some default values.  For numbers, the default value is always zero.  But for objects, the default value is the special value <code>null</code>.  The null value is not an object, but is a kind of placeholder telling us that the variable doesn't yet refer to an actual object.
+
+<p>
+Now, in your <code>main</code> method, try calling the <code>getNameLength</code> method.  This method attempts to invoke the <code>length</code> method on a null reference. What error do you get?  Trust us, you will see lots and lots of these during your career as a Java programmer.  They usually arise like this, from forgetting to initialize an object reference.
+
+<h3>3.</h3>
+We have seen that when you concatenate a String with an <code>int</code>, the result is a String.  So one way to convert an <code>int</code> to a string is by concatenating it with an empty String:
+<pre>
+    int x = 42;
+    String s = "" + x;
+</pre>
+But how do you convert a String to an <code>int</code>?  One way is to use the <code>parseInt</code> method in the class <code>Integer</code>, which is called like this:
+
+<pre>
+    String s = "42";
+    int x = Integer.parseInt(s);
+</pre>
+
+Try it. 
+(That is, create a test class with a <code>main</code> method in which you can 
+put the code snippets above.  <em>Just don't name your own class <code>String</code>, 
+since that is already
+the name of the class you are trying to use!</em>)
+ Then, find out what happens if you try to call <code>parseInt</code> on a String that really doesn't represent an integer, like "Hello" or "23Skidoo".
+
+<h3>4.</h3>
+In mathematics, there are infinitely many numbers.  But in most programming languages, the number types only have a finite range.  In Java, the largest and smallest possible integers are represented by the constants
+<pre>
+Integer.MAX_VALUE
+</pre>
+and
+<pre>
+Integer.MIN_VALUE
+</pre>
+Write a main method that prints out these two values.  Next, suppose you have a variable whose value is <code>Integer.MAX_VALUE</code>.  What is the result of adding 1 to it?  Do you get an error? How about adding 2? What do you suppose you'd get by adding <code>Integer.MAX_VALUE</code> to <code>Integer.MAX_VALUE</code>?
+
+<h3>5.</h3>
+In games and simulations, we usually need to have some randomness or unpredictability.
+Computers can't really do anything truly random, but there are ways to produce values that are seemingly unpredictable and appear to be random.  (Computer scientists call such values <em>pseudorandom</em>.)  In Java this is done with the class <code>Random</code>. 
+<p>
+To use it, you first construct an instance of the class <code>Random</code>:
+<pre class="block">
+Random rand = new Random();
+</pre> 
+The <code>Random</code> class has many methods for generating values.  
+You can take a look at the <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Random.html" target=_blank>documentation for <code>java.util.Random</code></a>.
+One of the most useful methods is 
+<code>nextInt(int n)</code>, which returns a pseudorandom value in the range 0 through <code>n - 1</code>.
+<p>
+Try it.  Create a class in your <code>lab3</code> package with a <code>main</code> method.
+(<em>Be sure you don't name the class <code>Random</code> since that is already
+the name of the class you are trying to use!</em>)
+  Add the statement
+<pre class="block">
+import java.util.Random
+</pre>
+after the package declaration.
+In the main method add some code like this:
+<pre class="block">
+Random rand = new Random();
+System.out.println(rand.nextInt(6));
+System.out.println(rand.nextInt(6));
+System.out.println(rand.nextInt(6));
+System.out.println(rand.nextInt(6));
+</pre> 
+Try running it several times.  You should see some values in the range 0 through 5.
+
+<p>
+Then, try replacing the first line as follows
+<pre class="block">
+Random rand = new Random(137);
+</pre>
+and run the main method a several more times.  What do you notice?
+<p>
+The literal number 137 you see above is called a "seed" for the random number generator.  You can use any number you want.  Any <code>Random</code> object constructed with the same seed is guaranteed to produce exactly the same sequence of values.  (This is extremely useful for testing or for reproducing the outcome of a simulation.  We'll use this technique for the second checkpoint.)
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page02a.html">&lt; Exceptions</a></td><td align="right"><a href="page08.html">Meeting a Specification &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab3/page02b.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:37 GMT -->
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Introducing JUnit</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page03.html">Unit Testing With <code>println</code></a></li><li><a href="page04.html">Introducing JUnit</a></li><li><a href="page05.html">Running a JUnit Test</a></li><li><a href="page05a.html">Incremental Development</a></li><li><a href="page06.html">More about JUnit</a></li><li><a href="page08.html">Unit Testing to Find Bugs</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Introducing JUnit</h2>
+<p>
+The basic idea of writing a JUnit test is that statements from our <code>main</code> method such as
+<pre>
+    System.out.println(b.isDribbleable());
+    System.out.println("Expected: false");
+</pre>
+are replaced with a special method call known as an <em>assertion</em>.
+<pre>
+    assertEquals(false, b.isDribbleable());
+</pre>
+The way it works is that the two arguments to the <code>assertEquals</code> method
+are the <em>expected</em> and <em>actual</em> values we are testing. If the expected and actual values 
+<em>don't</em> match, the JUnit framework produces some output indicating what failed.  
+If the test is successful, no output is produced.  That makes it easy to pinpoint 
+where the errors are.
+<p>
+There are many forms 
+of assertions in the JUnit libraries, but the most common are various
+forms of <code>assertEquals(<em>expected</em>, <em>actual</em>)</code>
+like the one above.
+
+<!--
+All the assertion methods have an alternate form in which the first argument is a string
+message.  If the test fails, the message is printed along with the outputs.
+So in practice, we would write the assertion something like this:
+<pre>
+    String msg = "Testing isDribbleable for newly constructed basketball. ";
+    assertEquals(msg, false, b.isDribbleable());
+</pre>
+-->
+
+<p>
+A JUnit test, with four test cases corresponding to our four <code>println</code> statements,
+might look like this:
+<pre>
+
+public class BasketballTests
+{
+    // margin of error for floating-point comparisons
+    private static final double EPSILON = 10e-07;
+    
+    @Test
+    public void testInitial()
+    {
+      Basketball b = new Basketball(5);
+      assertEquals(false, b.isDribbleable());
+    }
+
+    @Test
+    public void testInitialDiameter()
+    {
+      Basketball b = new Basketball(5);
+      assertEquals(5.0, b.getDiameter(), EPSILON);
+    }
+
+    @Test
+    public void testInflate()
+    {
+      Basketball b = new Basketball(5);
+      b.inflate();
+      assertEquals(true, b.isDribbleable());
+    }
+
+    @Test
+    public void testDiameterAfterInflation()
+    {
+      Basketball b = new Basketball(5);
+      b.inflate();
+      assertEquals(5.0, b.getDiameter(), EPSILON);
+    }
+   
+  }
+
+</pre>
+You can see that a JUnit test is an ordinary Java class.  Each test case is 
+just a <code>public void</code> method that has no arguments.  To tell the JUnit framework
+that the method should be used as a test case, we use the <code>@Test</code> annotation.
+<p>
+In the code above you can also see another variation of the <code>assertEquals</code> method.  
+In testing the value of the diameter, two <code>double</code> values are being compared.
+Since floating-point arithmetic is not exact, 
+we provide a margin of error, here using a constant called <code>EPSILON</code> (defined as
+10 to the -7)
+that is provided as a third argument to <code>assertEquals</code>.
+
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page03.html">&lt; Unit Testing With <code>println</code></a></td><td align="right"><a href="page05.html">Running a JUnit Test &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab5/page04.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:41 GMT -->
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+   <title>Debugging Loops</title>
+   <link rel="stylesheet" href="../navstyle.css" type="text/css" media="screen">
+</head>
+<body>
+<!-- NAVMENU START - do not edit -->
+<div id="sidebar"><ol><li><a href="page01.html">Introduction</a></li><li><a href="page02.html">While-loops vs for-loops</a></li><li><a href="page03.html">The accumulator pattern</a></li><li><a href="page04.html">Reading input</a></li><li><a href="page05.html">Search problems</a></li><li><a href="page06.html">Checkpoint 1</a></li><li><a href="page07.html">Debugging Loops</a></li><li><a href="page08.html">Exceptions</a></li><li><a href="page09.html">More Debugging</a></li><li><a href="page10.html">Reflection</a></li></ol></div>
+<div id="main">
+<!-- NAVMENU END - do not edit -->
+
+<h2>Debugging loops</h2>
+By now you have learnt about debuggers and have been able to use the common features.
+You will now learn about debugging loops.
+<p>
+Add the following file to your project:
+<br>
+<a href="SimpleLoops.java" target="New_Win">
+SimpleLoops.java</a>
+<br>
+The method <code>countP</code> does not have bugs, and
+the method <code>findLastP</code>, does have bugs. (The third method <code>findFirstP</code>, we'll look at in the next section.)
+ 
+<h3>Stepping through a loop</h3>
+Being able to single-step through loops is probably one of the single most useful things you can do with a debugger.
+Try this first by running the method <code>countP</code>:
+<ol class="addSpace">
+<li>Find the line with the <code>while</code> statement in <code>countP</code>, and set a breakpoint on that line. Run the program in debug mode.
+<li>Use Step Over or F6 to single-step through the code.  Notice in the Variables pane you can see the index <code>i</code> changing each iteration and <code>count</code> being updated each time a "P" is found. 
+<li>After execution completes, run again in debug mode.  This time, after you break at the <code>while</code> statement, instead of single-stepping, use "Resume" button.  This is a little green triangle among the buttons above the Debug pane, to the left of the red "stop" button. 
+<li>Each time you press the resume button, execution continues until you hit the next breakpoint, (which in this case is just the same breakpoint again).  This is a useful way to step through entire iterations of a loop without having to single-step through each line.
+</ol>
+
+
+<h3>Breaking into an infinite loop</h3>
+Sometimes when your code goes into an infinite loop, or seems to be doing nothing at all, it is not obvious where or why it is happening.  A useful technique is to <em>break</em> into the code while it is executing.  We will try this on the method <code>findLastP</code>:
+
+<p>
+
+<ol class="addSpace">
+<li>First, edit the main method by un-commenting the next two lines (the ones including the call to
+<code>findLastP</code>).
+
+<li>Run the program.  Notice that it seems to be doing nothing, but you still see the little red square "stop" button in Eclipse. That's usually a sign of an infinite loop.
+
+<li>Click the "stop" button to terminate execution.  Now run it again in debug mode.
+
+<li>While it's running, switch to the Debug perspective.
+
+<li>In the Debug pane, you'll see an item with the name of the main class, <code>SimpleLoops</code>.  Click the little triangle to expand it.
+
+<li>There are a bunch of lines referring to "Threads".  Don't worry about what they all mean, just find the one labeled "main" and click on it to highlight.
+
+<li>Now up among the buttons above the Debug pane, find the "pause" button (two vertical yellow bars); it is just to the left of the familiar red square stop button. Click that pause button.
+
+<p>
+<img src="pause_button_screenshot.png" width=400 />
+<p>
+
+<li>The program stops executing!  You can see the <code>findLastP</code> method at the top of the call stack.  If you double-click on it, the green highlight should become visible.  This is the line that was <em>about</em> to be executed when you pressed the pause button.
+<li>Now you can step through the code (using Step Over or F6) and see what's going on.
+<li>To the left of the pause button is the "Resume" button (looks like a green triangle).  Clicking the resume button causes the code to start executing it again.  Try it, and then pause it once more.
+<li>As you single-step through the code, it should be pretty obvious why this is an infinite loop.  Now figure out how to fix it.
+</ol>
+
+<!-- NAVLINKS START - do not edit -->
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>
+<div id="footer"><table width="100%"><tr><td align="left"><a href="page06.html">&lt; Checkpoint 1</a></td><td align="right"><a href="page08.html">Exceptions &gt;</a></td></tr></table></div>
+<!-- NAVLINKS END - do not edit -->
+</body>
+
+<!-- Mirrored from web.cs.iastate.edu/~cs227/labs/lab6/page07.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Dec 2017 03:11:43 GMT -->
+</html>
